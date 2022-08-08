@@ -1,0 +1,68 @@
+.intro {
+	position: absolute;
+	top: calc(50% - 250px + 20px);
+	left: calc(50% - 250px);
+
+	width: 500px;
+	height: 500px;
+}
+
+.intro p {
+	margin: 0;
+}
+
+.intro a {
+	text-decoration: underline;
+	color: #FFF7C0;;
+}
+
+.intro .header {
+	position: absolute;
+	top: 0px;
+
+	margin-top: calc((150px/2) - 35px);
+
+	width: 100%;
+	text-align: center;
+}
+
+.intro .header p {
+	font-size: 90px;
+	line-height: 70px;
+	font-weight: bolder;
+
+	text-align: center;
+}
+
+.intro .header p span {
+	padding: 0px 10px 0px 10px;
+
+	background-color: rgb(0, 0, 0, 0.3);
+}
+
+.intro .avatar {
+	position: absolute;
+	margin: 150px 0px 0px 150px;
+
+	text-align: center;
+}
+
+.intro .avatar img {
+	width: 200px;
+}
+
+.intro .subheader {
+	position: absolute;
+	bottom: 0px;
+
+	margin-bottom: calc((150px/2) + 15px);
+
+	width: 100%;
+	text-align: center;
+}
+
+.intro .subheader p {
+	font-size: 40px;
+	line-height: 40px;
+	font-weight: bolder;
+}

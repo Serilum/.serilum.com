@@ -1,0 +1,246 @@
+/*
+	Colour Palette (Entwined Magic): 
+		Blueish: # 56416C;
+		Greyish: # 72697E;
+		Greenish: # 86AC97;
+		Light Greenish: # BFDAAF;
+		Yellowish: # FFF7C0;
+		Blackish: # 1A081F;
+		Purpleish: # 4D1D4D;
+		Slightly darker purpleish: # 592459;
+		Dark Blueish: # 05676E;
+		Greenish: # 489C79;
+		Light Orangish: # EBC288;
+*/
+
+@font-face {
+	font-family: 'Roboto';
+	font-style: normal;
+	font-weight: 400;
+	src: local('Roboto'), local('Roboto-Regular'),
+		url('/assets/fonts/roboto/Roboto-Regular.woff2') format('woff2'),
+		url('/assets/fonts/roboto/Roboto-Regular.woff') format('woff'),
+		url('/assets/fonts/roboto/Roboto-Regular.ttf') format('truetype');
+}
+
+html, body {
+	margin: 0;
+}
+
+body {
+	font-family: "Roboto";
+
+	color: #FFF7C0;
+	background-color: #484d54;
+}
+
+.main {
+	position: absolute;
+	width: 100vw;
+	height: 100vh;
+}
+
+.navigation {
+	position: fixed;
+	z-index: 10;
+
+	top: 0;
+	left: 0;
+
+	width: 100vw;
+	height: 40px;
+
+	text-align: center;
+
+	border-bottom: 2px dashed #FFF7C0;
+	background-color: #484d54;
+}
+
+.navigation .inside {
+	margin-top: 3px;
+}
+
+.navigation .inside .serilum {
+	position: fixed;
+	top: 5px;
+	left: 2px;
+
+}
+.navigation .inside .serilum img {
+	height: 30px;
+}
+
+.navigation ul {
+	margin: 0;
+	padding: 0;
+}
+
+.navigation li {
+	display: inline;
+
+	padding: 0px 10px 0px 10px;
+
+	font-size: 20px;
+	font-weight: bolder;
+}
+
+.navigation li:hover a {
+	color: #BFDAAF;
+}
+
+.navigation ul a {
+	
+}
+
+.navigation li,
+.navigation li a {
+	color: #FFF7C0;
+	text-decoration: none;
+}
+
+
+/* Custom Switch */
+.togglewrapper {
+	margin-left: 10px;
+}
+.togglewrapper img {
+	position: absolute;
+	margin-top: 0px;
+
+	width: 30px;
+}
+.togglewrapper img.fabric {
+	margin-left: -12px;
+}
+.togglewrapper img.forge {
+	margin-top: 2px;
+	margin-left: 6px;
+}
+
+.toggle {
+	position: relative;
+	display: inline;
+
+	top: 3px;
+}
+.toggle input {
+	opacity: 0;
+}
+label.toggle-item {
+	width: 2.2em;
+	background: #677dA6;
+	height: 1.2em;
+	display: inline-block;
+	border-radius: 50px;
+	position: relative;
+	transition: all 0.3s ease;
+	transform-origin: 20% center;
+	cursor: pointer;
+
+	border: 1px solid black;
+}
+label.toggle-item:before {
+	transition: all 0.2s ease;
+	width: 2.3em;
+	height: 2.3em;
+	top: 0.25em;
+	left: 0.25em;
+	border-radius: 2em;
+	border: 2px solid #88cf8f;
+	transition: 0.3s ease;
+}
+
+.checkcross label:before {
+	content: none;
+}
+.checkcross .check {
+	border-radius: 50%;
+	width: 0.8em;
+	height: 0.8em;
+	position: absolute;
+	background: #DACFB3;
+	transition: 0.4s ease;
+	top: 4px;
+	left: 4.5px;
+}
+.checkcross .check:before, .checkcross .check:after {
+	height: 4px;
+	border-radius: 10px;
+	background: #fff;
+	transition: 0.4s ease;
+}
+.checkcross .check:before {
+	width: 25px;
+	transform: rotate(-45deg) translate(-6px, 8px);
+}
+.checkcross .check:after {
+	width: 10px;
+	transform: rotate(45deg) translate(8px, 4.4px);
+}
+
+#checkcross:checked + label .check {
+	left: 24px;
+	transform: rotate(360deg);
+	background: #1F2B43;
+}
+#checkcross:checked + label .check:before {
+	width: 27px;
+	transform: rotate(-45deg) translate(-8px, 7.2px);
+}
+#checkcross:checked + label .check:after {
+	width: 27px;
+	transform: rotate(45deg) translate(7.2px, 3.2px);
+}
+
+
+/* Toaster */
+.toasterwrapper {
+	position: fixed;
+	right: 70px;
+	bottom: 0px;
+
+	width: 200px;
+	height: auto;
+}
+div.toasterwrapper.offset {
+	top: 360px;
+}
+.toasterwrapper .toast {
+	width: 100%;
+	height: auto;
+	margin: 20px;
+	padding: 15px;
+
+	color: white;
+	font-size: 14px;
+	font-weight: bolder;
+	border-radius: 15px;
+	background-color: rgb(46, 124, 46);
+
+	text-align: center;
+}
+.toasterwrapper .toast p {
+	margin: 0;
+	padding: 10px;
+}
+
+.toasterwrapper .toast .slug {
+	font-style: italic;
+}
+
+.toasterwrapper .toast .carttoast:hover {
+	cursor: pointer;
+}
+
+
+/* Utility */
+
+.noselect {
+  -webkit-touch-callout: none; /* iOS Safari */
+	-webkit-user-select: none; /* Safari */
+	 -khtml-user-select: none; /* Konqueror HTML */
+	   -moz-user-select: none; /* Firefox */
+		-ms-user-select: none; /* Internet Explorer/Edge */
+			user-select: none; /* Non-prefixed version, currently
+								  supported by Chrome and Opera */
+}

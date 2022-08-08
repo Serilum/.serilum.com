@@ -1,0 +1,31 @@
+.about {
+	position: absolute;
+	top: 80px;
+	left: 10vw;
+
+	width: 80vw;
+	height: calc(100vh - 50px);
+}
+
+.about .insideabout {
+	margin-bottom: 80px;
+}
+
+.about h1 {
+	width: 100%;
+
+	font-size: 50px;
+
+	text-align: center;
+}
+
+.about p {
+	font-size: 20px;
+}
+
+.about .imagewrapper {
+	width: 100%;
+	height: auto;
+
+	text-align: center;
+}

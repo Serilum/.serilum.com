@@ -1,0 +1,194 @@
+@media only screen and (max-width: 760px) {
+	.modlist th {
+		font-size: 12px !important;
+	}
+
+	.modrow .logo img {
+		width: 60px !important;
+	}
+
+	.modrow .description {
+		font-size: 14px !important;
+	}
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table th {
+	position: -webkit-sticky;
+	position: sticky;
+	z-index: 1;
+
+	top: 35px;
+	height: 80px;
+
+	box-shadow: inset 0 -2px 0 #FFF7C0;
+
+	background-color: #484d54;
+}
+
+.modwrapper a {
+	color: #FFF7C0;
+	text-decoration: none;
+}
+
+.modwrapper {
+	position: absolute;
+	top: 50px;
+
+	width: 100%;
+	height: auto;
+}
+
+.modlist {
+	position: relative;
+	left: 1vw;
+
+	width: 98vw;
+
+	margin-top: 5px;
+	margin-bottom: 60px;
+}
+
+.modlist .modheader {
+
+}
+
+.modlist th {
+	font-size: 20px;
+}
+
+.modlist th,
+.modlist td {
+	margin: 0;
+	padding: 10px 5px 10px 5px;
+
+	text-align: left;
+
+	border-bottom: 1px solid #FFF7C0;
+}
+
+.modrow {
+	margin: 10px;
+}
+.modrow:hover {
+	background-color: #3d4145;
+}
+.defaultfabric .modrow.hasfabric:hover {
+	cursor: url("/assets/images/fabric_pointer.png"),auto;
+}
+.defaultforge .modrow.hasforge:hover {
+	cursor: url("/assets/images/forge_pointer.png"),auto;
+}
+
+.modrow .logo img {
+	width: 100px;
+
+	padding: 0px 20px 0px 10px;
+}
+
+.modrow .name {
+	padding-right: 10px;
+}
+
+.modrow .description {
+	font-size: 16px;
+
+	padding-right: 10px;
+}
+
+.modrow .versions img {
+	width: 50px;
+}
+
+.modrow .dependencies {
+	text-align: right;
+}
+.modrow .dependencies img {
+	width: 50px;
+
+	padding-right: 10px;
+}
+
+/* Version Selector Dropdown */
+.selectorwrapper {
+	width: 100%;
+	height: auto;
+
+	text-align: center;
+
+	margin-top: 15px;
+	margin-bottom: -20px;
+}
+.dropdown-check-list {
+	position: relative;
+	left: calc(50% - 88px);
+
+	width: 120px;
+}
+
+.dropdown-check-list .anchor {
+	position: relative;
+	z-index: 9;
+
+	cursor: pointer;
+	display: inline-block;
+	padding: 5px 50px 5px 10px;
+	border: 1px solid #ccc;
+
+	width: 100%;
+}
+
+.dropdown-check-list .anchor:after {
+	position: absolute;
+	content: "";
+	border-left: 2px solid black;
+	border-top: 2px solid black;
+	padding: 5px;
+	right: 10px;
+	top: 20%;
+	-moz-transform: rotate(-135deg);
+	-ms-transform: rotate(-135deg);
+	-o-transform: rotate(-135deg);
+	-webkit-transform: rotate(-135deg);
+	transform: rotate(-135deg);
+}
+
+.dropdown-check-list .anchor:active:after {
+	right: 8px;
+	top: 21%;
+}
+
+.dropdown-check-list ul.items {
+	position: absolute;
+	z-index: 9;
+
+	padding: 2px;
+	display: none;
+	margin: 0;
+	border: 1px solid #ccc;
+	border-top: none;
+
+	width: 176px;
+	background-color: #484d54;
+}
+
+.dropdown-check-list ul.items li {
+	list-style: none;
+	width: 100%;
+
+	text-align: left;
+}
+
+.dropdown-check-list ul.items li input {
+	margin: 5px 10px 5px 20px;
+}
+.dropdown-check-list ul.items li p {
+	display: inline;
+}
+
+.dropdown-check-list.visible .items {
+	display: block;
+}
