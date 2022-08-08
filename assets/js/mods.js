@@ -161,7 +161,10 @@ function setChangelog(mod) {
 				window.history.replaceState("mods", "Serilum.com | Mods", "/mods?changelog=" + mod);
 			}
 		},
-		error: function(data) { }
+		error: function(data) {
+			closeChangelog();
+			console.log("Mod " + mod + " not found.");
+		}
 	});
 }
 
