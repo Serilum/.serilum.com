@@ -38,9 +38,11 @@ body {
 	.navigation { 
 		height: 70px !important;
 	}
+	.navigation .inside {
+		margin-top: 6px !important;
+	}
 	.togglewrapper {
-		position: relative;
-		top: 3px;
+
 	}
 }
 
@@ -48,6 +50,7 @@ body {
 	position: absolute;
 	width: 100vw;
 	height: 100vh;
+	max-height: -webkit-fill-available;
 }
 
 .navigation {
@@ -69,7 +72,7 @@ body {
 }
 
 .navigation .inside {
-	margin-top: 3px;
+	margin-top: 1px;
 }
 
 .navigation .inside .serilum {
@@ -113,6 +116,9 @@ body {
 
 /* Custom Switch */
 .togglewrapper {
+	position: relative;
+	top: 3px;
+
 	width: 120px;
 }
 .togglewrapper img {
