@@ -11,6 +11,11 @@
 		font-size: 14px !important;
 	}
 }
+@media only screen and (max-width: 462px) {
+	.modwrapper {
+		margin-top: 30px;
+	}
+}
 
 table {
 	border-collapse: collapse;

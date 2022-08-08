@@ -1,6 +1,12 @@
+@media only screen and (max-width: 462px) {
+	.intro {
+		top: calc(50% - 250px + 70px) !important;
+	}
+}
+
 .intro {
 	position: absolute;
-	top: calc(50% - 250px + 20px);
+	top: calc(50% - 250px + 40px);
 	left: calc(50% - 250px);
 
 	width: 500px;

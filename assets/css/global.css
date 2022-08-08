@@ -34,6 +34,16 @@ body {
 	background-color: #484d54;
 }
 
+@media only screen and (max-width: 462px) {
+	.navigation { 
+		height: 70px !important;
+	}
+	.togglewrapper {
+		position: relative;
+		top: 3px;
+	}
+}
+
 .main {
 	position: absolute;
 	width: 100vw;
@@ -54,6 +64,8 @@ body {
 
 	border-bottom: 2px dashed #FFF7C0;
 	background-color: #484d54;
+
+	overflow: scroll;
 }
 
 .navigation .inside {
@@ -76,7 +88,7 @@ body {
 }
 
 .navigation li {
-	display: inline;
+	display: inline-block;
 
 	padding: 0px 10px 0px 10px;
 
@@ -101,7 +113,7 @@ body {
 
 /* Custom Switch */
 .togglewrapper {
-	margin-left: 10px;
+	width: 120px;
 }
 .togglewrapper img {
 	position: absolute;
@@ -110,11 +122,11 @@ body {
 	width: 30px;
 }
 .togglewrapper img.fabric {
-	margin-left: -12px;
+	margin-left: -38px;
 }
 .togglewrapper img.forge {
 	margin-top: 2px;
-	margin-left: 6px;
+	margin-left: 4px;
 }
 
 .toggle {
@@ -136,6 +148,8 @@ label.toggle-item {
 	transition: all 0.3s ease;
 	transform-origin: 20% center;
 	cursor: pointer;
+
+	margin-left: -30px;
 
 	border: 1px solid black;
 }
