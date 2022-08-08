@@ -47,6 +47,8 @@ table th {
 
 	width: 100%;
 	height: auto;
+
+	background-color: #484d54;
 }
 
 .modlist {
@@ -57,6 +59,8 @@ table th {
 
 	margin-top: 5px;
 	margin-bottom: 60px;
+
+	background-color: #484d54;
 }
 
 .modlist .modheader {
