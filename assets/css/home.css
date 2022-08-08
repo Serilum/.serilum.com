@@ -4,6 +4,10 @@
 	}
 }
 
+.main {
+	overflow-x: hidden;
+}
+
 .intro {
 	position: absolute;
 	top: calc(50% - 250px + 40px);
