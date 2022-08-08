@@ -13,7 +13,7 @@
 }
 @media only screen and (max-width: 462px) {
 	.modwrapper {
-		margin-top: 30px;
+		margin-top: 80px !important;
 	}
 }
 
@@ -41,7 +41,9 @@ table th {
 
 .modwrapper {
 	position: absolute;
-	top: 50px;
+	top: 0px;
+
+	margin-top: 50px;
 
 	width: 100%;
 	height: auto;
@@ -58,7 +60,7 @@ table th {
 }
 
 .modlist .modheader {
-
+	background-color: #484d54;
 }
 
 .modlist th {
