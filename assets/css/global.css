@@ -34,6 +34,10 @@ body {
 	background-color: #484d54;
 }
 
+body.prompt {
+	overflow: hidden;
+}
+
 @media only screen and (max-width: 462px) {
 	.navigation { 
 		height: 70px !important;

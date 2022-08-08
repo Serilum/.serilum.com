@@ -1,12 +1,14 @@
-var versionurlsuffix = { "1.19" : "3A73407", "1.18" : "3A73250", "1.17" : "3A73242", "1.16" : "3A70886", "1.15" : "3A68722", "1.14" : "3A64806", "1.13" : "3A55023", "1.12" : "3A628", "1.11" : "3A599", }
+var versionurlsuffix = { "1.19" : "3A73407", "1.18" : "3A73250", "1.17" : "3A73242", "1.16" : "3A70886", "1.15" : "3A68722", "1.14" : "3A64806", "1.13" : "3A55023", "1.12" : "3A628", "1.11" : "3A599", "1.7" : "3A5"}
 var defaultenabled = ["1_19", "1_18", "1_16", "1_12"];
-var ignoredversions = ["1.17", "1.15", "1.14", "1.13", "1.11"]
+var ignoredversions = ["1.17", "1.15", "1.14", "1.13", "1.11", "1.7"]
 
 $(document).ready(function(e) { 
 	console.log("Loading https://serilum.com/mods")
 
 	setVersionSelector();
 	loadModData();
+
+	checkForChangelogParameter();
 });
 
 function setVersionSelector() {
@@ -26,6 +28,11 @@ function setVersionSelector() {
 }
 
 function loadModData() {
+	preloadImage("/assets/images/changelog.png");
+	for (var version in versionurlsuffix) {
+		preloadImage("/assets/data/logo/" + version.replace(".", "_") + ".png");
+	}
+
 	$.ajax({
 		url: "/assets/data/mod_data.json",
 		type: "GET",
@@ -35,6 +42,7 @@ function loadModData() {
 			modlistcontent += '	<th class="logo"></th>';
 			modlistcontent += '	<th class="name">Name</th>';
 			modlistcontent += '	<th class="description">Description</th>';
+			modlistcontent += '	<th class="changelog">Changelog</th>';
 			modlistcontent += '	<th class="versions">Fabric</th>';
 			modlistcontent += '	<th class="versions">Forge</th>';
 			modlistcontent += '	<th class="dependencies">Dependencies</th>';
@@ -42,7 +50,8 @@ function loadModData() {
 
 			var ishidden = "";
 			for (const [modname, moddata] of Object.entries(data)) {
-				var imagename = modname.replaceAll(" ", "-").toLowerCase() + moddata["logo_file_type"];
+				var packageid = modname.replaceAll(" ", "-").toLowerCase();
+				var imagename = packageid + moddata["logo_file_type"];
 				preloadImage("/assets/data/logo/" + imagename);
 
 				var hasfabric = moddata["fabric_versions"].length > 0;
@@ -60,6 +69,8 @@ function loadModData() {
 				modrowcontent += '	<td class="logo"><img src="/assets/data/logo/' + imagename + '"></a></td>';
 				modrowcontent += '	<td class="name">' + modname + '</a></td>';
 				modrowcontent += '	<td class="description">' + moddata["description"] + '</td>';
+
+				modrowcontent += '	<td class="changelog"><a href="#changelog"><img class="climage" src="/assets/images/changelog.png" value="' + packageid + '"></a></td>';
 
 				modrowcontent += '	<td class="versions fabricver">';
 				for (const fabric_version of moddata["fabric_versions"]) {
@@ -114,7 +125,41 @@ function loadModData() {
 
 			$("table.modlist").html(modlistcontent);
 
-			$(".modwrapper").delay(200).fadeIn(400);
+			$(".modwrapper").delay(300).fadeIn(500);
+		},
+		error: function(data) { }
+	});
+}
+
+function checkForChangelogParameter() {
+	var url = document.URL;
+
+	if (url.includes("?changelog=")) {
+		var mod = url.split("?changelog=")[1];
+
+		setChangelog(mod);
+	}
+}
+
+function setChangelog(mod) {
+	console.log("Setting changelog for " + mod + ".")
+
+	$("body").addClass("prompt");
+
+	$.ajax({
+		url: "https://raw.githubusercontent.com/ricksouth/serilum-mc-mods/master/changelog/" + mod + ".txt",
+		type: "GET",
+		dataType: 'text',
+		success: function(data){
+			var content = wrapURL(data.replaceAll("\n", "<br>"), true);
+
+			$(".changelogwrapper .changelogcontent").html(content);
+
+			$(".changelogwrapper").fadeIn(100);
+
+			if (window.history.replaceState) {
+				window.history.replaceState("mods", "Serilum.com | Mods", "/mods?changelog=" + mod);
+			}
 		},
 		error: function(data) { }
 	});
@@ -173,11 +218,52 @@ $("#versionselector input").change(function() {
 	}
 });
 $(document).on('mousedown', '#versionselector .items p', function(e) {
+	if (!(e.which === 1)) {
+		return;
+	}
+
 	var id = $(this).attr('id');
 	$("#" + id.replace("label", "")).click();
 });
 
+$(document).on('mousedown', '.climage', function(e) {
+	if (!(e.which === 1)) {
+		return;
+	}
+
+	var mod = $(this).attr('value');
+	setChangelog(mod);
+});
+
+$(document).on('mousedown', '.changelogwrapper .insidechangelog .closewrapper p', function(e) {
+	closeChangelog();
+});
+$(document).on('mousedown', '.changelogwrapper', function(e) {
+	if (e.target == this) {
+		closeChangelog();
+	}
+});
+
+function closeChangelog() {
+	$(".changelogwrapper").hide();
+	$("body").removeClass("prompt");
+
+	if (window.history.replaceState) {
+		window.history.replaceState("mods", "Serilum.com | Mods", "/mods");
+	}
+}
+
 function preloadImage(url) {
 	var img = new Image();
 	img.src = url;
+}
+
+function wrapURL(text) {
+	let urlPattern = /\b((?:[a-z][\w-]+:(?:\/{1,3}|[a-z0-9%])|www\d{0,3}[.]|[a-z0-9.\-]+[.][a-z]{2,4}\/)(?:[^\s()<>]+|\(([^\s()<>]+|(\([^\s()<>]+\)))*\))+(?:\(([^\s()<>]+|(\([^\s()<>]+\)))*\)|[^\z`!()\[\]{};:'".,<>?«»“”‘’]))/ig;
+
+	let result = text.replace(urlPattern, function(url){
+		return `<a href="${url.trim()}" target=_blank>${url.trim()}</a>`;
+	});
+
+	return result;
 }
