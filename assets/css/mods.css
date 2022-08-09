@@ -24,7 +24,7 @@ table {
 table th {
 	position: -webkit-sticky;
 	position: sticky;
-	z-index: 1;
+	z-index: 2;
 
 	top: 35px;
 	height: 80px;
@@ -32,6 +32,19 @@ table th {
 	box-shadow: inset 0 -2px 0 #FFF7C0;
 
 	background-color: #484d54;
+}
+
+.backgroundwrapper {
+	position: fixed;
+	z-index: 1;
+	top: 0;
+	left: 0;
+
+	width: 300vw;
+	height: 100px;
+
+	background-color: #484d54;
+	overflow: hidden;
 }
 
 .modwrapper a {
@@ -64,6 +77,8 @@ table th {
 }
 
 .modlist .modheader {
+	vertical-align: bottom;
+	line-height: 40px;
 	background-color: #484d54;
 }
 
