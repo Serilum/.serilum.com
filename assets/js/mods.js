@@ -1,6 +1,7 @@
 var versionurlsuffix = { "1.19" : "3A73407", "1.18" : "3A73250", "1.17" : "3A73242", "1.16" : "3A70886", "1.15" : "3A68722", "1.14" : "3A64806", "1.13" : "3A55023", "1.12" : "3A628", "1.11" : "3A599", "1.7" : "3A5"}
 var defaultenabled = ["1_19", "1_18", "1_16", "1_12"];
 var ignoredversions = ["1.17", "1.15", "1.14", "1.13", "1.11", "1.7"]
+var logofiletypes = {}
 
 $(document).ready(function(e) { 
 	console.log("Loading https://serilum.com/mods")
@@ -52,6 +53,8 @@ function loadModData() {
 			for (const [modname, moddata] of Object.entries(data)) {
 				var packageid = modname.replaceAll(" ", "-").toLowerCase();
 				var imagename = packageid + moddata["logo_file_type"];
+				logofiletypes[packageid] = moddata["logo_file_type"]
+
 				preloadImage("/assets/data/logo/" + imagename);
 
 				var hasfabric = moddata["fabric_versions"].length > 0;
@@ -153,19 +156,42 @@ function setChangelog(mod) {
 		success: function(data){
 			var content = wrapURL(data.replaceAll("\n", "<br>"), true);
 
-			$(".changelogwrapper .changelogcontent").html(content);
+			if (logofiletypes[mod] == undefined) {
+				$.get("https://serilum.com/assets/data/logo/" + mod + ".png")
+					.done(function() { 
+						content = '<img src="/assets/data/logo/' + mod + '.png"><br><br>' + content;
+						setRestChangelog(mod, content);
+					}).fail(function() {
+						console.log("Mod data not loaded yet and mod image is not a png.");
+						console.log("Expect a 404 Not Found error in the console.");
+						console.log("Don't worry. All is well!");
 
-			$(".changelogwrapper").fadeIn(100);
+						content = '<img src="/assets/data/logo/' + mod + '.gif"><br><br>' + content;
+						setRestChangelog(mod, content);
+				})
 
-			if (window.history.replaceState) {
-				window.history.replaceState("mods", "Serilum.com | Mods", "/mods?changelog=" + mod);
+				return;
 			}
+
+			content = '<img src="/assets/data/logo/' + mod + logofiletypes[mod] + '"><br><br>' + content;
+			setRestChangelog(mod, content);
 		},
 		error: function(data) {
 			closeChangelog();
 			console.log("Mod " + mod + " not found.");
 		}
 	});
+}
+
+function setRestChangelog(mod, content) {
+	$(".changelogwrapper .changelogcontent").html(content);
+	$('.changelogwrapper .changelogcontent').scrollTop(0);
+
+	$(".changelogwrapper").fadeIn(100);
+
+	if (window.history.replaceState) {
+		window.history.replaceState("mods", "Serilum.com | Mods", "/mods?changelog=" + mod);
+	}
 }
 
 $(document).on('mousedown', 'a', function(e) {
@@ -244,6 +270,13 @@ $(document).on('mousedown', '.changelogwrapper .insidechangelog .closewrapper p'
 $(document).on('mousedown', '.changelogwrapper', function(e) {
 	if (e.target == this) {
 		closeChangelog();
+	}
+});
+$(document).on('keyup', function(e) {
+	if (e.key == "Escape") {
+		if ($(".changelogwrapper").is(":visible")) {
+			closeChangelog();
+		}
 	}
 });
 
