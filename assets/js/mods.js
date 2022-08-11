@@ -194,7 +194,7 @@ function setRestChangelog(mod, content) {
 	}
 }
 
-$(document).on('mousedown', 'a', function(e) {
+$(document).on('mouseup', 'a', function(e) {
 	if (!(e.which === 1)) {
 		return;
 	}
@@ -202,7 +202,7 @@ $(document).on('mousedown', 'a', function(e) {
 	e.stopImmediatePropagation();
 });
 
-$(document).on('mousedown', '.modrow', function(e) {
+$(document).on('mouseup', '.modrow', function(e) {
 	if (!(e.which === 1)) {
 		return;
 	}
@@ -246,7 +246,7 @@ $("#versionselector input").change(function() {
 		$(".v" + version).hide();	
 	}
 });
-$(document).on('mousedown', '#versionselector .items p', function(e) {
+$(document).on('mouseup', '#versionselector .items p', function(e) {
 	if (!(e.which === 1)) {
 		return;
 	}
@@ -255,7 +255,7 @@ $(document).on('mousedown', '#versionselector .items p', function(e) {
 	$("#" + id.replace("label", "")).click();
 });
 
-$(document).on('mousedown', '.climage', function(e) {
+$(document).on('mouseup', '.climage', function(e) {
 	if (!(e.which === 1)) {
 		return;
 	}
@@ -264,10 +264,10 @@ $(document).on('mousedown', '.climage', function(e) {
 	setChangelog(mod);
 });
 
-$(document).on('mousedown', '.changelogwrapper .insidechangelog .closewrapper p', function(e) {
+$(document).on('mouseup', '.changelogwrapper .insidechangelog .closewrapper p', function(e) {
 	closeChangelog();
 });
-$(document).on('mousedown', '.changelogwrapper', function(e) {
+$(document).on('mouseup', '.changelogwrapper', function(e) {
 	if (e.target == this) {
 		closeChangelog();
 	}
