@@ -15,6 +15,9 @@
 	.modwrapper {
 		margin-top: 80px !important;
 	}
+	.submenuwrapper {
+		margin-top: 90px !important;
+	}
 }
 
 table {
@@ -41,13 +44,14 @@ table th {
 	left: 0;
 
 	width: 300vw;
-	height: 100px;
+	height: 80px;
 
 	background-color: #484d54;
 	overflow: hidden;
 }
 
-.modwrapper a {
+.modwrapper a,
+.submenuwrapper a {
 	color: #FFF7C0;
 	text-decoration: none;
 }
@@ -62,6 +66,30 @@ table th {
 	height: auto;
 
 	background-color: #484d54;
+}
+
+/* Submenu */
+.submenuwrapper {
+	position: absolute;
+	z-index: 5;
+	left: 0;
+	width: 100vw;
+
+	margin-top: 60px;
+
+	text-align: center;
+}
+
+.submenuwrapper p {
+	display: inline-block;
+	font-size: 20px;
+	font-weight: bolder;
+
+	padding: 0px 10px 0px 10px;
+	margin: 0;
+}
+.submenuwrapper p:hover {
+	color: #BFDAAF;
 }
 
 .modlist {
@@ -160,7 +188,7 @@ table th {
 
 	text-align: center;
 
-	margin-top: 15px;
+	margin-top: 50px;
 	margin-bottom: -20px;
 }
 .dropdown-check-list {
