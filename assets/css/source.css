@@ -9,10 +9,10 @@
 	.sourcewrapper .insidesource div {
 		width: 150px !important;
 	}
-	.scforge {
+	.scfabric {
 		left: calc(50% - 150px) !important;
 	}
-	.scfabric {
+	.scforge {
 		right: calc(50% - 150px) !important;
 	}
 }
