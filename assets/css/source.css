@@ -60,10 +60,9 @@
 	filter: brightness(80%);
 }
 
-.scforge {
+.scfabric {
 	left: calc(50% - 250px);
 }
-
-.scfabric {
+.scforge {
 	right: calc(50% - 250px);
 }
