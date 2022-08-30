@@ -1,0 +1,64 @@
+@media only screen and (max-width: 462px) {
+	.sourcewrapper {
+		top: 80px !important;
+	}
+
+	.sourcewrapper .insidesource img {
+		width: 100px !important;
+	}
+	.sourcewrapper .insidesource div {
+		width: 150px !important;
+	}
+	.scforge {
+		left: calc(50% - 150px) !important;
+	}
+	.scfabric {
+		right: calc(50% - 150px) !important;
+	}
+}
+
+
+.sourcewrapper {
+	position: absolute;
+	top: 40px;
+	left: 0;
+
+	width: 100vw;
+	height: calc(100vh - 80px);
+
+	text-align: center;
+}
+
+.sourcewrapper .insidesource {
+	position: absolute;
+	top: 50px;
+	left: 5%;
+
+	width: 90%;
+	height: 100%;
+}
+
+.sourcewrapper .insidesource img {
+	width: 200px;
+}
+
+.sourcewrapper .insidesource a {
+	color: #FFF7C0;
+	text-decoration: none;
+}
+.sourcewrapper .insidesource div {
+	position: absolute;
+	width: 250px;
+}
+.sourcewrapper .insidesource div:not(.unavailable):hover {
+	cursor: pointer;
+	filter: brightness(80%);
+}
+
+.scforge {
+	left: calc(50% - 250px);
+}
+
+.scfabric {
+	right: calc(50% - 250px);
+}
