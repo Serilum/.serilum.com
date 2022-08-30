@@ -24,6 +24,8 @@ $(document).ready(function(e) {
 				if (modname in data) {
 					var md = data[modname];
 
+					$(".modlogo").html('<img src="/assets/data/logo/' + mod + md["logo_file_type"] + '">');
+
 					var fabricvl = md["fabric_versions"].length
 					var forgevl = md["forge_versions"].length
 

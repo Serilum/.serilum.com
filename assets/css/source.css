@@ -38,7 +38,12 @@
 	height: 100%;
 }
 
-.sourcewrapper .insidesource img {
+.sourcewrapper .insidesource .modlogo {
+	display: inline-block;
+}
+
+.sourcewrapper .insidesource .scfabric img,
+.sourcewrapper .insidesource .scforge img {
 	width: 200px;
 }
 
@@ -46,11 +51,11 @@
 	color: #FFF7C0;
 	text-decoration: none;
 }
-.sourcewrapper .insidesource div {
+.sourcewrapper .insidesource .modloader {
 	position: absolute;
 	width: 250px;
 }
-.sourcewrapper .insidesource div:not(.unavailable):hover {
+.sourcewrapper .insidesource .modloader:not(.unavailable):hover {
 	cursor: pointer;
 	filter: brightness(80%);
 }
