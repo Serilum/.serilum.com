@@ -41,7 +41,7 @@ $(document).ready(function(e) {
 					}
 				}
 
-				window.location.href("/");
+				window.location.assign("/");
 			},
 			error: function(data) { }
 		});
@@ -49,5 +49,5 @@ $(document).ready(function(e) {
 		return;
 	}
 
-	window.location.href("/");
+	window.location.assign("/");
 });
