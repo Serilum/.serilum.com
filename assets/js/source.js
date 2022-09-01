@@ -7,6 +7,7 @@ $(document).ready(function(e) {
 	if (url.includes("?mod=")) {
 		var mod = url.split("?mod=")[1];
 		var modname = mod.replaceAll("-", " ").replace(/\b\w/g, l => l.toUpperCase())
+		modname = modname.replaceAll("Tnt ", "TNT ").replaceAll("Gui ", "GUI ").replaceAll("Op ", "OP ");
 		modname = modname.replaceAll(" A ", " a ").replaceAll(" And ", " and ");
 
 		var fabricurl = fabricsourceurl + modname + " (Fabric)"
