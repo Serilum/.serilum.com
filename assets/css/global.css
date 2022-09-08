@@ -45,8 +45,13 @@ body.prompt {
 	.navigation .inside {
 		margin-top: 6px !important;
 	}
-	.togglewrapper {
-
+}
+@media only screen and (max-width: 418px) {
+	.footer {
+		height: 50px !important;
+	}
+	.footer p {
+		display: inline-block !important;
 	}
 }
 
@@ -262,6 +267,42 @@ div.toasterwrapper.offset {
 
 .toasterwrapper .toast .carttoast:hover {
 	cursor: pointer;
+}
+
+/* Footer */
+.footer {
+	position: fixed;
+	z-index: 1001;
+	left: 0;
+	bottom: 0;
+
+	height: 28px;
+	width: 100vw;
+
+	text-align: center;
+
+	border-top: 1px dashed #FFF7C0;
+	background-color: #484d54;
+}
+
+.footer .insidefooter {
+	margin-top: 3px;
+}
+
+.footer p {
+	display: inline;
+	margin: 0;
+	padding: 0px 5px 0px 5px;
+
+	font-size: 12px;
+}
+
+.footer a {
+	color: #DBD4A9;
+	text-decoration: none;
+}
+.footer p:hover a {
+	color: #BFDAAF;
 }
 
 

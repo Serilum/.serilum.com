@@ -18,4 +18,10 @@
 		<changefreq>weekly</changefreq>
 		<priority>1.0</priority>
 	</url>
+	<url>
+		<loc>https://serilum.com/how-to-configure-mods</loc>
+		<lastmod>2022-08-08</lastmod>
+		<changefreq>weekly</changefreq>
+		<priority>1.0</priority>
+	</url>
 </urlset>
