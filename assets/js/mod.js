@@ -43,10 +43,14 @@ $(document).ready(function(e) {
 						if (fabricvl == 0 && forgevl != 0) {
 							$("#cffabriclink h3").show();
 							$(".cffabric").addClass("unavailable").unwrap();
+							$("#mrlink img").attr('src', "/assets/images/mod-mr-forge.png")
+							$("#mrlink p").html("Forge");
 						}
 						else if (fabricvl != 0 && forgevl == 0) {
 							$("#cfforgelink h3").show();
 							$(".cfforge").addClass("unavailable").unwrap();
+							$("#mrlink img").attr('src', "/assets/images/mod-mr-fabric.png")
+							$("#mrlink p").html("Fabric");
 						}
 
 						return;
