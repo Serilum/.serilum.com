@@ -26,6 +26,9 @@ $(document).ready(function(e) {
 		$("#cfforgelink").attr('href', cf_forge_url);
 		$("#mrlink").attr('href', mr_url);
 
+		var changelogurl = "/mods?changelog=" + mod
+		$("#changelogurl").attr('href', changelogurl);
+
 		$.ajax({
 			url: "/assets/data/mod_data.json",
 			type: "GET",

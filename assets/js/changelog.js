@@ -27,7 +27,7 @@ function loadChangelogData() {
 					lasttimestamp = linedata["timestamp"];
 				}
 
-				line += '<p class="modname"><a href="https://serilum.com/source-code/?mod=' + linedata["modid"] + '" target=_blank>' + linedata["modname"] + '</a></p>';
+				line += '<p class="modname"><a href="https://serilum.com/source-code/?mod=' + linedata["modid"] + '" target=_blank>' + linedata["modname"] + ' (' + linedata["version"] + ')</a></p>';
 				line += '<p class="separator">=========</p>'
 				line += '<p class="content">' + linedata["content"].replaceAll("\n", "<br>") + '</p>'
 
