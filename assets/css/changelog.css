@@ -1,0 +1,57 @@
+.changelogwrapper {
+	position: absolute;
+	top: 100px;
+	left: 0;
+
+	width: 100vw;
+}
+
+.changelogwrapper .insidechangelog {
+	position: absolute;
+	left: calc(50% - 300px);
+	width: 600px;
+
+	padding-bottom: 100px;
+}
+
+.insidechangelog .header {
+	margin-bottom: 40px;
+}
+.insidechangelog .header p {
+	color: #EAEAE5;
+	margin-bottom: 8px;
+}
+
+.insidechangelog .clline {
+	margin-bottom: 20px;
+}
+
+.insidechangelog p {
+	margin: 0;
+}
+
+.insidechangelog .timestamp {
+	margin-bottom: 8px;
+	padding-bottom: 2px;
+
+	font-size: 30px;
+	
+	border-bottom: 1px dashed #EAEAE5;
+}
+.insidechangelog .modname {
+	font-size: 22px;
+	font-size: bolder;
+}
+.insidechangelog .modname a {
+	color: #EAEAE5;
+	text-decoration: none;
+}
+.insidechangelog .modname a:hover {
+	filter: brightness(0.8);
+}
+.insidechangelog .separator {
+	color: white;
+}
+.insidechangelog .content {
+	color: #EAEAE5;
+}
