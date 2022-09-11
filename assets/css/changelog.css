@@ -37,6 +37,9 @@
 	color: #EAEAE5;
 	margin-bottom: 8px;
 }
+.insidechangelog .header .discordlink {
+	color: #EAEAE5;
+}
 
 .insidechangelog .clline {
 	margin-bottom: 20px;
