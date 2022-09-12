@@ -1,16 +1,10 @@
-@media only screen and (max-width: 462px) {
-	.intro {
-		top: calc(50% - 250px + 70px) !important;
-	}
-}
-
 .main {
 	overflow-x: hidden;
 }
 
 .intro {
 	position: absolute;
-	top: calc(50% - 250px + 40px);
+	top: calc(50% - 250px + 50px);
 	left: calc(50% - 250px);
 
 	width: 500px;
@@ -26,12 +20,12 @@
 	color: #FFF7C0;
 }
 
+.intro .header:not(.scroll) {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+}
 .intro .header {
-	position: absolute;
-	top: 0px;
-
-	margin-top: calc((150px/2) - 35px);
-
 	width: 100%;
 	text-align: center;
 }
@@ -51,8 +45,8 @@
 }
 
 .intro .avatar {
-	position: absolute;
-	margin: 150px 0px 0px 150px;
+	position: relative;
+	margin-top: 30px;
 
 	text-align: center;
 }
@@ -62,7 +56,7 @@
 }
 
 .intro .subheader {
-	position: absolute;
+	position: relative;
 	bottom: 0px;
 
 	margin-bottom: calc((150px/2) + 15px);
@@ -75,4 +69,12 @@
 	font-size: 40px;
 	line-height: 40px;
 	font-weight: bolder;
+}
+
+.intro .subheader h2 {
+	margin-bottom: 5px;
+}
+.intro .subheader img {
+	height: 30px;
+	border-radius: 10px;
 }
