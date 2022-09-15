@@ -46,14 +46,6 @@ body.prompt {
 		margin-top: 6px !important;
 	}
 }
-@media only screen and (max-width: 418px) {
-	.footer {
-		height: 50px !important;
-	}
-	.footer p {
-		display: inline-block !important;
-	}
-}
 
 .main {
 	position: absolute;
