@@ -42,6 +42,7 @@ function loadAndSetMembers() {
 					
 					$(".randommember").html(randommember);
 					$(".randomplatform").html(rmplatform);
+					$(".insidefooter").fadeIn(1500);
 				}
 			},
 			error: function(data) { }
