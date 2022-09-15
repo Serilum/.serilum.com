@@ -122,6 +122,13 @@ body.prompt {
 	text-decoration: none;
 }
 
+.navigation .selected {
+	color: #EBC288;
+}
+.navigation .external:hover {
+	cursor: url("/assets/images/external_pointer.png"),auto;
+}
+
 
 /* Custom Switch */
 .togglewrapper {
