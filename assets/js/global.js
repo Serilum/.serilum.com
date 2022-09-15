@@ -1,6 +1,8 @@
 $(document).ready(function(e) { 
 	console.log("Loading https://serilum.com/")
 
+	loadAndSetMembers();
+
 	var modloadertoggle = Cookies.get('modloadertoggle');
 	if (modloadertoggle != undefined) {
 		if (modloadertoggle === 'true') {
@@ -12,6 +14,42 @@ $(document).ready(function(e) {
 		}
 	}
 });
+
+var memberdata = null;
+function loadAndSetMembers() {
+	if (memberdata != null) {
+		var keys = Object.keys(memberdata);
+
+		var randommember = keys[keys.length * Math.random() << 0];
+		var rmplatform = memberdata[randommember];
+		
+		$(".randommember").html(randommember);
+		$(".randomplatform").html(rmplatform);
+	}
+	else {
+		$.ajax({
+			url: "https://raw.githubusercontent.com/ricksouth/ricksouth-data-workflow/main/membership/members.json",
+			type: "GET",
+			dataType: 'json',
+			success: function(md){
+				if ("combined_specific" in md) {
+					memberdata = md["combined_specific"];
+
+					var keys = Object.keys(memberdata);
+
+					var randommember = keys[keys.length * Math.random() << 0];
+					var rmplatform = memberdata[randommember];
+					
+					$(".randommember").html(randommember);
+					$(".randomplatform").html(rmplatform);
+				}
+			},
+			error: function(data) { }
+		});
+	}
+
+	setTimeout(loadAndSetMembers, 5000);
+}
 
 $(".toggle input").change(function() {
 	var checked = $(this).is(":checked");
