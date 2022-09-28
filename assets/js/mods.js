@@ -51,6 +51,10 @@ function loadModData() {
 
 			var ishidden = "";
 			for (const [modname, moddata] of Object.entries(data)) {
+				if (!moddata["published"]) {
+					continue;
+				}
+
 				var packageid = modname.replaceAll(" ", "-").toLowerCase();
 				var imagename = packageid + moddata["logo_file_type"];
 				logofiletypes[packageid] = moddata["logo_file_type"]
