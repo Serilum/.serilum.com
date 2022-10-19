@@ -55,7 +55,7 @@ function loadModData() {
 					continue;
 				}
 
-				var packageid = modname.replaceAll(" ", "-").toLowerCase();
+				var packageid = modname.replaceAll(" ", "-").replace("'", "").toLowerCase();
 				var imagename = packageid + moddata["logo_file_type"];
 				logofiletypes[packageid] = moddata["logo_file_type"]
 

@@ -9,6 +9,7 @@ $(document).ready(function(e) {
 		var modname = mod.replaceAll("-", " ").replace(/\b\w/g, l => l.toUpperCase())
 		modname = modname.replaceAll("Tnt ", "TNT ").replaceAll("Gui ", "GUI ").replaceAll("Op ", "OP ");
 		modname = modname.replaceAll(" A ", " a ").replaceAll(" And ", " and ");
+		modname = modname.replaceAll("Pumpkillagers", "Pumpkillager's")
 
 		var cf_fabric_url = curseforgebase + mod + "-fabric"
 		if (mod == "gui-clock" || mod == "gui-compass" || mod == "villager-names") {
