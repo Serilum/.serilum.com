@@ -1,3 +1,4 @@
+var sourceurl = "https://github.com/ricksouth/serilum-mc-mod-sources/tree/main/sources/";
 var fabricsourceurl = "https://github.com/ricksouth/serilum-mc-mods/tree/master/sources-fabric/";
 var forgesourceurl = "https://github.com/ricksouth/serilum-mc-mods/tree/master/sources/";
 
@@ -11,8 +12,8 @@ $(document).ready(function(e) {
 		modname = modname.replaceAll(" A ", " a ").replaceAll(" And ", " and ");
 		modname = modname.replaceAll("Pumpkillagers", "Pumpkillager's")
 
-		var fabricurl = fabricsourceurl + modname + " (Fabric)"
-		var forgeurl = forgesourceurl + modname
+		var fabricurl = sourceurl + modname
+		var forgeurl = sourceurl + modname
 
 		$("#modname").html(modname);
 		$("#fabricsclink").attr('href', fabricurl);

@@ -86,7 +86,12 @@ function loadModData() {
 						ishidden = " hidden";
 					}
 
-					modrowcontent += '<a class="v' + fabric_version.replace(".", "_") + '" href="' + moddata["fabric_url"] + '/files/all?filter-status=1&filter-game-version=1738749986%' + versionurlsuffix[fabric_version] + '" target=_blank' + ishidden + '><img src="/assets/images/versions/' + fabric_version.replaceAll(".", "_") + '.png"></a>';
+					fabric_url = moddata["fabric_url"]
+					if (fabric_version != "1.16" && fabric_version != "1.17") {
+						fabric_url = fabric_url.replace("-fabric-version", "").replace("-fabric", "")
+					}
+
+					modrowcontent += '<a class="v' + fabric_version.replace(".", "_") + '" href="' + fabric_url + '/files/all?filter-status=1&filter-game-version=1738749986%' + versionurlsuffix[fabric_version] + '" target=_blank' + ishidden + '><img src="/assets/images/versions/' + fabric_version.replaceAll(".", "_") + '.png"></a>';
 				}
 				modrowcontent += '</td>';
 
@@ -214,30 +219,19 @@ $(document).on('mouseup', '.modrow', function(e) {
 	var modrow = $(this);
 	var modname = modrow.children('.name').html();
 
+	var urlprefix = "https://curseforge.com/minecraft/mc-mods/"
 	var urlsuffix = "";
-	var forgedefault = $(".navigation .toggle input").is(":checked");
-	if (!forgedefault) {
-		urlsuffix = "-fabric";
 
-		if (modname == "GUI Clock" || modname == "GUI Compass" || modname == "Villager Names") {
-			urlsuffix += "-version";
+	var curseforgedefault = $(".navigation .toggle input").is(":checked");
+	if (!curseforgedefault) {
+		if (modname == "Villager Names") {
+			urlsuffix += "-serilum";
 		}
+
+		urlprefix = "https://modrinth.com/mod/"
 	}
 
-	if (forgedefault) {
-		var forgeversions = modrow.children('.forgever').html();
-		if (forgeversions == "") {
-			return;
-		}
-	}
-	else {
-		var fabricversions = modrow.children('.fabricver').html();
-		if (fabricversions == "") {
-			return;
-		}
-	}
-	
-	window.open("https://curseforge.com/minecraft/mc-mods/" + modname.replaceAll(" ", "-").toLowerCase() + urlsuffix, '_blank').focus();
+	window.open(urlprefix + modname.replaceAll(" ", "-").replaceAll("'", "").toLowerCase() + urlsuffix, '_blank').focus();
 });
 
 $("#versionselector input").change(function() {

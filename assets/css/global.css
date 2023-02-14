@@ -143,11 +143,10 @@ body.prompt {
 
 	width: 30px;
 }
-.togglewrapper img.fabric {
+.togglewrapper img.modrinth {
 	margin-left: -38px;
 }
-.togglewrapper img.forge {
-	margin-top: 2px;
+.togglewrapper img.curseforge {
 	margin-left: 4px;
 }
 
@@ -162,7 +161,7 @@ body.prompt {
 }
 label.toggle-item {
 	width: 2.2em;
-	background: #677dA6;
+	background: #2C2C2C; /* toggle background */
 	height: 1.2em;
 	display: inline-block;
 	border-radius: 50px;
@@ -194,7 +193,7 @@ label.toggle-item:before {
 	width: 0.8em;
 	height: 0.8em;
 	position: absolute;
-	background: #DACFB3;
+	background: #1BD96A; /* modrinth check */
 	transition: 0.4s ease;
 	top: 4px;
 	left: 4.5px;
@@ -217,7 +216,7 @@ label.toggle-item:before {
 #checkcross:checked + label .check {
 	left: 24px;
 	transform: rotate(360deg);
-	background: #1F2B43;
+	background: #F16436; /* curseforge check */
 }
 #checkcross:checked + label .check:before {
 	width: 27px;
@@ -233,7 +232,7 @@ label.toggle-item:before {
 .toasterwrapper {
 	position: fixed;
 	right: 70px;
-	bottom: 0px;
+	bottom: 30px;
 
 	width: 200px;
 	height: auto;
