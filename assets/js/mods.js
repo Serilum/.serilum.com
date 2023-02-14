@@ -120,14 +120,7 @@ function loadModData() {
 
 					modrowcontent += '<a class="dependency_' + dependency + '" href="https://curseforge.com/minecraft/mc-mods/' + dependency + depurlsuffix + '" target=_blank' + ishidden + '><img src="/assets/data/logo/' + dependency + '.png"></a>';
 				}
-				if (hasfabric) {
-					ishidden = "";
-					if ($("body").hasClass("defaultforge")) {
-						ishidden = " hidden"
-					}
 
-					modrowcontent += '<a class="dependency_fabricapi" href="https://curseforge.com/minecraft/mc-mods/fabric-api" target=_blank' + ishidden + '><img src="/assets/data/logo/fabric-api.png"></a>';
-				}
 				modrowcontent += '</td>';
 
 				modrowcontent += '</tr>';

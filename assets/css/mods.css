@@ -99,7 +99,8 @@ table th {
 
 .modlist {
 	position: relative;
-	width: 100%;
+	width: 98%;
+	left: 1%;
 
 	margin-top: 5px;
 	margin-bottom: 60px;
