@@ -10,6 +10,10 @@ $(document).ready(function(e) {
 	loadModData();
 
 	checkForChangelogParameter();
+
+	if (/Mobi|Android/i.test(navigator.userAgent)) {
+		$(".footer").attr('style', 'z-index: -1;')
+	}
 });
 
 function setVersionSelector() {

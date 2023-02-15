@@ -30,6 +30,8 @@ html, body {
 body {
 	font-family: "Roboto";
 
+	height: 100vh;
+
 	color: #FFF7C0;
 	background-color: #484d54;
 }
