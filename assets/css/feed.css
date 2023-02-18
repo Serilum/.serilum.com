@@ -51,6 +51,10 @@
 .feedwrapper .shield {
 	height: 40px;
 }
+.feedwrapper .shield:hover {
+	cursor: pointer;
+	filter: brightness(80%);
+}
 
 .feedwrapper .line {
 	margin: 40px 0px 30px 0px;
