@@ -75,7 +75,7 @@ function loadFeedData() {
 							var s = ymd.split('');
 							var fdate = new Date(s[0] + s[1] + s[2] + s[3], parseInt(s[4] + s[5])-1, s[6] + s[7]);
 
-							feedentryhtml = '				<li class="feed-item" data-content="A" data-time="' + fdate.toLocaleDateString("en-US", dateoptions) + '" data-color="discord">';
+							feedentryhtml = '				<li class="feed-item" data-content="D" data-time="' + fdate.toLocaleDateString("en-US", dateoptions) + '" data-color="discord">';
 							feedentryhtml += '					<section>';
 							feedentryhtml += '						<p class="announcementheader">📢 <span class="name">Rick | Serilum</span> via <span class="discord"><a href="https://ntms.link/discord" target=_blank>Discord</a></span>:</p>';
 							feedentryhtml += '						<p class="announcementcontent">' + content + '</p>';
