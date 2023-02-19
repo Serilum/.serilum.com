@@ -4,7 +4,7 @@
 
 .intro {
 	position: absolute;
-	top: calc(50% - 250px + 50px);
+	top: calc(50% - 250px);
 	left: calc(50% - 250px);
 
 	width: 500px;
@@ -26,6 +26,7 @@
 	justify-content: center;
 }
 .intro .header {
+	margin-top: 95px;
 	width: 100%;
 	text-align: center;
 }
@@ -58,8 +59,6 @@
 .intro .subheader {
 	position: relative;
 	bottom: 0;
-
-	margin-bottom: calc((150px/2) + 15px);
 
 	width: 100%;
 	text-align: center;
