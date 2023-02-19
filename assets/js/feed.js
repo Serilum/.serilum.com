@@ -68,7 +68,7 @@ function loadFeedData() {
 									content = content.replace(word, '<img alt="img" src="' + word + '">');
 								}
 								else if (word.includes("https://")) {
-									content = content.replace(word, '<a class="url" href="' + word + '" target=_blank>' + word + '</a>');
+									content = content.replace(word, '<a class="url" href="' + word.replace(/,$/, "") + '" target=_blank>' + word + '</a>');
 								}
 							}
 

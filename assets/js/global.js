@@ -69,7 +69,7 @@ function enableModrinth(toast) {
 	$("body").removeClass("defaultcurseforge").addClass("defaultmodrinth");
 
 	if (toast) {
-		showToast("Modrinth set as the default mod host.");
+		showToast("Modrinth set as the default mod host.", "#1BD96A");
 	}
 
 	if (window.location.href.indexOf("mods")) {
@@ -84,7 +84,7 @@ function enableCurseForge(toast) {
 	$("body").removeClass("defaultmodrinth").addClass("defaultcurseforge");
 
 	if (toast) {
-		showToast("CurseForge set as the default mod host.");
+		showToast("CurseForge set as the default mod host.", "#F16436");
 	}
 
 	if (window.location.href.indexOf("mods")) {
@@ -96,9 +96,9 @@ function enableCurseForge(toast) {
 }
 
 let toastnumber = 0;
-function showToast(message) {
+function showToast(message, colour) {
 	let toastid = 'toast_' + toastnumber;
-	let toasthtml = '<div id="' + toastid + '" class="toast">' + message + '</div>';
+	let toasthtml = '<div id="' + toastid + '" class="toast" style="background-color: ' + colour + ';">' + message + '</div>';
 	$(".toasterwrapper").append(toasthtml);
 
 	window[toastid + "_0"] = setTimeout(function(){ 
