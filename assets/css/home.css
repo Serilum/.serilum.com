@@ -39,7 +39,7 @@
 }
 
 .intro .header p span {
-	padding: 0px 10px 0px 10px;
+	padding: 0 10px 0 10px;
 
 	background-color: rgb(0, 0, 0, 0.3);
 }
@@ -57,7 +57,7 @@
 
 .intro .subheader {
 	position: relative;
-	bottom: 0px;
+	bottom: 0;
 
 	margin-bottom: calc((150px/2) + 15px);
 

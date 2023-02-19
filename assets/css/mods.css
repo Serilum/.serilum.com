@@ -63,7 +63,7 @@ table th {
 
 .modwrapper {
 	position: absolute;
-	top: 0px;
+	top: 0;
 
 	margin-top: 50px;
 
@@ -90,7 +90,7 @@ table th {
 	font-size: 20px;
 	font-weight: bolder;
 
-	padding: 0px 10px 0px 10px;
+	padding: 0 10px 0 10px;
 	margin: 0;
 }
 .submenuwrapper p:hover {
@@ -149,7 +149,7 @@ table th {
 .modrow .logo img {
 	width: 100px;
 
-	padding: 0px 20px 0px 10px;
+	padding: 0 20px 0 10px;
 }
 
 .modrow .name {
@@ -303,7 +303,7 @@ table th {
 }
 
 .changelogwrapper .insidechangelog .closewrapper p {
-	margin: 0px;
+	margin: 0;
 
 	font-size: 40px;
 	color: #EBC288;

@@ -59,7 +59,7 @@
 }
 .insidechangelog .modname {
 	font-size: 22px;
-	font-size: bolder;
+	font-weight: bolder;
 }
 .insidechangelog .modname a {
 	color: #EAEAE5;

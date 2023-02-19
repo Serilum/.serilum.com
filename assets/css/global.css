@@ -28,7 +28,7 @@ html, body {
 }
 
 body {
-	font-family: "Roboto";
+	font-family: "Roboto", serif;
 
 	height: 100vh;
 
@@ -53,6 +53,7 @@ body.prompt {
 	position: absolute;
 	width: 100%;
 	height: 100vh;
+	/*noinspection CssInvalidPropertyValue*/
 	max-height: -webkit-fill-available;
 }
 
@@ -104,7 +105,7 @@ body.prompt {
 .navigation li {
 	display: inline-block;
 
-	padding: 0px 10px 0px 10px;
+	padding: 0 10px 0 10px;
 
 	font-size: 20px;
 	font-weight: bolder;
@@ -127,7 +128,7 @@ body.prompt {
 .navigation .selected {
 	color: #EBC288;
 }
-.navigation .external:hover {
+a.external:hover {
 	cursor: url("/assets/images/external_pointer.png"),auto;
 }
 
@@ -141,7 +142,7 @@ body.prompt {
 }
 .togglewrapper img {
 	position: absolute;
-	margin-top: 0px;
+	margin-top: 0;
 
 	width: 30px;
 }
@@ -177,7 +178,6 @@ label.toggle-item {
 	border: 1px solid black;
 }
 label.toggle-item:before {
-	transition: all 0.2s ease;
 	width: 2.3em;
 	height: 2.3em;
 	top: 0.25em;
@@ -198,7 +198,7 @@ label.toggle-item:before {
 	background: #1BD96A; /* modrinth check */
 	transition: 0.4s ease;
 	top: 4px;
-	left: 4.5px;
+	left: 5px;
 }
 .checkcross .check:before, .checkcross .check:after {
 	height: 4px;
@@ -212,7 +212,7 @@ label.toggle-item:before {
 }
 .checkcross .check:after {
 	width: 10px;
-	transform: rotate(45deg) translate(8px, 4.4px);
+	transform: rotate(45deg) translate(8px, 4px);
 }
 
 #checkcross:checked + label .check {
@@ -222,11 +222,11 @@ label.toggle-item:before {
 }
 #checkcross:checked + label .check:before {
 	width: 27px;
-	transform: rotate(-45deg) translate(-8px, 7.2px);
+	transform: rotate(-45deg) translate(-8px, 7px);
 }
 #checkcross:checked + label .check:after {
 	width: 27px;
-	transform: rotate(45deg) translate(7.2px, 3.2px);
+	transform: rotate(45deg) translate(7px, 3px);
 }
 
 
@@ -292,7 +292,7 @@ div.toasterwrapper.offset {
 .footer p {
 	display: inline;
 	margin: 0;
-	padding: 0px 5px 0px 5px;
+	padding: 0 5px 0 5px;
 
 	font-size: 12px;
 }
