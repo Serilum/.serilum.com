@@ -3,8 +3,8 @@ $(document).ready(function(e) {
 
 	loadAndSetMembers();
 
-	var modhosttoggle = Cookies.get('modhosttoggle');
-	if (modhosttoggle != undefined) {
+	let modhosttoggle = Cookies.get('modhosttoggle');
+	if (modhosttoggle !== undefined) {
 		if (modhosttoggle === 'true') {
 			enableCurseForge(false);
 		}
@@ -15,13 +15,13 @@ $(document).ready(function(e) {
 	}
 });
 
-var memberdata = null;
+let memberdata = null;
 function loadAndSetMembers() {
 	if (memberdata != null) {
-		var keys = Object.keys(memberdata);
+		let keys = Object.keys(memberdata);
 
-		var randommember = keys[keys.length * Math.random() << 0];
-		var rmplatform = memberdata[randommember];
+		let randommember = keys[keys.length * Math.random() << 0];
+		let rmplatform = memberdata[randommember];
 		
 		$(".randommember").html(randommember);
 		$(".randomplatform").html(rmplatform);
@@ -35,10 +35,10 @@ function loadAndSetMembers() {
 				if ("combined_specific" in md) {
 					memberdata = md["combined_specific"];
 
-					var keys = Object.keys(memberdata);
+					let keys = Object.keys(memberdata);
 
-					var randommember = keys[keys.length * Math.random() << 0];
-					var rmplatform = memberdata[randommember];
+					let randommember = keys[keys.length * Math.random() << 0];
+					let rmplatform = memberdata[randommember];
 					
 					$(".randommember").html(randommember);
 					$(".randomplatform").html(rmplatform);
@@ -53,7 +53,7 @@ function loadAndSetMembers() {
 }
 
 $(".toggle input").change(function() {
-	var checked = $(this).is(":checked");
+	let checked = $(this).is(":checked");
 
 	if (checked) {
 		enableCurseForge(true);
@@ -95,10 +95,10 @@ function enableCurseForge(toast) {
 	}
 }
 
-var toastnumber = 0;
+let toastnumber = 0;
 function showToast(message) {
-	var toastid = 'toast_' + toastnumber;
-	var toasthtml = '<div id="' + toastid + '" class="toast">' + message + '</div>';
+	let toastid = 'toast_' + toastnumber;
+	let toasthtml = '<div id="' + toastid + '" class="toast">' + message + '</div>';
 	$(".toasterwrapper").append(toasthtml);
 
 	window[toastid + "_0"] = setTimeout(function(){ 

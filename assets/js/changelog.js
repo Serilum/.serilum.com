@@ -8,24 +8,24 @@ function loadChangelogData() {
 		type: "GET",
 		dataType: 'json',
 		success: function(changelogdata){
-			var clhtml = "";
+			let clhtml = "";
 
 			clhtml += '<div class="header">';
 			clhtml += "<h1>Global Mod Changelog</h1>";
 			clhtml += "<p>This page contains an overview of all changelog submitted. An easy way to see if your favourite mod has been updated lately.</p>";
 			clhtml += "<p>You can click the mod names to look at the complete changelog.</p><br>";
 			clhtml += "<p>If you use Discord, there's also a channel available which receives a message after each mod update:</p><br>";
-			clhtml += '<p><a href="https://ntms.link/changelog" target=_blank><img src="/assets/images/discord_mod-changelog.png"></a></p>';
+			clhtml += '<p><a href="https://ntms.link/changelog" target=_blank><img alt="discordchangelog" src="/assets/images/discord_mod-changelog.png"></a></p>';
 			clhtml += '<p><a class="discordlink" href="https://ntms.link/changelog" target=_blank>https://ntms.link/changelog</a></p>';
 			clhtml += '</div>';
 
-			var lasttimestamp = "";
-			for (key of changelogdata["keys"]) {
-				linedata = changelogdata["entries"][key];
+			let lasttimestamp = "";
+			for (let key of changelogdata["keys"]) {
+				let linedata = changelogdata["entries"][key];
 
-				line = '<div id="' + key + '" class="clline">';
+				let line = '<div id="' + key + '" class="clline">';
 
-				if (lasttimestamp != linedata["timestamp"]) {
+				if (lasttimestamp !== linedata["timestamp"]) {
 					line += '<p class="timestamp">' + linedata["timestamp"] + '</p>';
 					lasttimestamp = linedata["timestamp"];
 				}

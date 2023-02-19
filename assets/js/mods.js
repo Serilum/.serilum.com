@@ -1,7 +1,7 @@
-var versionurlsuffix = { "1.19" : "3A73407", "1.18" : "3A73250", "1.17" : "3A73242", "1.16" : "3A70886", "1.15" : "3A68722", "1.14" : "3A64806", "1.13" : "3A55023", "1.12" : "3A628", "1.11" : "3A599", "1.7" : "3A5"}
-var defaultenabled = ["1_19", "1_18", "1_16", "1_12"];
-var ignoredversions = ["1.17", "1.15", "1.14", "1.13", "1.11", "1.7"]
-var logofiletypes = {}
+const versionurlsuffix = { "1.19" : "3A73407", "1.18" : "3A73250", "1.17" : "3A73242", "1.16" : "3A70886", "1.15" : "3A68722", "1.14" : "3A64806", "1.13" : "3A55023", "1.12" : "3A628", "1.11" : "3A599", "1.7" : "3A5"}
+const defaultenabled = ["1_19", "1_18", "1_16", "1_12"];
+const ignoredversions = ["1.17", "1.15", "1.14", "1.13", "1.11", "1.7"]
+const logofiletypes = {}
 
 $(document).ready(function(e) { 
 	console.log("Loading https://serilum.com/mods")
@@ -17,7 +17,7 @@ $(document).ready(function(e) {
 });
 
 function setVersionSelector() {
-	var checkList = document.getElementById('versionselector');
+	let checkList = document.getElementById('versionselector');
 	checkList.getElementsByClassName('anchor')[0].onclick = function(evt) {
 		if (checkList.classList.contains('visible')) {
 			checkList.classList.remove('visible');
@@ -27,14 +27,14 @@ function setVersionSelector() {
 		}
 	}
 
-	for (const version of defaultenabled) {
+	for (let version of defaultenabled) {
 		$("#cb" + version).prop('checked', 'true')
 	}
 }
 
 function loadModData() {
 	preloadImage("/assets/images/changelog.png");
-	for (var version in versionurlsuffix) {
+	for (let version in versionurlsuffix) {
 		preloadImage("/assets/data/logo/" + version.replace(".", "_") + ".png");
 	}
 
@@ -43,7 +43,7 @@ function loadModData() {
 		type: "GET",
 		dataType: 'json',
 		success: function(data){
-			var modlistcontent = '<tr class="modheader">';
+			let modlistcontent = '<tr class="modheader">';
 			modlistcontent += '	<th class="logo"></th>';
 			modlistcontent += '	<th class="name">Name</th>';
 			modlistcontent += '	<th class="description">Description</th>';
@@ -53,22 +53,22 @@ function loadModData() {
 			modlistcontent += '	<th class="dependencies">Dependencies</th>';
 			modlistcontent += '</tr>';
 
-			var ishidden = "";
-			for (const [modname, moddata] of Object.entries(data)) {
+			let ishidden = "";
+			for (let [modname, moddata] of Object.entries(data)) {
 				if (!moddata["published"]) {
 					continue;
 				}
 
-				var packageid = modname.replaceAll(" ", "-").replace("'", "").toLowerCase();
-				var imagename = packageid + moddata["logo_file_type"];
+				let packageid = modname.replaceAll(" ", "-").replace("'", "").toLowerCase();
+				let imagename = packageid + moddata["logo_file_type"];
 				logofiletypes[packageid] = moddata["logo_file_type"]
 
 				preloadImage("/assets/data/logo/" + imagename);
 
-				var hasfabric = moddata["fabric_versions"].length > 0;
-				var hasforge = moddata["forge_versions"].length > 0;
+				let hasfabric = moddata["fabric_versions"].length > 0;
+				let hasforge = moddata["forge_versions"].length > 0;
 
-				var extrarowclasses = "";
+				let extrarowclasses = "";
 				if (hasfabric) {
 					extrarowclasses += " hasfabric"
 				}
@@ -76,53 +76,43 @@ function loadModData() {
 					extrarowclasses += " hasforge"
 				}
 
-				modrowcontent = '<tr class="modrow' + extrarowclasses + '">';
-				modrowcontent += '	<td class="logo"><img src="/assets/data/logo/' + imagename + '"></a></td>';
+				let modrowcontent = '<tr class="modrow' + extrarowclasses + '">';
+				modrowcontent += '	<td class="logo"><img alt="logo" src="/assets/data/logo/' + imagename + '"></a></td>';
 				modrowcontent += '	<td class="name">' + modname + '</a></td>';
 				modrowcontent += '	<td class="description">' + moddata["description"] + '</td>';
 
-				modrowcontent += '	<td class="changelog"><a href="#changelog"><img class="climage" src="/assets/images/changelog.png" value="' + packageid + '"></a></td>';
+				modrowcontent += '	<td class="changelog"><a href="#changelog"><img class="climage" alt="climage" src="/assets/images/changelog.png" value="' + packageid + '"></a></td>';
 
 				modrowcontent += '	<td class="versions fabricver">';
-				for (const fabric_version of moddata["fabric_versions"]) {
+				for (let fabric_version of moddata["fabric_versions"]) {
 					ishidden = "";
 					if (ignoredversions.includes(fabric_version)) {
 						ishidden = " hidden";
 					}
 
-					fabric_url = moddata["fabric_url"]
-					if (fabric_version != "1.16" && fabric_version != "1.17") {
+					let fabric_url = moddata["fabric_url"]
+					if (fabric_version !== "1.16" && fabric_version !== "1.17") {
 						fabric_url = fabric_url.replace("-fabric-version", "").replace("-fabric", "")
 					}
 
-					modrowcontent += '<a class="v' + fabric_version.replace(".", "_") + '" href="' + fabric_url + '/files/all?filter-status=1&filter-game-version=1738749986%' + versionurlsuffix[fabric_version] + '" target=_blank' + ishidden + '><img src="/assets/images/versions/' + fabric_version.replaceAll(".", "_") + '.png"></a>';
+					modrowcontent += '<a class="v' + fabric_version.replace(".", "_") + '" href="' + fabric_url + '/files/all?filter-status=1&filter-game-version=1738749986%' + versionurlsuffix[fabric_version] + '" target=_blank' + ishidden + '><img alt="version" src="/assets/images/versions/' + fabric_version.replaceAll(".", "_") + '.png"></a>';
 				}
 				modrowcontent += '</td>';
 
 				modrowcontent += '	<td class="versions forgever">';
-				for (const forge_version of moddata["forge_versions"]) {
+				for (let forge_version of moddata["forge_versions"]) {
 					ishidden = "";
 					if (ignoredversions.includes(forge_version)) {
 						ishidden = " hidden";
 					}
 
-					modrowcontent += '<a class="v' + forge_version.replace(".", "_") + '" href="' + moddata["forge_url"] + '/files/all?filter-status=1&filter-game-version=1738749986%' + versionurlsuffix[forge_version] + '" target=_blank' + ishidden + '><img src="/assets/images/versions/' + forge_version.replaceAll(".", "_") + '.png"></a>';
+					modrowcontent += '<a class="v' + forge_version.replace(".", "_") + '" href="' + moddata["forge_url"] + '/files/all?filter-status=1&filter-game-version=1738749986%' + versionurlsuffix[forge_version] + '" target=_blank' + ishidden + '><img alt="version" src="/assets/images/versions/' + forge_version.replaceAll(".", "_") + '.png"></a>';
 				}
 				modrowcontent += '</td>';
 
 				modrowcontent += '	<td class="dependencies">';
-				for (const dependency of moddata["dependencies"]) {
-					ishidden = "";
-					var depurlsuffix = "";
-					if ($("body").hasClass("defaultfabric") && dependency == "collective") {
-						depurlsuffix = "-fabric";
-
-						if (!hasfabric) {
-							ishidden = " hidden";
-						}
-					}
-
-					modrowcontent += '<a class="dependency_' + dependency + '" href="https://curseforge.com/minecraft/mc-mods/' + dependency + depurlsuffix + '" target=_blank' + ishidden + '><img src="/assets/data/logo/' + dependency + '.png"></a>';
+				for (let dependency of moddata["dependencies"]) {
+					modrowcontent += '<a class="dependency_' + dependency + '" href="https://curseforge.com/minecraft/mc-mods/' + dependency + '" target=_blank' + '><img alt="dependency" src="/assets/data/logo/' + dependency + '.png"></a>';
 				}
 
 				modrowcontent += '</td>';
@@ -141,10 +131,10 @@ function loadModData() {
 }
 
 function checkForChangelogParameter() {
-	var url = document.URL;
+	let url = document.URL;
 
 	if (url.includes("?changelog=")) {
-		var mod = url.split("?changelog=")[1];
+		let mod = url.split("?changelog=")[1];
 
 		setChangelog(mod);
 	}
@@ -160,26 +150,26 @@ function setChangelog(mod) {
 		type: "GET",
 		dataType: 'text',
 		success: function(data){
-			var content = wrapURL(data.replaceAll("\n", "<br>"), true);
+			let content = wrapURL(data.replaceAll("\n", "<br>"), true);
 
-			if (logofiletypes[mod] == undefined) {
+			if (logofiletypes[mod] === undefined) {
 				$.get("https://serilum.com/assets/data/logo/" + mod + ".png")
 					.done(function() { 
-						content = '<img src="/assets/data/logo/' + mod + '.png"><br><br>' + content;
+						content = '<img alt="logo" src="/assets/data/logo/' + mod + '.png"><br><br>' + content;
 						setRestChangelog(mod, content);
 					}).fail(function() {
 						console.log("Mod data not loaded yet and mod image is not a png.");
 						console.log("Expect a 404 Not Found error in the console.");
 						console.log("Don't worry. All is well!");
 
-						content = '<img src="/assets/data/logo/' + mod + '.gif"><br><br>' + content;
+						content = '<img alt="logo" src="/assets/data/logo/' + mod + '.gif"><br><br>' + content;
 						setRestChangelog(mod, content);
 				})
 
 				return;
 			}
 
-			content = '<img src="/assets/data/logo/' + mod + logofiletypes[mod] + '"><br><br>' + content;
+			content = '<img alt="logo" src="/assets/data/logo/' + mod + logofiletypes[mod] + '"><br><br>' + content;
 			setRestChangelog(mod, content);
 		},
 		error: function(data) {
@@ -213,15 +203,15 @@ $(document).on('mouseup', '.modrow', function(e) {
 		return;
 	}
 
-	var modrow = $(this);
-	var modname = modrow.children('.name').html();
+	let modrow = $(this);
+	let modname = modrow.children('.name').html();
 
-	var urlprefix = "https://curseforge.com/minecraft/mc-mods/"
-	var urlsuffix = "";
+	let urlprefix = "https://curseforge.com/minecraft/mc-mods/"
+	let urlsuffix = "";
 
-	var curseforgedefault = $(".navigation .toggle input").is(":checked");
+	let curseforgedefault = $(".navigation .toggle input").is(":checked");
 	if (!curseforgedefault) {
-		if (modname == "Villager Names") {
+		if (modname === "Villager Names") {
 			urlsuffix += "-serilum";
 		}
 
@@ -232,7 +222,7 @@ $(document).on('mouseup', '.modrow', function(e) {
 });
 
 $("#versionselector input").change(function() {
-	var version = $(this).attr('id').replace("cb", "");
+	let version = $(this).attr('id').replace("cb", "");
 
 	if ($(this).is(":checked")) {
 		$(".v" + version).show();
@@ -246,7 +236,7 @@ $(document).on('mouseup', '#versionselector .items p', function(e) {
 		return;
 	}
 
-	var id = $(this).attr('id');
+	let id = $(this).attr('id');
 	$("#" + id.replace("label", "")).click();
 });
 
@@ -255,7 +245,7 @@ $(document).on('mouseup', '.climage', function(e) {
 		return;
 	}
 
-	var mod = $(this).attr('value');
+	let mod = $(this).attr('value');
 	setChangelog(mod);
 });
 
@@ -263,12 +253,12 @@ $(document).on('mouseup', '.changelogwrapper .insidechangelog .closewrapper p', 
 	closeChangelog();
 });
 $(document).on('mouseup', '.changelogwrapper', function(e) {
-	if (e.target == this) {
+	if (e.target === this) {
 		closeChangelog();
 	}
 });
 $(document).on('keyup', function(e) {
-	if (e.key == "Escape") {
+	if (e.key === "Escape") {
 		if ($(".changelogwrapper").is(":visible")) {
 			closeChangelog();
 		}
@@ -285,16 +275,14 @@ function closeChangelog() {
 }
 
 function preloadImage(url) {
-	var img = new Image();
+	let img = new Image();
 	img.src = url;
 }
 
 function wrapURL(text) {
-	let urlPattern = /\b((?:[a-z][\w-]+:(?:\/{1,3}|[a-z0-9%])|www\d{0,3}[.]|[a-z0-9.\-]+[.][a-z]{2,4}\/)(?:[^\s()<>]+|\(([^\s()<>]+|(\([^\s()<>]+\)))*\))+(?:\(([^\s()<>]+|(\([^\s()<>]+\)))*\)|[^\z`!()\[\]{};:'".,<>?«»“”‘’]))/ig;
+	let urlPattern = /\b((?:[a-z][\w-]+:(?:\/{1,3}|[a-z0-9%])|www\d{0,3}[.]|[a-z0-9.\-]+[.][a-z]{2,4}\/)(?:[^\s()<>]+|\(([^\s()<>]+|(\([^\s()<>]+\)))*\))+(?:\(([^\s()<>]+|(\([^\s()<>]+\)))*\)|[^z`!()\[\]{};:'".,<>?«»“”‘’]))/ig;
 
-	let result = text.replace(urlPattern, function(url){
+	return text.replace(urlPattern, function (url) {
 		return `<a href="${url.trim()}" target=_blank>${url.trim()}</a>`;
 	});
-
-	return result;
 }
