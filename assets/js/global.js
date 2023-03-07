@@ -61,7 +61,16 @@ $(".toggle input").change(function() {
 	else {
 		enableModrinth(true);
 	}
-	
+
+	$(".modrow .versions a,.modrow .dependencies a").each(function(e) {
+		let elem = $(this);
+		let cururl = elem.attr('href');
+		let ourl = elem.attr('value');
+
+		elem.attr('href', ourl);
+		elem.attr('value', cururl);
+	});
+
 	Cookies.set('modhosttoggle', checked, { expires: 365 });
 });
 

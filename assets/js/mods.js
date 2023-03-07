@@ -1,10 +1,12 @@
-const versionurlsuffix = { "1.19" : "3A73407", "1.18" : "3A73250", "1.17" : "3A73242", "1.16" : "3A70886", "1.15" : "3A68722", "1.14" : "3A64806", "1.13" : "3A55023", "1.12" : "3A628", "1.11" : "3A599", "1.7" : "3A5"}
+const versionurlsuffix = { "1.19" : "3A73407", "1.18" : "3A73250", "1.17" : "3A73242", "1.16" : "3A70886", "1.15" : "3A68722", "1.14" : "3A64806", "1.13" : "3A55023", "1.12" : "3A628", "1.11" : "3A599", "1.7" : "3A5"};
 const defaultenabled = ["1_19", "1_18", "1_16", "1_12"];
-const ignoredversions = ["1.17", "1.15", "1.14", "1.13", "1.11", "1.7"]
-const logofiletypes = {}
+const ignoredversions = ["1.17", "1.15", "1.14", "1.13", "1.11", "1.7"];
+const subversions = { "1.19" : 3, "1.18" : 2, "1.17" : 1, "1.16" : 5, "1.15" : 2, "1.14" : 4, "1.13" : 2, "1.12" : 2 };
+const cfonly = [ "1.15", "1.14", "1.13", "1.12", "1.11", "1.7" ];
+const logofiletypes = {};
 
 $(document).ready(function(e) { 
-	console.log("Loading https://serilum.com/mods")
+	console.log("Loading https://serilum.com/mods");
 
 	setVersionSelector();
 	loadModData();
@@ -12,7 +14,7 @@ $(document).ready(function(e) {
 	checkForChangelogParameter();
 
 	if (/Mobi|Android/i.test(navigator.userAgent)) {
-		$(".footer").attr('style', 'z-index: -1;')
+		$(".footer").attr('style', 'z-index: -1;');
 	}
 });
 
@@ -28,7 +30,7 @@ function setVersionSelector() {
 	}
 
 	for (let version of defaultenabled) {
-		$("#cb" + version).prop('checked', 'true')
+		$("#cb" + version).prop('checked', 'true');
 	}
 }
 
@@ -61,7 +63,7 @@ function loadModData() {
 
 				let packageid = modname.replaceAll(" ", "-").replace("'", "").toLowerCase();
 				let imagename = packageid + moddata["logo_file_type"];
-				logofiletypes[packageid] = moddata["logo_file_type"]
+				logofiletypes[packageid] = moddata["logo_file_type"];
 
 				preloadImage("/assets/data/logo/" + imagename);
 
@@ -70,10 +72,10 @@ function loadModData() {
 
 				let extrarowclasses = "";
 				if (hasfabric) {
-					extrarowclasses += " hasfabric"
+					extrarowclasses += " hasfabric";
 				}
 				if (hasforge) {
-					extrarowclasses += " hasforge"
+					extrarowclasses += " hasforge";
 				}
 
 				let modrowcontent = '<tr class="modrow' + extrarowclasses + '">';
@@ -92,10 +94,25 @@ function loadModData() {
 
 					let fabric_url = moddata["fabric_url"]
 					if (fabric_version !== "1.16" && fabric_version !== "1.17") {
-						fabric_url = fabric_url.replace("-fabric-version", "").replace("-fabric", "")
+						fabric_url = fabric_url.replace("-fabric-version", "").replace("-fabric", "");
 					}
 
-					modrowcontent += '<a class="v' + fabric_version.replace(".", "_") + '" href="' + fabric_url + '/files/all?filter-status=1&filter-game-version=1738749986%' + versionurlsuffix[fabric_version] + '" target=_blank' + ishidden + '><img alt="version" src="/assets/images/versions/' + fabric_version.replaceAll(".", "_") + '.png"></a>';
+					let cfurl = fabric_url + '/files/all?filter-status=1&filter-game-version=1738749986%' + versionurlsuffix[fabric_version];
+
+					let subver = fabric_version;
+					for (let i = 1; i <= subversions[fabric_version]; i++) {
+						subver += "," + fabric_version + "." + i;
+					}
+					let mrurl = getModUrl(modname, true, false) + "/versions?l=fabric&g=" + subver;
+
+					let verurl = cfurl;
+					let ourl = mrurl;
+					if (!enabledCurseForge()) {
+						verurl = mrurl;
+						ourl = cfurl;
+					}
+
+					modrowcontent += '<a class="v' + fabric_version.replace(".", "_") + '" href="' + verurl + '" value="' + ourl + '" target=_blank' + ishidden + '><img alt="version" src="/assets/images/versions/' + fabric_version.replaceAll(".", "_") + '.png"></a>';
 				}
 				modrowcontent += '</td>';
 
@@ -106,13 +123,47 @@ function loadModData() {
 						ishidden = " hidden";
 					}
 
-					modrowcontent += '<a class="v' + forge_version.replace(".", "_") + '" href="' + moddata["forge_url"] + '/files/all?filter-status=1&filter-game-version=1738749986%' + versionurlsuffix[forge_version] + '" target=_blank' + ishidden + '><img alt="version" src="/assets/images/versions/' + forge_version.replaceAll(".", "_") + '.png"></a>';
+					let iscurseforge = enabledCurseForge();
+					if (cfonly.includes(forge_version)) {
+						iscurseforge = true;
+					}
+
+					let cfurl = moddata["forge_url"] + '/files/all?filter-status=1&filter-game-version=1738749986%' + versionurlsuffix[forge_version];
+
+					let subver = forge_version;
+					for (let i = 1; i <= subversions[forge_version]; i++) {
+						subver += "," + forge_version + "." + i;
+					}
+					let mrurl = getModUrl(modname, true, false) + "/versions?l=forge&g=" + subver;
+
+					let verurl = cfurl;
+					let ourl = mrurl;
+					if (!iscurseforge) {
+						verurl = mrurl;
+						ourl = cfurl;
+					}
+
+					if (cfonly.includes(forge_version)) {
+						ourl = verurl;
+					}
+
+					modrowcontent += '<a class="v' + forge_version.replace(".", "_") + '" href="' + verurl + '" value="' + ourl + '" target=_blank' + ishidden + '><img alt="version" src="/assets/images/versions/' + forge_version.replaceAll(".", "_") + '.png"></a>';
 				}
 				modrowcontent += '</td>';
 
 				modrowcontent += '	<td class="dependencies">';
 				for (let dependency of moddata["dependencies"]) {
-					modrowcontent += '<a class="dependency_' + dependency + '" href="https://curseforge.com/minecraft/mc-mods/' + dependency + '" target=_blank' + '><img alt="dependency" src="/assets/data/logo/' + dependency + '.png"></a>';
+					let cfurl = getModUrl(modname, false, true) + dependency;
+					let mrurl = getModUrl(modname, false, false) + dependency;
+
+					let verurl = cfurl;
+					let ourl = mrurl;
+					if (!enabledCurseForge()) {
+						verurl = mrurl;
+						ourl = cfurl;
+					}
+
+					modrowcontent += '<a class="dependency_' + dependency + '" href="' + verurl + '" value="' + ourl + '" target=_blank' + '><img alt="dependency" src="/assets/data/logo/' + dependency + '.png"></a>';
 				}
 
 				modrowcontent += '</td>';
@@ -141,7 +192,7 @@ function checkForChangelogParameter() {
 }
 
 function setChangelog(mod) {
-	console.log("Setting changelog for " + mod + ".")
+	console.log("Setting changelog for " + mod + ".");
 
 	$("body").addClass("prompt");
 
@@ -206,19 +257,7 @@ $(document).on('mouseup', '.modrow', function(e) {
 	let modrow = $(this);
 	let modname = modrow.children('.name').html();
 
-	let urlprefix = "https://curseforge.com/minecraft/mc-mods/"
-	let urlsuffix = "";
-
-	let curseforgedefault = $(".navigation .toggle input").is(":checked");
-	if (!curseforgedefault) {
-		if (modname === "Villager Names") {
-			urlsuffix += "-serilum";
-		}
-
-		urlprefix = "https://modrinth.com/mod/"
-	}
-
-	window.open(urlprefix + modname.replaceAll(" ", "-").replaceAll("'", "").toLowerCase() + urlsuffix, '_blank').focus();
+	window.open(getActiveModUrl(modname, true), '_blank').focus();
 });
 
 $("#versionselector input").change(function() {
@@ -228,7 +267,7 @@ $("#versionselector input").change(function() {
 		$(".v" + version).show();
 	}
 	else {
-		$(".v" + version).hide();	
+		$(".v" + version).hide();
 	}
 });
 $(document).on('mouseup', '#versionselector .items p', function(e) {
@@ -272,6 +311,52 @@ function closeChangelog() {
 	if (window.history.replaceState) {
 		window.history.replaceState("mods", "Serilum.com | Mods", "/mods");
 	}
+}
+
+function getActiveModUrl(modname, fullurl=false) {
+	let urlprefix = "";
+	let urlsuffix = "";
+
+	if (!enabledCurseForge()) {
+		if (modname === "Villager Names") {
+			urlsuffix += "-serilum";
+		}
+
+		urlprefix = "https://modrinth.com/mod/";
+	}
+	else {
+		urlprefix = "https://curseforge.com/minecraft/mc-mods/";
+	}
+
+	if (fullurl) {
+		return urlprefix + modname.replaceAll(" ", "-").replaceAll("'", "").toLowerCase() + urlsuffix;
+	}
+	return urlprefix;
+}
+
+function getModUrl(modname, fullurl=false, iscurseforge=true) {
+	let urlprefix = "";
+	let urlsuffix = "";
+
+	if (!iscurseforge) {
+		if (modname === "Villager Names") {
+			urlsuffix += "-serilum";
+		}
+
+		urlprefix = "https://modrinth.com/mod/";
+	}
+	else {
+		urlprefix = "https://curseforge.com/minecraft/mc-mods/";
+	}
+
+	if (fullurl) {
+		return urlprefix + modname.replaceAll(" ", "-").replaceAll("'", "").toLowerCase() + urlsuffix;
+	}
+	return urlprefix;
+}
+
+function enabledCurseForge() {
+	return $(".navigation .toggle input").is(":checked");
 }
 
 function preloadImage(url) {
