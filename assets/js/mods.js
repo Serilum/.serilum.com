@@ -97,7 +97,7 @@ function loadModData() {
 						fabric_url = fabric_url.replace("-fabric-version", "").replace("-fabric", "");
 					}
 
-					let cfurl = fabric_url + '/files/all?filter-status=1&filter-game-version=1738749986%' + versionurlsuffix[fabric_version];
+					let cfurl = fabric_url.replace("https://", "https://legacy.") + '/files/all?filter-status=1&filter-game-version=1738749986%' + versionurlsuffix[fabric_version];
 
 					let subver = fabric_version;
 					for (let i = 1; i <= subversions[fabric_version]; i++) {
@@ -128,7 +128,7 @@ function loadModData() {
 						iscurseforge = true;
 					}
 
-					let cfurl = moddata["forge_url"] + '/files/all?filter-status=1&filter-game-version=1738749986%' + versionurlsuffix[forge_version];
+					let cfurl = moddata["forge_url"].replace("https://", "https://legacy.") + '/files/all?filter-status=1&filter-game-version=1738749986%' + versionurlsuffix[forge_version];
 
 					let subver = forge_version;
 					for (let i = 1; i <= subversions[forge_version]; i++) {
@@ -346,7 +346,7 @@ function getModUrl(modname, fullurl=false, iscurseforge=true) {
 		urlprefix = "https://modrinth.com/mod/";
 	}
 	else {
-		urlprefix = "https://curseforge.com/minecraft/mc-mods/";
+		urlprefix = "https://legacy.curseforge.com/minecraft/mc-mods/";
 	}
 
 	if (fullurl) {
