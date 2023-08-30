@@ -14,7 +14,7 @@ function loadFeedData() {
 		dataType: 'json',
 		success: function(memberdata){
 			$.ajax({
-				url: "https://ntmsdata.com/data/feed/announcements.json",
+				url: "https://serilum.com/assets/data/announcements.json",
 				type: "GET",
 				dataType: 'json',
 				success: function(announcementdata){

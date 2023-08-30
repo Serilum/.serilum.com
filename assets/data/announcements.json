@@ -1,0 +1,39 @@
+{
+    "entries": {
+        "20211105": [
+            "Slowly the Discord server is taking shape! Far from an established community, but happy nonetheless. Hope to see you around!"
+        ],
+        "20220908": [
+            "Hi everyone! You've all found this server through the hidden Discord button in the TVE modpack. Quite the detectives you are. I'm planning on adding some more public links to the discord in other places as well. I'm not exactly sure yet how the Discord server will take shape, but I'm glad you're here \ud83d\ude42 Let me know if you've got any ideas for the future!"
+        ],
+        "20220930": [
+            "This is for all you Fabric folk out there! Working on Mod Menu integration, with being able to edit config files in-game. Almost ready for uploading! \ud83e\udd73 https://cdn.discordapp.com/attachments/905531994413350945/1025352495951790090/2022-09-30_12.23.32.png",
+            "And here's a sneak peak at the config screen. Should make configuration a lot easier! https://cdn.discordapp.com/attachments/905531994413350945/1025403583761502228/2022-09-30_15.46.50.png"
+        ],
+        "20221207": [
+            "Minecraft 1.19.3 was released earlier today. Fabric was done shortly and after some code crunching all my Fabric mods have been updated to the new version! The Forge team is still working on the new release. I'll be ready for when it's done! \ud83d\ude04"
+        ],
+        "20230210": [
+            "Hi everyone! I'm currently working on improving the Discord server. I've created a new bot @SerBot! It will manage some functions such as converting paste files, processing trigger commands, giving roles and publishing announcements. You'll probably see some other changes as well. Thanks for being here!"
+        ],
+        "20230214": [
+            "I've updated https://serilum.com/ to work with Forge/Fabric merge from last month. There have also been some style changes. It now contains a toggle to choose your preferred mod host, either CurseForge or Modrinth. Download away! \ud83e\udd73"
+        ],
+        "20230219": [
+            "There is now a feed page available at https://serilum.com/feed, which will mirror the announcements made here on Discord. I'll be using this to post about major updates. Examples are the planned translation files and mod ports to a new Minecraft update. Let me know if there's anything you like me to focus on! Happy modding everyone."
+        ],
+        "20230315": [
+            "Hi everyone! All the mods have been updated to Minecraft version 1.19.4. Thanks for playing! \u2665\ufe0f"
+        ]
+    },
+    "keys": [
+        "20211105",
+        "20220908",
+        "20220930",
+        "20221207",
+        "20230210",
+        "20230214",
+        "20230219",
+        "20230315"
+    ]
+}
