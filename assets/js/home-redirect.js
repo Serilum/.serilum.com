@@ -1,3 +1,3 @@
 $(document).ready(function(e) {
-	window.location.assign("/");
+	window.location.replace("/");
 });
