@@ -153,6 +153,10 @@ function loadModData() {
 
 				modrowcontent += '	<td class="dependencies">';
 				for (let dependency of moddata["dependencies"]) {
+					if (dependency === "minecraft") {
+						continue;
+					}
+
 					let cfurl = getModUrl(modname, false, true) + dependency;
 					let mrurl = getModUrl(modname, false, false) + dependency;
 
