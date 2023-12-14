@@ -1,6 +1,6 @@
-const sourceurl = "https://github.com/ricksouth/serilum-mc-mod-sources/tree/main/sources/";
-const fabricsourceurl = "https://github.com/ricksouth/serilum-mc-mods/tree/master/sources-fabric/";
-const forgesourceurl = "https://github.com/ricksouth/serilum-mc-mods/tree/master/sources/";
+const sourceurl = "https://github.com/orgs/Serilum/repositories";
+const fabricsourceurl = "https://github.com/orgs/Serilum/repositories";
+const forgesourceurl = "https://github.com/orgs/Serilum/repositories";
 
 $(document).ready(function(e) {
 	let url = document.URL;

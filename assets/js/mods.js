@@ -197,7 +197,7 @@ function setChangelog(mod) {
 	$("body").addClass("prompt");
 
 	$.ajax({
-		url: "https://raw.githubusercontent.com/ricksouth/serilum-mc-mods/master/changelog/" + mod + ".txt",
+		url: "https://raw.githubusercontent.com/Serilum/.data/main/changelog/" + mod + ".txt",
 		type: "GET",
 		dataType: 'text',
 		success: function(data){
