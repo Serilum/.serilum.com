@@ -1,3 +1,3 @@
 $(document).ready(function(e) {
-	window.location.replace("https://github.com/ricksouth/serilum-mc-mods/issues");
+	window.location.replace("https://github.com/Serilum/.issue-tracker/issues");
 });
