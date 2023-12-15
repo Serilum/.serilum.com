@@ -1,13 +1,14 @@
 const versionurlsuffix = { "1.20" : "3A75125", "1.19" : "3A73407", "1.18" : "3A73250", "1.17" : "3A73242", "1.16" : "3A70886", "1.15" : "3A68722", "1.14" : "3A64806", "1.13" : "3A55023", "1.12" : "3A628", "1.11" : "3A599", "1.7" : "3A5"};
-const defaultenabled = [ "1_20", "1_19", "1_18" ];
+const defaultenabled = [ "1.20", "1.19", "1.18" ];
 const ignoredversions = ["1.17", "1.15", "1.14", "1.13", "1.11", "1.7"];
-const subversions = { "1.20": 0, "1.19" : 4, "1.18" : 2, "1.17" : 1, "1.16" : 5, "1.15" : 2, "1.14" : 4, "1.13" : 2, "1.12" : 2 };
+const subversions = { "1.20": 4, "1.19" : 4, "1.18" : 2, "1.17" : 1, "1.16" : 5, "1.15" : 2, "1.14" : 4, "1.13" : 2, "1.12" : 2 };
 const cfonly = [ "1.15", "1.14", "1.13", "1.12", "1.11", "1.7" ];
 const logofiletypes = {};
 
 $(document).ready(function(e) { 
 	console.log("Loading https://serilum.com/mods");
 
+	preload();
 	setVersionSelector();
 	loadModData();
 
@@ -17,6 +18,13 @@ $(document).ready(function(e) {
 		$(".footer").attr('style', 'z-index: -1;');
 	}
 });
+
+function preload() {
+	preloadImage("/assets/images/changelog.png");
+	for (let version in versionurlsuffix) {
+		preloadImage("/assets/data/logo/" + version.replace(".", "_") + ".png");
+	}
+}
 
 function setVersionSelector() {
 	let checkList = document.getElementById('versionselector');
@@ -29,17 +37,13 @@ function setVersionSelector() {
 		}
 	}
 
+	$("#versionselector .items input").prop('checked', false);
 	for (let version of defaultenabled) {
-		$("#cb" + version).prop('checked', 'true');
+		$("#cb" + version.replace(".", "_")).prop('checked', true);
 	}
 }
 
 function loadModData() {
-	preloadImage("/assets/images/changelog.png");
-	for (let version in versionurlsuffix) {
-		preloadImage("/assets/data/logo/" + version.replace(".", "_") + ".png");
-	}
-
 	$.ajax({
 		url: "/assets/data/mod_data.json",
 		type: "GET",
@@ -50,8 +54,7 @@ function loadModData() {
 			modlistcontent += '	<th class="name">Name</th>';
 			modlistcontent += '	<th class="description">Description</th>';
 			modlistcontent += '	<th class="changelog">Changelog</th>';
-			modlistcontent += '	<th class="versions">Fabric</th>';
-			modlistcontent += '	<th class="versions">Forge</th>';
+			modlistcontent += '	<th class="versions">Versions</th>';
 			modlistcontent += '	<th class="dependencies">Dependencies</th>';
 			modlistcontent += '</tr>';
 
@@ -85,56 +88,25 @@ function loadModData() {
 
 				modrowcontent += '	<td class="changelog"><a href="#changelog"><img class="climage" alt="climage" src="/assets/images/changelog.png" value="' + packageid + '"></a></td>';
 
-				modrowcontent += '	<td class="versions fabricver">';
-				for (let fabric_version of moddata["fabric_versions"]) {
+				modrowcontent += '	<td class="versions ver">';
+				for (let version of moddata["forge_versions"]) {
 					ishidden = "";
-					if (ignoredversions.includes(fabric_version)) {
-						ishidden = " hidden";
-					}
-
-					let fabric_url = moddata["fabric_url"]
-					if (fabric_version !== "1.16" && fabric_version !== "1.17") {
-						fabric_url = fabric_url.replace("-fabric-version", "").replace("-fabric", "");
-					}
-
-					let cfurl = fabric_url.replace("https://", "https://legacy.") + '/files/all?filter-status=1&filter-game-version=1738749986%' + versionurlsuffix[fabric_version];
-
-					let subver = fabric_version;
-					for (let i = 1; i <= subversions[fabric_version]; i++) {
-						subver += "," + fabric_version + "." + i;
-					}
-					let mrurl = getModUrl(modname, true, false) + "/versions?l=fabric&g=" + subver;
-
-					let verurl = cfurl;
-					let ourl = mrurl;
-					if (!enabledCurseForge()) {
-						verurl = mrurl;
-						ourl = cfurl;
-					}
-
-					modrowcontent += '<a class="v' + fabric_version.replace(".", "_") + '" href="' + verurl + '" value="' + ourl + '" target=_blank' + ishidden + '><img alt="version" src="/assets/images/versions/' + fabric_version.replaceAll(".", "_") + '.png"></a>';
-				}
-				modrowcontent += '</td>';
-
-				modrowcontent += '	<td class="versions forgever">';
-				for (let forge_version of moddata["forge_versions"]) {
-					ishidden = "";
-					if (ignoredversions.includes(forge_version)) {
+					if (!defaultenabled.includes(version)) {
 						ishidden = " hidden";
 					}
 
 					let iscurseforge = enabledCurseForge();
-					if (cfonly.includes(forge_version)) {
+					if (cfonly.includes(version)) {
 						iscurseforge = true;
 					}
 
-					let cfurl = moddata["forge_url"].replace("https://", "https://legacy.") + '/files/all?filter-status=1&filter-game-version=1738749986%' + versionurlsuffix[forge_version];
+					let cfurl = moddata["forge_url"].replace("https://", "https://legacy.") + '/files/all?filter-status=1&filter-game-version=1738749986%' + versionurlsuffix[version];
 
-					let subver = forge_version;
-					for (let i = 1; i <= subversions[forge_version]; i++) {
-						subver += "," + forge_version + "." + i;
+					let subver = version;
+					for (let i = 1; i <= subversions[version]; i++) {
+						subver += "&g=" + version + "." + i;
 					}
-					let mrurl = getModUrl(modname, true, false) + "/versions?l=forge&g=" + subver;
+					let mrurl = getModUrl(modname, true, false) + "/versions?g=" + subver;
 
 					let verurl = cfurl;
 					let ourl = mrurl;
@@ -143,11 +115,11 @@ function loadModData() {
 						ourl = cfurl;
 					}
 
-					if (cfonly.includes(forge_version)) {
+					if (cfonly.includes(version)) {
 						ourl = verurl;
 					}
 
-					modrowcontent += '<a class="v' + forge_version.replace(".", "_") + '" href="' + verurl + '" value="' + ourl + '" target=_blank' + ishidden + '><img alt="version" src="/assets/images/versions/' + forge_version.replaceAll(".", "_") + '.png"></a>';
+					modrowcontent += '<a class="v' + version.replace(".", "_") + '" href="' + verurl + '" value="' + ourl + '" target=_blank' + ishidden + '><img alt="version" src="/assets/images/versions/' + version.replaceAll(".", "_") + '.png"></a>';
 				}
 				modrowcontent += '</td>';
 
