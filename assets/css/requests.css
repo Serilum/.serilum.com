@@ -20,6 +20,8 @@
 .requestswrapper .headerwrapper .header {
     display: inline-block;
     max-width: 500px;
+
+    margin-bottom: -20px;
 }
 .header h1 {
     margin-bottom: 0px;
