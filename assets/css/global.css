@@ -233,6 +233,7 @@ label.toggle-item:before {
 /* Toaster */
 .toasterwrapper {
 	position: fixed;
+	z-index: 101;
 	right: 70px;
 	bottom: 30px;
 
