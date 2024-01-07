@@ -38,7 +38,7 @@ function setRequestsContent() {
 function populateTable(sorted) {
 	let data = inputData["data"];
 
-	let html = "<table id='requesttable'><tr class='headerrow'><th id='reaction_count'><p>🔢</p></th><th id='number'><p>#</p></th><th id='mod_name'><p>Mod</p></th><th id='title'><p>Title</p></th><th id='opened_by'><p>Author</p></th></tr>"
+	let html = "<table id='requesttable'><tr class='headerrow'><th id='reaction_count'><p>🧮</p></th><th id='number'><p>#</p></th><th id='mod_name'><p>Mod</p></th><th id='title'><p>Title</p></th><th id='opened_by'><p>Author</p></th></tr>"
 
 	let firstrow = true;
 	for (let sortedarr of sorted) {
