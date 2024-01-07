@@ -1,0 +1,140 @@
+.requestswrapper {
+    position: absolute;
+    top: 100px;
+    left: 0;
+
+    width: 100%;
+}
+
+.requestswrapper .insiderequests {
+    position: absolute;
+    left: 5%;
+    width: 90%;
+
+    padding-bottom: 100px;
+}
+
+.requestswrapper .headerwrapper {
+    text-align: center;
+}
+.requestswrapper .headerwrapper .header {
+    display: inline-block;
+    max-width: 500px;
+}
+.header h1 {
+    margin-bottom: 0px;
+}
+.header h3 {
+    margin-top: 0px;
+    font-size: 13px;
+}
+.header h4 {
+    margin-top: 6px;
+    padding-bottom: 8px;
+
+    font-size: 12px;
+    color: #EAEAE5;
+
+    box-shadow: inset 0 -2px 0 #EAEAE5;
+}
+.header h4 span {
+    color: white;
+}
+.header img {
+    border-radius: 10px;
+    max-width: 100%;
+}
+.requestswrapper p {
+    color: #EAEAE5;
+}
+
+table {
+    display: block;
+	border-collapse: collapse;
+    width: 100%;
+}
+table tbody {
+    width: 100%;
+}
+table p {
+    margin: 0;
+    display: inline;
+}
+table tr {
+    border-bottom: 1px dotted #EAEAE5;
+}
+table tr:not(.headerrow) {
+    word-wrap: break-word;
+    word-break: break-all;
+}
+table tr:nth-child(odd) {
+    background-color: #525861;
+}
+table tr:first-child {
+    vertical-align: bottom;
+    line-height: 60px;
+}
+table .first td {
+    vertical-align: bottom;
+}
+table th {
+	position: -webkit-sticky;
+	position: sticky;
+    z-index: 2;
+
+    font-size: 30px;
+    height: 80px;
+    top: 35px;
+
+	box-shadow: inset 0 -2px 0 #EAEAE5;
+
+	background-color: #484d54;
+}
+table th p {
+    padding-bottom: 2px;
+}
+table th.sort p {
+    color: #5086BC;
+    border-bottom: 2px solid #5086BC;
+}
+table th,
+table td {
+    text-align: left;
+    padding: 8px 20px 8px 0px;
+}
+table th:last-child,
+table td:last-child {
+    padding-left: 10px !important;
+    padding-right: 10px !important;
+    max-width: 150px;
+}
+table th:last-child {
+    text-align: right;
+}
+table td:last-child {
+    text-align: right;
+}
+table td:last-child p {
+    display: inline-block;
+    margin-right: -10px;
+
+    max-width: 150px;
+    overflow: hidden;
+}
+table tr:not(.headerrow):hover {
+    background-color: #686d73;
+    cursor: url("/assets/images/github_pointer.png"),auto;
+}
+table tr.headerrow th p:hover {
+    color: #5086BC;
+    cursor: pointer;
+}
+table tr.first td {
+    padding-top: 20px;
+}
+.requestswrapper .content table td.rc {
+    text-align: center;
+}
+.requestswrapper .content table td.inum {
+    min-width: 60px;
+}
