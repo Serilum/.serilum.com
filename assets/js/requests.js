@@ -16,7 +16,6 @@ function setRequestsContent() {
 		type: "GET",
 		dataType: 'json',
 		success: function(inp){
-			console.log(inp);
 			inputData = inp;
 
 			let lastupdated = inp["last_updated"];
@@ -45,7 +44,6 @@ function populateTable(sorted) {
 		if (issuedata === undefined) {
 			continue;
 		}
-		// console.log(issuedata);
 
 		let reaction_count = issuedata["reaction_count"]
 		let issuetitle = issuedata["title"];
@@ -105,7 +103,6 @@ $(document).on('mouseup', 'table tr.headerrow p', function(e) {
 
 	let th = $(this).parent();
 	let identifier = th.attr('id');
-	console.log(identifier);
 	let data = inputData["data"]["mod-feature"];
 
 	for (let keynum in data) {
@@ -153,10 +150,7 @@ function updateFilterQuery() {
 
 	$("#requesttable tr:not(.headerrow)").each(function(e) {
 		let row = $(this);
-
-		console.log(row);
 		let childRow = row.find("." + identifier + " p");
-		console.log(childRow);
 
 		if (childRow.html().toLowerCase().includes(query)) {
 			row.show();
