@@ -16,6 +16,12 @@
 
     padding-bottom: 100px;
 }
+@media only screen and (max-width: 530.5px) {
+    .requestswrapper .insiderequests {
+        left: 10px !important;
+        width: calc(100% - 20px) !important;
+    }
+}
 
 .requestswrapper .headerwrapper {
     text-align: center;
