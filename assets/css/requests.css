@@ -141,6 +141,11 @@ table th {
 
 	background-color: #484d54;
 }
+@media only screen and (max-width: 530.5px) {
+    table th {
+        top: 45px !important;
+    }
+}
 table th p {
     padding-bottom: 2px;
 }
