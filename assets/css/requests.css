@@ -45,6 +45,10 @@
 .header h4 span {
     color: white;
 }
+.header a {
+    color: #EAEAE5;
+    text-decoration: underline;
+}
 .header img {
     border-radius: 10px;
     max-width: 100%;
