@@ -185,8 +185,42 @@ table td:last-child p {
     overflow: hidden;
 }
 table td.t_mo {
-    word-break: normal !important;
+    word-break: break-word !important;
     overflow-wrap: break-word !important;
+}
+table td.t_ti {
+    min-width: 100px;
+}
+@media only screen and (max-width: 720px) {
+    table th#reaction_count {
+        padding-right: 6px;
+    }
+    table th#number {
+        width: 40px;
+        min-width: 40px;
+        padding-right: 0px;
+    }
+    table th#modname {
+        padding-right: 6px;
+        min-width: 55px;
+    }
+    table td.rc {
+        padding-right: 6px;
+    }
+    table td.inum {
+        width: 40px;
+        min-width: 40px;
+        padding-right: 0px;
+    }
+    table td.t_mo {
+        padding-right: 6px;
+        min-width: 55px;
+    }
+}
+@media only screen and (min-width: 721px) {
+    table td.inum {
+        min-width: 60px;
+    }
 }
 table tr:not(.headerrow):hover {
     background-color: #686d73;
@@ -201,7 +235,4 @@ table tr.first td {
 }
 .requestswrapper .content table td.rc {
     text-align: center;
-}
-.requestswrapper .content table td.inum {
-    min-width: 60px;
 }

@@ -65,10 +65,15 @@ function populateTable(sorted) {
 
 	html += "</table>";
 
-	$(".requestswrapper .content").html(html);
+	let contentdiv = $(".requestswrapper .content");
+	contentdiv.html(html);
 
 	resizeTableHeader();
 	updateFilterQuery();
+
+	if (!contentdiv.is(":visible")) {
+		contentdiv.fadeIn(500);
+	}
 }
 
 function resizeTableHeader() {
