@@ -21,9 +21,6 @@ function setRequestsContent() {
 
 			let lastupdated = inp["last_updated"];
 			let hoursago = timeSince(Date.parse(lastupdated)) + " ago";
-			if (hoursago.split(" ")[0] === "1") {
-				hoursago = hoursago.replace("hours", "hour");
-			}
 
 			$(".requestswrapper #lastupdated").html(hoursago);
 
@@ -191,27 +188,45 @@ function setOddEven() {
 }
 
 function timeSince(date) {
-	let seconds = Math.floor((new Date() - date) / 1000);
+	let seconds = Math.floor((convertDateToUTC(new Date()) - date) / 1000);
 	let interval = seconds / 31536000;
+	let c;
 
 	if (interval > 1) {
-		return Math.floor(interval) + " years";
+		c = Math.floor(interval);
+		return c + " year" + sOrEmpty(c);
 	}
 	interval = seconds / 2592000;
 	if (interval > 1) {
-		return Math.floor(interval) + " months";
+		c = Math.floor(interval);
+		return c + " month" + sOrEmpty(c);
 	}
 	interval = seconds / 86400;
 	if (interval > 1) {
-		return Math.floor(interval) + " days";
+		c = Math.floor(interval);
+		return c + " day" + sOrEmpty(c);
 	}
 	interval = seconds / 3600;
 	if (interval > 1) {
-		return Math.floor(interval) + " hours";
+		c = Math.floor(interval);
+		return c + " hour" + sOrEmpty(c);
 	}
 	interval = seconds / 60;
 	if (interval > 1) {
-		return Math.floor(interval) + " minutes";
+		c = Math.floor(interval);
+		return c + " minute" + sOrEmpty(c);
 	}
-	return Math.floor(seconds) + " seconds";
+	c = Math.floor(seconds);
+	return Math.floor(seconds) + " second" + sOrEmpty(c);
+}
+
+function convertDateToUTC(date) {
+    return new Date(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate(), date.getUTCHours(), date.getUTCMinutes(), date.getUTCSeconds());
+}
+
+function sOrEmpty(c) {
+	if (c === 1) {
+		return "";
+	}
+	return "s";
 }
