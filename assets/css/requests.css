@@ -57,6 +57,7 @@ table {
 }
 table tbody {
     width: 100%;
+    display: table;
 }
 table p {
     margin: 0;
