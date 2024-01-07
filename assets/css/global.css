@@ -40,7 +40,7 @@ body.prompt {
 	overflow: hidden;
 }
 
-@media only screen and (max-width: 462px) {
+@media only screen and (max-width: 530.5px) {
 	.navigation { 
 		height: 70px !important;
 	}
