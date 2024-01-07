@@ -140,10 +140,10 @@ table th {
 	background-color: #3d4145;
 }
 .defaultmodrinth .modrow:hover {
-	cursor: url("/assets/images/modrinth_pointer.png"),auto;
+	cursor: url("/assets/images/modrinth_pointer.png"), auto;
 }
 .defaultcurseforge .modrow:hover {
-	cursor: url("/assets/images/curseforge_pointer.png"),auto;
+	cursor: url("/assets/images/curseforge_pointer.png"), auto;
 }
 
 .modrow .logo img {

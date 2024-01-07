@@ -49,6 +49,10 @@
     border-radius: 10px;
     max-width: 100%;
 }
+.header a img:hover {
+    filter: brightness(90%);
+}
+
 .header .filterwrapper {
     position: relative;
     z-index: 5;
@@ -182,7 +186,7 @@ table td.t_mo {
 }
 table tr:not(.headerrow):hover {
     background-color: #686d73;
-    cursor: url("/assets/images/github_pointer.png"),auto;
+    cursor: url("/assets/images/github_pointer.png"), auto;
 }
 table tr.headerrow th p:hover {
     color: #5086BC;
