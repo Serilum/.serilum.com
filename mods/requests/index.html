@@ -51,9 +51,17 @@
 						<p>The wording "not planned" is chosen as a way to separate the feature requests from an actual completed issue. <b>This does not actually mean it's not planned!</b></p>
 						<p>To up-vote the feature you'd most like to see implemented, you can react to the issues's first post <u>on GitHub</u> with a positive emoji.</p>
 						<p>Such as: 👍 😀 🎉 ❤️ 🚀 👀</p>
-						<p><a href="https://github.com/Serilum/.issue-tracker/issues?q=is%3Aissue+is%3Aclosed+reason%3A%22not+planned%22+label%3A%22Feature+Request%22" target="_blank"><img src="/assets/images/react_example_small.gif"></a></p>
+						<p><a href="https://github.com/Serilum/.issue-tracker/issues?q=is%3Aissue+is%3Aclosed+reason%3A%22not+planned%22+label%3A%22Feature+Request%22" target="_blank"><img src="/assets/images/react_example_small.gif" alt="react example"></a></p>
 						<p>You can click on the table rows below to go directly to the issue page.</p>
 						<p>The feature request with the most reactions shows at the top of the list. This allows me to prioritize certain features that users want the most. As unfortunately due to having limited time, I'm unable to implement everything.</p>
+						<div class="filterwrapper">
+							<input id="filtertext" type="text" placeholder="Search filter">
+							<select id="filterselector" name="filter">
+								<option id="s_mod_name" value="modname">in Mod</option>
+								<option id="s_title" value="title">in Title</option>
+								<option id="s_opened_by" value="openedby">in Author</option>
+							</select><span>▽</span>
+						</div>
 					</div>
 				</div>
 			</div>

@@ -5,6 +5,9 @@
 
     width: 100%;
 }
+.requestswrapper p {
+    color: #EAEAE5;
+}
 
 .requestswrapper .insiderequests {
     position: absolute;
@@ -46,8 +49,45 @@
     border-radius: 10px;
     max-width: 100%;
 }
-.requestswrapper p {
-    color: #EAEAE5;
+.header .filterwrapper {
+    position: relative;
+    z-index: 5;
+    left: 10px;
+
+    margin-top: 20px;
+
+    width: calc(100% - 20px);
+}
+.header .filterwrapper input {
+    padding-left: 10px;
+
+    height: 35px;
+    width: 40%;
+}
+.header .filterwrapper select {
+    margin-left: -4px;
+    padding-left: 10px;
+
+    height: 40px;
+    width: 20%;
+    min-width: 92px;
+
+    -webkit-appearance: none;
+    -webkit-border-radius: 0px;
+    border: none;
+}
+@media only screen and (max-width: 459px) {
+    .header .filterwrapper select {
+        min-width: 72px !important;
+    }
+}
+.header .filterwrapper span {
+    position: absolute;
+    margin: 9px 0px 0px -24px;
+
+    font-size: 16px;
+    color: black;
+    pointer-events: none;
 }
 
 table {
@@ -70,7 +110,7 @@ table tr:not(.headerrow) {
     word-wrap: break-word;
     word-break: break-all;
 }
-table tr:nth-child(odd) {
+table tr.odd {
     background-color: #525861;
 }
 table tr:first-child {
@@ -107,9 +147,21 @@ table td {
 }
 table th:last-child,
 table td:last-child {
-    padding-left: 10px !important;
-    padding-right: 10px !important;
     max-width: 150px;
+}
+table th:last-child p,
+table td:last-child p {
+    padding-right: 2px;
+}
+@media only screen and (min-width: 620px) {
+    table th:last-child,
+    table td:last-child {
+        width: 150px;
+    }
+    table th:last-child p,
+    table td:last-child p {
+        padding-right: 6px;
+    }
 }
 table th:last-child {
     text-align: right;
@@ -123,6 +175,10 @@ table td:last-child p {
 
     max-width: 150px;
     overflow: hidden;
+}
+table td.t_mo {
+    word-break: normal !important;
+    overflow-wrap: break-word !important;
 }
 table tr:not(.headerrow):hover {
     background-color: #686d73;

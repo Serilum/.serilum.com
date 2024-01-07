@@ -63,7 +63,7 @@ function populateTable(sorted) {
 		if (firstrow) {
 			rowclass = " class=\"first\"";
 		}
-		html += "<tr id=\"" + issuenum + "\"" + rowclass + "><td class=\"rc\"><p>" + reaction_count + "</p></td><td class=\"inum\"><p>" + issuenum + "</p></td><td><p>" + modname + "</p></td><td><p>" + issuetitle + "</p></td><td><p>" + openedby + "</p></td></tr>";
+		html += "<tr id='" + issuenum + "'" + rowclass + "><td class='rc'><p>" + reaction_count + "</p></td><td class='inum'><p>" + issuenum + "</p></td><td class='t_mo'><p>" + modname + "</p></td><td class='t_ti'><p>" + issuetitle + "</p></td><td class='t_op'><p>" + openedby + "</p></td></tr>";
 
 		firstrow = false;
 	}
@@ -73,6 +73,7 @@ function populateTable(sorted) {
 	$(".requestswrapper .content").html(html);
 
 	resizeTableHeader();
+	updateFilterQuery();
 }
 
 function resizeTableHeader() {
@@ -80,13 +81,19 @@ function resizeTableHeader() {
 
 	if (width < 460) {
 		$("#mod_name p").html("📂");
+		$("#s_mod_name").html("in 📂");
 		$("#title p").html("🗒");
+		$("#s_title").html("in 🗒");
 		$("#opened_by p").html("👩‍💻");
+		$("#s_opened_by").html("in 👩‍💻");
 	}
 	else {
 		$("#mod_name p").html("Mod");
+		$("#s_mod_name").html("in Mod");
 		$("#title p").html("Title");
+		$("#s_title").html("in Title");
 		$("#opened_by p").html("Author");
+		$("#s_opened_by").html("in Author");
 	}
 }
 
@@ -132,6 +139,56 @@ $(document).on('mouseup', 'table tr.headerrow p', function(e) {
 		th.addClass("sort sortnormal");
 	}
 });
+
+$(".filterwrapper #filtertext").on('input',function(e) {
+	updateFilterQuery();
+});
+
+function updateFilterQuery() {
+	let query = $("#filtertext").val().toLowerCase();
+	if (!query.length) {
+		$("#requesttable tr").show();
+		setOddEven();
+		return;
+	}
+
+	let identifier = "t_" + $('#filterselector').find(":selected").val().substring(0, 2);
+
+	$("#requesttable tr:not(.headerrow)").each(function(e) {
+		let row = $(this);
+
+		console.log(row);
+		let childRow = row.find("." + identifier + " p");
+		console.log(childRow);
+
+		if (childRow.html().toLowerCase().includes(query)) {
+			row.show();
+		}
+		else {
+			row.hide();
+		}
+	});
+
+	setOddEven();
+}
+
+function setOddEven() {
+	$("tr.odd").removeClass("odd");
+
+	let odd = false;
+	$("#requesttable tr:not(.headerrow)").each(function(e) {
+		let row = $(this);
+		if (!row.is(":visible")) {
+			return true;
+		}
+
+		if (odd) {
+			row.addClass("odd");
+		}
+
+		odd = !odd;
+	});
+}
 
 function timeSince(date) {
 	let seconds = Math.floor((new Date() - date) / 1000);
