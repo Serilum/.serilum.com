@@ -28,7 +28,7 @@ function loadAndSetMembers() {
 	}
 	else {
 		$.ajax({
-			url: "https://raw.githubusercontent.com/ricksouth/ricksouth-data-workflow/main/membership/members.json",
+			url: "https://raw.githubusercontent.com/Serilum/.data-workflow/main/membership/data/members.json",
 			type: "GET",
 			dataType: 'json',
 			success: function(md){
