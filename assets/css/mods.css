@@ -11,12 +11,12 @@
 		font-size: 14px !important;
 	}
 }
-@media only screen and (max-width: 504px) {
+@media only screen and (max-width: 437px) {
 	.selectorwrapper {
-		margin-top: 60px !important;
+		margin-top: 70px !important;
 	}
 }
-@media only screen and (max-width: 462px) {
+@media only screen and (max-width: 620px) {
 	.modwrapper {
 		margin-top: 80px !important;
 	}
