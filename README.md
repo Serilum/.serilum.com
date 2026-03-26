@@ -1,2 +1,2 @@
 # serilum.com
-The source code for https://serilum.com/ hosted via Github Pages.
+The source code for https://serilum.com/ hosted via CloudFlare Pages.
