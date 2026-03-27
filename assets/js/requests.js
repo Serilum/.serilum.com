@@ -12,7 +12,7 @@ $(window).on( "resize", function() {
 
 function setRequestsContent() {
 	$.ajax({
-		url: "https://raw.githubusercontent.com/Serilum/.data-workflow/main/issue-tracker/data/feature-request-data.min.json",
+		url: "https://workflow.serilum.com/issue-tracker/data/feature-request-data.min.json",
 		type: "GET",
 		dataType: 'json',
 		success: function(inp){

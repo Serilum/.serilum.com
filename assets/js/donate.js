@@ -10,7 +10,7 @@ $(document).ready(function(e) {
 
 function populateMemberTable() {
 	$.ajax({
-		url: "https://raw.githubusercontent.com/Serilum/.data-workflow/main/membership/data/members.json",
+		url: "https://workflow.serilum.com/membership/data/members.json",
 		type: "GET",
 		dataType: 'json',
 		success: function(data){
