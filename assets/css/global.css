@@ -1,16 +1,12 @@
 /*
-	Colour Palette (Entwined Magic): 
-		Blueish: # 56416C;
-		Greyish: # 72697E;
-		Greenish: # 86AC97;
-		Light Greenish: # BFDAAF;
-		Yellowish: # FFF7C0;
-		Blackish: # 1A081F;
-		Purpleish: # 4D1D4D;
-		Slightly darker purpleish: # 592459;
-		Dark Blueish: # 05676E;
-		Greenish: # 489C79;
-		Light Orangish: # EBC288;
+	Colour Palette (Stone & Grass):
+		Stone (content bg):  # 484d54;
+		Deepslate (bars):    # 3a3e44;
+		Soft White (text):   # ECECEC;
+		Muted (text):        # 9aa0a6;
+		Grass (accent):      # 88C04F;
+		Leaf (hover):        # BFDAAF;
+		Sign Shadow:         rgb(0, 0, 0, 0.5);
 */
 
 @font-face {
@@ -23,6 +19,14 @@
 		url('/assets/fonts/roboto/Roboto-Regular.ttf') format('truetype');
 }
 
+@font-face {
+	font-family: 'Monocraft';
+	font-style: normal;
+	font-weight: 400;
+	src: local('Monocraft'),
+		url('/assets/fonts/monocraft/Monocraft.ttf') format('truetype');
+}
+
 html, body {
 	margin: 0;
 }
@@ -32,7 +36,7 @@ body {
 
 	height: 100vh;
 
-	color: #FFF7C0;
+	color: #ECECEC;
 	background-color: #484d54;
 }
 
@@ -69,8 +73,8 @@ body.prompt {
 
 	text-align: center;
 
-	border-bottom: 2px dashed #FFF7C0;
-	background-color: #484d54;
+	border-bottom: 3px solid #88C04F;
+	background-color: #3a3e44;
 
 	overflow-x: visible;
 	overflow-y: scroll;
@@ -109,6 +113,8 @@ body.prompt {
 
 	font-size: 20px;
 	font-weight: bolder;
+
+	text-shadow: 1px 1px 0 rgb(0, 0, 0, 0.5);
 }
 
 .navigation li:hover a {
@@ -121,12 +127,12 @@ body.prompt {
 
 .navigation li,
 .navigation li a {
-	color: #FFF7C0;
+	color: #ECECEC;
 	text-decoration: none;
 }
 
 .navigation .selected {
-	color: #EBC288;
+	color: #88C04F;
 }
 a.external:hover {
 	cursor: url("/assets/images/external_pointer.png"),auto;
@@ -167,7 +173,7 @@ label.toggle-item {
 	background: #2C2C2C; /* toggle background */
 	height: 1.2em;
 	display: inline-block;
-	border-radius: 50px;
+	border-radius: 0;
 	position: relative;
 	transition: all 0.3s ease;
 	transform-origin: 20% center;
@@ -191,7 +197,7 @@ label.toggle-item:before {
 	content: none;
 }
 .checkcross .check {
-	border-radius: 50%;
+	border-radius: 0;
 	width: 0.8em;
 	height: 0.8em;
 	position: absolute;
@@ -202,7 +208,7 @@ label.toggle-item:before {
 }
 .checkcross .check:before, .checkcross .check:after {
 	height: 4px;
-	border-radius: 10px;
+	border-radius: 0;
 	background: #fff;
 	transition: 0.4s ease;
 }
@@ -252,7 +258,8 @@ div.toasterwrapper.offset {
 	color: #373737;
 	font-size: 14px;
 	font-weight: bolder;
-	border-radius: 15px;
+	border-radius: 0;
+	border-left: 4px solid rgb(0, 0, 0, 0.25);
 	background-color: rgb(46, 124, 46);
 
 	text-align: center;
@@ -282,8 +289,8 @@ div.toasterwrapper.offset {
 
 	text-align: center;
 
-	border-top: 1px dashed #FFF7C0;
-	background-color: #484d54;
+	border-top: 3px solid #88C04F;
+	background-color: #3a3e44;
 }
 
 .footer .insidefooter {
@@ -299,11 +306,192 @@ div.toasterwrapper.offset {
 }
 
 .footer a {
-	color: #DBD4A9;
+	color: #ECECEC;
 	text-decoration: none;
 }
 .footer p:hover a {
 	color: #BFDAAF;
+}
+
+
+/* Sub-navigation buttons (shared by the mods, changelog and requests pages) */
+
+.submenuwrapper {
+	display: flex;
+	justify-content: center;
+	flex-wrap: wrap;
+	gap: 12px;
+
+	margin-top: 4px;
+}
+
+.submenubtn {
+	padding: 8px 18px;
+
+	color: #ECECEC;
+	font-size: 16px;
+	font-weight: bolder;
+	text-decoration: none;
+
+	background-color: #3a3e44;
+	border: 2px solid #88C04F;
+}
+.submenubtn:hover {
+	color: #373737;
+
+	background-color: #88C04F;
+}
+
+
+/* Parsed changelog content (shared by the mods changelog modal and the global changelog page modal) */
+
+.clmodallogo {
+	display: block;
+	margin: 0 auto 14px auto;
+
+	max-width: 90px;
+	height: auto;
+}
+
+.clmodalhead {
+	margin-bottom: 22px;
+	padding-bottom: 16px;
+
+	text-align: center;
+
+	border-bottom: 2px solid #88C04F;
+}
+.clmodaltitle {
+	margin: 0 0 8px 0;
+
+	color: #ECECEC;
+	font-size: 24px;
+	font-weight: bolder;
+}
+.clmodallink {
+	color: #88C04F;
+	font-size: 14px;
+	text-decoration: underline;
+}
+.clmodallink:hover {
+	color: #BFDAAF;
+}
+
+.clmodalentry {
+	display: flex;
+	gap: 12px;
+
+	margin-bottom: 16px;
+	padding-bottom: 16px;
+
+	border-bottom: 1px solid #41464d;
+}
+.clmodalentry:last-child {
+	margin-bottom: 0;
+	padding-bottom: 0;
+
+	border-bottom: none;
+}
+
+.clmodalver {
+	flex: 0 0 auto;
+	align-self: flex-start;
+
+	padding: 3px 10px;
+
+	color: #373737;
+	font-family: "Monocraft", monospace;
+	font-size: 13px;
+
+	background-color: #88C04F;
+}
+.clmodalbody {
+	flex: 1 1 auto;
+	min-width: 0;
+
+	margin: 0;
+
+	color: #ECECEC;
+}
+.clmodalbody a {
+	color: #88C04F;
+	text-decoration: underline;
+}
+
+
+/* Pagination (shared by the changelog and requests pages) */
+
+.pager {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	gap: 16px;
+
+	margin-top: 30px;
+}
+
+.pagerbtn {
+	padding: 8px 18px;
+
+	color: #ECECEC;
+	font-size: 15px;
+	font-weight: bolder;
+
+	background-color: #3a3e44;
+	border: 2px solid #88C04F;
+
+	cursor: pointer;
+}
+.pagerbtn:hover {
+	color: #373737;
+
+	background-color: #88C04F;
+}
+.pagerbtn.disabled {
+	color: #5b6168;
+
+	background-color: #3a3e44;
+	border-color: #5b6168;
+
+	cursor: default;
+}
+
+.pageinfo {
+	color: #9aa0a6;
+	font-size: 15px;
+}
+
+/* Compact pager that sits inside a controls bar (left of the search) */
+.toppager {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+}
+.toppager:empty {
+	display: none;
+}
+.toppager .pagerbtn {
+	padding: 10px 14px;
+
+	font-size: 14px;
+}
+.toppager .pageinfo {
+	font-size: 14px;
+
+	white-space: nowrap;
+}
+
+
+/* Clickable controls: never show the text-selection highlight when clicked */
+.submenubtn,
+.pager,
+.toppager,
+.pagerbtn,
+.pageinfo {
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
 }
 
 

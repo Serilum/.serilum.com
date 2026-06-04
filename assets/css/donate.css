@@ -1,163 +1,111 @@
-body.noscroll {
-	overflow: hidden;
+/* Donate page overrides the global full-viewport .main so the page scrolls normally */
+.main {
+	position: static;
+	height: auto;
+	max-height: none;
+
+	padding: 52px 0 50px 0;
 }
 
-.middle {
-	margin-top: 140px;
-	text-align: center;
-	color: white;
-}
+.donatewrapper {
+	width: 92%;
+	max-width: 640px;
 
-@media only screen and (max-width: 270px) {
-	.donation.wrapper .middle .shield {
-		height: auto !important;
-		display: block !important;
-		width: 100% !important;
-	}
-}
-@media only screen and (max-width: 307px) {
-	.donation.wrapper .membertable td p {
-		font-size: 14px !important;
-	}
-}
-@media only screen and (max-width: 360px) {
-	.donation.wrapper .middle img.gif.rain {
-		position: absolute !important;
-		left: calc(50% - 150px) !important;
-	}
-	.donation.wrapper .middle .separator {
-		height: 214px;
-		width: 100%;
-	}
-	.donation.wrapper .middle img.gif.thumb {
-		width: 90vw;
-	}
-}
-@media only screen and (min-width: 307px) and (max-width: 372px) {
-	.donation.wrapper .membertable td p {
-		font-size: 16px !important;
-	}
-}
-@media only screen and (max-width: 680px) {
-	.donation.wrapper {
-		position: absolute;
-		left: 5%;
-
-		width: 90%;
-	}
-	.donation.wrapper .middle {
-		position: relative;
-
-		width: 100%;
-	}
-}
-@media only screen and (min-width: 680px) {
-	.donation.wrapper {
-		position: absolute;
-		left: 0;
-
-		height: 100vh;
-		width: 100vw;
-
-		padding: 0;
-		margin: 0;
-	}
-	.donation.wrapper .middle {
-		position: absolute;
-		left: calc(50% - 330px);
-		z-index: 2;
-
-		width: 660px;
-	}
-}
-
-.donation.wrapper .middle {
-	padding-bottom: 40px;
-}
-.donation.wrapper .middle h1 {
-	margin-bottom: 8px;
-}
-.donation.wrapper .middle img.gif {
-	position: relative;
-}
-.donation.wrapper .middle img.gif.rain {
-	width: 300px;
-	height: 210px;
-}
-.donation.wrapper .middle .avatarwrapper {
-	position: relative;
-	display: inline-block;
-	z-index: 10;
-
-	width: 100%;
-	height: 200px;
-
-	margin-top: -25px;
-	text-align: center;
-}
-.donation.wrapper .middle .avatarwrapper span {
-	position: absolute;
-	display: inline-block;
-
-	margin-left: -100px;
-
-	width: 200px;
-	height: 200px;
-}
-.donation.wrapper .middle .avatarwrapper span img {
-	position: absolute;
-	left: 0;
-	width: 200px;
-}
-
-.donation.wrapper .middle .shieldw {
-	display: inline;
-	padding: 3px;
-}
-.donation.wrapper .middle .shield {
-	height: 60px;
-	padding: 5px 0px 5px 0px;
-
-	border-radius: 10px;
-}
-.donation.wrapper .middle .shield:hover {
-	cursor: pointer;
-	filter: brightness(80%);
-}
-
-.donation.wrapper .middle .guide {
-	margin: 2px 0px 30px 0px;
-
-	color: #009BE3;
-}
-.donation.wrapper .middle .guide:hover {
-	cursor: pointer;
-	filter: brightness(1.2);
-}
-
-.donation.wrapper .members {
-	margin-top: 50px;
-}
-.donation.wrapper .membertable {
-	position: relative;
-	left: 0;
-	width: 100%;
+	margin: 0 auto;
 
 	text-align: center;
 }
-.donation.wrapper .members h2 {
-	margin-bottom: 8px;
-	color: #1ABDF0;
-}
-.donation.wrapper .membertable td p {
-	display: inline;
-	margin: 0;
-	padding: 5px;
 
-	font-size: 20px;
-	line-height: 40px;
-	color: #F17C54;
+.donateavatar {
+	margin-top: 28px;
 }
-.donation.wrapper .membertable td p:hover {
-	cursor: url("/assets/images/heart_pointer.png"),auto;
+.donateavatar img {
+	width: 140px;
+
+	padding: 10px;
+
+	background-color: #3a3e44;
+	border: 3px solid #88C04F;
+}
+
+.donatewrapper h1 {
+	margin: 22px 0 24px 0;
+
+	font-size: 32px;
+	line-height: 1.3;
+}
+
+.donateshields {
+	display: flex;
+	justify-content: center;
+	flex-wrap: wrap;
+	gap: 14px;
+
+	margin-bottom: 36px;
+}
+.donateshields .shield {
+	height: 52px;
+}
+.donateshields a:hover .shield {
+	filter: brightness(85%);
+}
+
+.donatebody {
+	margin: 0 auto;
+
+	text-align: left;
+}
+.donatebody p {
+	margin: 0 0 16px 0;
+
+	color: #ECECEC;
+	font-size: 17px;
+	line-height: 1.7;
+}
+.donatebody p.lead {
+	margin-bottom: 18px;
+
+	font-size: 19px;
+	font-weight: bolder;
+	text-align: center;
+}
+
+.members {
+	margin-top: 48px;
+}
+.members h2 {
+	margin: 0 0 18px 0;
+
+	font-size: 22px;
+	line-height: 1.4;
+}
+.memberlist {
+	display: flex;
+	justify-content: center;
+	flex-wrap: wrap;
+	gap: 8px 10px;
+}
+.memberchip {
+	padding: 6px 12px;
+
+	color: #ECECEC;
+	font-size: 17px;
+
+	background-color: #3a3e44;
+
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
+.memberchip:hover {
+	color: #BFDAAF;
+
+	cursor: url("/assets/images/heart_pointer.png"), auto;
+}
+
+@media only screen and (max-width: 620.5px) {
+	.main {
+		padding-top: 82px;
+	}
 }

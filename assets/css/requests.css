@@ -1,249 +1,304 @@
-.requestswrapper {
-    position: absolute;
-    top: 60px;
-    left: 0;
+/* Requests page overrides the global full-viewport .main so the page scrolls normally */
+.main {
+	position: static;
+	height: auto;
+	max-height: none;
 
-    width: 100%;
-}
-.requestswrapper p {
-    color: #EAEAE5;
+	padding: 52px 0 50px 0;
 }
 
-.requestswrapper .insiderequests {
-    position: absolute;
-    left: 5%;
-    width: 90%;
+/* Wrapper */
+.reqwrapper {
+	width: 92%;
+	max-width: 1000px;
 
-    padding-bottom: 100px;
-}
-@media only screen and (max-width: 530.5px) {
-    .requestswrapper .insiderequests {
-        left: 10px !important;
-        width: calc(100% - 20px) !important;
-    }
+	margin: 0 auto;
 }
 
-.requestswrapper .headerwrapper {
-    text-align: center;
-}
-.requestswrapper .headerwrapper .header {
-    display: inline-block;
-    max-width: 500px;
+/* Header */
+.reqheader {
+	margin-top: 20px;
+	margin-bottom: 22px;
 
-    margin-bottom: -20px;
+	text-align: center;
 }
-.header h1 {
-    margin-bottom: 0px;
-}
-.header h3 {
-    margin-top: 0px;
-    font-size: 13px;
-}
-.header h4 {
-    margin-top: 6px;
-    padding-bottom: 8px;
+.reqheader h1 {
+	margin: 0 0 12px 0;
 
-    font-size: 12px;
-    color: #EAEAE5;
-
-    box-shadow: inset 0 -2px 0 #EAEAE5;
-}
-.header h4 span {
-    color: white;
-}
-.header a {
-    color: #EAEAE5;
-    text-decoration: underline;
-}
-.header img {
-    border-radius: 10px;
-    max-width: 100%;
-}
-.header a img:hover {
-    filter: brightness(90%);
+	font-size: 46px;
 }
 
-.header .filterwrapper {
-    position: relative;
-    z-index: 5;
-    left: 10px;
+.requpdated {
+	display: inline-block;
+	margin: 0 0 22px 0;
+	padding-bottom: 4px;
 
-    margin-top: 20px;
+	color: #9aa0a6;
+	font-size: 14px;
 
-    width: calc(100% - 20px);
+	border-bottom: 2px solid #88C04F;
 }
-.header .filterwrapper input {
-    padding-left: 10px;
-
-    height: 35px;
-    width: 40%;
-}
-.header .filterwrapper select {
-    margin-left: -4px;
-    padding-left: 10px;
-
-    height: 40px;
-    width: 20%;
-    min-width: 92px;
-
-    -webkit-appearance: none;
-    -webkit-border-radius: 0px;
-    border: none;
-}
-@media only screen and (max-width: 459px) {
-    .header .filterwrapper select {
-        min-width: 72px !important;
-    }
-}
-.header .filterwrapper span {
-    position: absolute;
-    margin: 9px 0px 0px -24px;
-
-    font-size: 16px;
-    color: black;
-    pointer-events: none;
+.requpdated span {
+	color: #ECECEC;
 }
 
-table {
-    display: block;
-	border-collapse: collapse;
-    width: 100%;
+.reqintro {
+	max-width: 700px;
+	margin: 0 auto;
+
+	text-align: left;
 }
-table tbody {
-    width: 100%;
-    display: table;
+.reqintro p {
+	margin: 0 0 12px 0;
+
+	color: #ECECEC;
+	font-size: 16px;
+	line-height: 1.6;
 }
-table p {
-    margin: 0;
-    display: inline;
+.reqintro a {
+	color: #88C04F;
+	text-decoration: underline;
 }
-table tr {
-    border-bottom: 1px dotted #EAEAE5;
+.reqintro a:hover {
+	color: #BFDAAF;
 }
-table tr:not(.headerrow) {
-    word-wrap: break-word;
-    word-break: break-all;
+.reqintro .reactsample {
+	text-align: center;
 }
-table tr.odd {
-    background-color: #525861;
+.reqintro img {
+	max-width: 100%;
 }
-table tr:first-child {
-    vertical-align: bottom;
-    line-height: 60px;
+.reqintro a img:hover {
+	filter: brightness(90%);
 }
-table .first td {
-    vertical-align: bottom;
-}
-table th {
-	position: -webkit-sticky;
+
+/* Controls: search + selector, sticky below the nav */
+.reqcontrols {
 	position: sticky;
-    z-index: 2;
+	z-index: 6;
+	top: 42px;
 
-    font-size: 30px;
-    height: 80px;
-    top: 35px;
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: 10px;
 
-	box-shadow: inset 0 -2px 0 #EAEAE5;
+	padding: 12px 0;
 
 	background-color: #484d54;
+	border-bottom: 2px solid #88C04F;
 }
-@media only screen and (max-width: 530.5px) {
-    table th {
-        top: 45px !important;
-    }
+/* Hidden until the data loads, so the pager and count never pop in late */
+.reqwrapper:not(.loaded) .reqcontrols {
+	display: none;
 }
-table th p {
-    padding-bottom: 2px;
-}
-table th.sort p {
-    color: #5086BC;
-    border-bottom: 2px solid #5086BC;
-}
-table th,
-table td {
-    text-align: left;
-    padding: 8px 20px 8px 0px;
-}
-table th:last-child,
-table td:last-child {
-    max-width: 150px;
-}
-table th:last-child p,
-table td:last-child p {
-    padding-right: 2px;
-}
-@media only screen and (min-width: 620px) {
-    table th:last-child,
-    table td:last-child {
-        width: 150px;
-    }
-    table th:last-child p,
-    table td:last-child p {
-        padding-right: 6px;
-    }
-}
-table th:last-child {
-    text-align: right;
-}
-table td:last-child {
-    text-align: right;
-}
-table td:last-child p {
-    display: inline-block;
-    margin-right: -10px;
+.reqcontrols #filtertext {
+	flex: 1 1 240px;
+	min-width: 180px;
 
-    max-width: 150px;
-    overflow: hidden;
+	padding: 10px 14px;
+
+	color: #ECECEC;
+	font-size: 16px;
+	font-family: "Roboto", sans-serif;
+
+	background-color: #3a3e44;
+	border: 2px solid #5b6168;
+
+	outline: none;
 }
-table td.t_mo {
-    word-break: break-word !important;
-    overflow-wrap: break-word !important;
+.reqcontrols #filtertext:focus {
+	border-color: #88C04F;
 }
-table td.t_ti {
-    min-width: 100px;
+.reqcontrols #filtertext::placeholder {
+	color: #9aa0a6;
 }
-@media only screen and (max-width: 720px) {
-    table th#reaction_count {
-        padding-right: 6px;
-    }
-    table th#number {
-        width: 40px;
-        min-width: 40px;
-        padding-right: 0px;
-    }
-    table th#modname {
-        padding-right: 6px;
-        min-width: 55px;
-    }
-    table td.rc {
-        padding-right: 6px;
-    }
-    table td.inum {
-        width: 40px;
-        min-width: 40px;
-        padding-right: 0px;
-    }
-    table td.t_mo {
-        padding-right: 6px;
-        min-width: 55px;
-    }
+
+.reqselectwrap {
+	position: relative;
 }
-@media only screen and (min-width: 721px) {
-    table td.inum {
-        min-width: 60px;
-    }
+.reqcontrols #filterselector {
+	padding: 10px 36px 10px 14px;
+
+	color: #ECECEC;
+	font-size: 16px;
+	font-family: "Roboto", sans-serif;
+
+	background-color: #3a3e44;
+	border: 2px solid #5b6168;
+
+	outline: none;
+	cursor: pointer;
+
+	-webkit-appearance: none;
+	appearance: none;
+	border-radius: 0;
 }
-table tr:not(.headerrow):hover {
-    background-color: #686d73;
-    cursor: url("/assets/images/github_pointer.png"), auto;
+.reqcontrols #filterselector:focus {
+	border-color: #88C04F;
 }
-table tr.headerrow th p:hover {
-    color: #5086BC;
-    cursor: pointer;
+.reqselectwrap .caret {
+	position: absolute;
+	top: 50%;
+	right: 12px;
+
+	transform: translateY(-50%);
+
+	color: #88C04F;
+	font-size: 14px;
+
+	pointer-events: none;
 }
-table tr.first td {
-    padding-top: 20px;
+
+.reqcount {
+	margin: 0 0 0 auto;
+	padding-right: 2px;
+
+	color: #9aa0a6;
+	font-size: 15px;
 }
-.requestswrapper .content table td.rc {
-    text-align: center;
+@media only screen and (max-width: 480px) {
+	.reqcount {
+		display: none;
+	}
+}
+
+/* Table */
+.reqtable {
+	width: 100%;
+}
+.reqloading {
+	padding: 20px 0;
+
+	color: #9aa0a6;
+	font-size: 16px;
+}
+#requesttable {
+	width: 100%;
+	border-collapse: collapse;
+}
+#requesttable th,
+#requesttable td {
+	padding: 11px 16px 11px 0;
+
+	text-align: left;
+	vertical-align: top;
+}
+
+#requesttable .headerrow th {
+	position: -webkit-sticky;
+	position: sticky;
+	z-index: 2;
+	top: 110px; /* fallback; refined to (nav + controls height) by updateStickyOffsets() */
+
+	color: #ECECEC;
+	font-size: 16px;
+	font-weight: bolder;
+
+	background-color: #484d54;
+	box-shadow: inset 0 -2px 0 #88C04F;
+}
+#requesttable .headerrow th p {
+	margin: 0;
+	display: inline;
+
+	padding-bottom: 2px;
+
+	cursor: pointer;
+}
+#requesttable .headerrow th p:hover {
+	color: #88C04F;
+}
+#requesttable .headerrow th.sort p {
+	color: #88C04F;
+
+	border-bottom: 2px solid #88C04F;
+}
+
+#requesttable tr {
+	border-bottom: 1px solid #41464d;
+}
+#requesttable tr.odd {
+	background-color: #41464d;
+}
+#requesttable tr:not(.headerrow):hover {
+	background-color: #565c64;
+
+	cursor: url("/assets/images/github_pointer.png"), pointer;
+}
+
+#requesttable td {
+	color: #ECECEC;
+	font-size: 15px;
+
+	word-break: break-word;
+	overflow-wrap: break-word;
+}
+#requesttable td p {
+	margin: 0;
+}
+
+/* Reaction count */
+#requesttable th#reaction_count,
+#requesttable td.rc {
+	text-align: center;
+}
+#requesttable td.rc p {
+	display: inline-block;
+	min-width: 22px;
+	padding: 3px 9px;
+
+	color: #373737;
+	font-weight: bolder;
+
+	background-color: #88C04F;
+}
+
+/* Issue number */
+#requesttable td.inum p {
+	color: #9aa0a6;
+	font-family: "Monocraft", monospace;
+	font-size: 13px;
+}
+
+/* Mod name */
+#requesttable td.t_mo p {
+	color: #9aa0a6;
+}
+
+/* Column sizing */
+#requesttable th#number,
+#requesttable td.inum {
+	width: 60px;
+}
+#requesttable th#reaction_count,
+#requesttable td.rc {
+	width: 70px;
+}
+#requesttable th#opened_by,
+#requesttable td.t_op {
+	max-width: 150px;
+}
+
+@media only screen and (max-width: 620.5px) {
+	.main {
+		padding-top: 82px;
+	}
+	.reqcontrols {
+		top: 72px;
+	}
+	#requesttable .headerrow th {
+		top: 140px;
+	}
+}
+
+@media only screen and (max-width: 480px) {
+	#requesttable th,
+	#requesttable td {
+		padding-right: 8px;
+	}
+	#requesttable th#number,
+	#requesttable td.inum {
+		width: 40px;
+	}
 }

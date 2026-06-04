@@ -62,7 +62,7 @@ $(".toggle input").change(function() {
 		enableModrinth(true);
 	}
 
-	$(".modrow .versions a,.modrow .dependencies a").each(function(e) {
+	$(".modcard .modlink,.modcard .loader,.modcard .dependency").each(function(e) {
 		let elem = $(this);
 		let cururl = elem.attr('href');
 		let ourl = elem.attr('value');
@@ -117,4 +117,97 @@ function showToast(message, colour) {
 		}, 1000);
 	}, 5000);
 	toastnumber+=1;
+}
+
+function wrapURL(text) {
+	let urlPattern = /\b((?:[a-z][\w-]+:(?:\/{1,3}|[a-z0-9%])|www\d{0,3}[.]|[a-z0-9.\-]+[.][a-z]{2,4}\/)(?:[^\s()<>]+|\(([^\s()<>]+|(\([^\s()<>]+\)))*\))+(?:\(([^\s()<>]+|(\([^\s()<>]+\)))*\)|[^z`!()\[\]{};:'".,<>?«»“”‘’]))/ig;
+
+	return text.replace(urlPattern, function (url) {
+		return `<a href="${url.trim()}" target=_blank>${url.trim()}</a>`;
+	});
+}
+
+function formatChangelog(data) {
+	let blocks = data.split(/\n=+\n/);
+
+	// No separators: fall back to the raw text so nothing is lost.
+	if (blocks.length <= 1) {
+		return '<div class="clmodalbody">' + wrapURL(data.trim().replaceAll("\n", "<br>")) + '</div>';
+	}
+
+	let headerlines = blocks[0].trim().split("\n");
+	if (headerlines.length > 0 && headerlines[0].trim().toLowerCase() === "changelog:") {
+		headerlines.shift();
+	}
+
+	let modtitle = headerlines.length > 0 ? headerlines[0].trim() : "";
+	let modurl = "";
+	for (let line of headerlines) {
+		if (line.trim().startsWith("http")) {
+			modurl = line.trim();
+			break;
+		}
+	}
+
+	let html = "";
+
+	html += '<div class="clmodalhead">';
+	if (modtitle !== "") {
+		html += '<p class="clmodaltitle">' + modtitle + '</p>';
+	}
+	if (modurl !== "") {
+		html += '<a class="clmodallink" href="' + modurl + '" target=_blank>' + clHostLabel(modurl) + '</a>';
+	}
+	html += '</div>';
+
+	for (let i = 1; i < blocks.length; i++) {
+		let block = blocks[i].trim();
+		if (block === "") { continue; }
+
+		let match = block.match(/^(v[^\s:]+):\s*([\s\S]*)$/);
+
+		html += '<div class="clmodalentry">';
+		if (match) {
+			html += '<p class="clmodalver">' + match[1] + '</p>';
+			html += '<p class="clmodalbody">' + wrapURL(match[2].trim().replaceAll("\n", "<br>")) + '</p>';
+		}
+		else {
+			html += '<p class="clmodalbody">' + wrapURL(block.replaceAll("\n", "<br>")) + '</p>';
+		}
+		html += '</div>';
+	}
+
+	return html;
+}
+
+function clHostLabel(url) {
+	if (url.includes("curseforge")) { return "View on CurseForge"; }
+	if (url.includes("modrinth")) { return "View on Modrinth"; }
+
+	return "View mod page";
+}
+
+// Pagination state in the URL (?page=N, 1-indexed), shared by the changelog and requests pages.
+function getPageFromUrl() {
+	let params = new URLSearchParams(window.location.search);
+	let page = parseInt(params.get("page"), 10);
+
+	if (isNaN(page) || page < 1) {
+		return 0;
+	}
+
+	return page - 1;
+}
+
+function setPageInUrl(pageindex) {
+	if (!window.history.replaceState) {
+		return;
+	}
+
+	let url = window.location.pathname;
+	if (pageindex > 0) {
+		url += "?page=" + (pageindex + 1);
+	}
+
+	window.history.replaceState(null, "", url);
 }

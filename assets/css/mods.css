@@ -1,272 +1,445 @@
-@media only screen and (max-width: 760px) {
-	.modlist th {
-		font-size: 12px !important;
-	}
+/* Mods page overrides the global full-viewport .main so the page scrolls normally */
+.main {
+	position: static;
+	height: auto;
+	max-height: none;
 
-	.modrow .logo img {
-		width: 60px !important;
-	}
-
-	.modrow .description {
-		font-size: 14px !important;
-	}
-}
-@media only screen and (max-width: 437px) {
-	.selectorwrapper {
-		margin-top: 70px !important;
-	}
-}
-@media only screen and (max-width: 620px) {
-	.modwrapper {
-		margin-top: 80px !important;
-	}
-	.submenuwrapper {
-		margin-top: 90px !important;
-	}
+	padding: 52px 0 50px 0;
 }
 
-table {
-	border-collapse: collapse;
-}
-
-table th {
-	position: -webkit-sticky;
-	position: sticky;
-	z-index: 2;
-
-	top: 35px;
-	height: 80px;
-
-	box-shadow: inset 0 -2px 0 #FFF7C0;
-
-	background-color: #484d54;
-}
-
-.backgroundwrapper {
-	position: fixed;
-	z-index: 1;
-	top: 0;
-	left: 0;
-
-	width: 300vw;
-	height: 80px;
-
-	background-color: #484d54;
-	overflow: hidden;
-}
-
-.modwrapper a,
-.submenuwrapper a {
-	color: #FFF7C0;
+.modwrapper a {
+	color: #ECECEC;
 	text-decoration: none;
 }
 
+/* Wrapper */
 .modwrapper {
-	position: absolute;
-	top: 0;
+	width: 92%;
+	max-width: 1240px;
 
-	margin-top: 50px;
+	margin: 0 auto;
+}
 
-	width: 100%;
-	height: auto;
+/* Controls: search + version filter, sticky below the nav */
+.modcontrols {
+	position: sticky;
+	z-index: 6;
+	top: 43px;
+
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: 10px;
+
+	padding: 12px 0;
+	margin-bottom: 14px;
 
 	background-color: #484d54;
+	border-bottom: 2px solid #88C04F;
 }
 
-/* Submenu */
-.submenuwrapper {
-	position: absolute;
-	z-index: 5;
-	left: 0;
-	width: 100%;
+.modcontrols #modsearch {
+	flex: 1 1 240px;
+	min-width: 180px;
 
-	margin-top: 60px;
+	padding: 10px 14px;
 
-	text-align: center;
-}
-
-.submenuwrapper p {
-	display: inline-block;
-	font-size: 20px;
-	font-weight: bolder;
-
-	padding: 0 10px 0 10px;
-	margin: 0;
-}
-.submenuwrapper p:hover {
-	color: #BFDAAF;
-}
-
-.modlist {
-	position: relative;
-	width: 98%;
-	left: 1%;
-
-	margin-top: 5px;
-	margin-bottom: 60px;
-
-	background-color: #484d54;
-}
-
-.modlist .modheader {
-	vertical-align: bottom;
-	line-height: 40px;
-	background-color: #484d54;
-}
-
-.modlist th {
-	font-size: 20px;
-}
-
-.modlist th,
-.modlist td {
-	margin: 0;
-	padding: 10px 5px 10px 5px;
-
-	text-align: left;
-
-	border-bottom: 1px solid #FFF7C0;
-}
-
-.modlist th.changelog,
-.modlist th.versions {
-	text-align: center;
-}
-
-.modrow {
-	margin: 10px;
-}
-.modrow:hover {
-	background-color: #3d4145;
-}
-.defaultmodrinth .modrow:hover {
-	cursor: url("/assets/images/modrinth_pointer.png"), auto;
-}
-.defaultcurseforge .modrow:hover {
-	cursor: url("/assets/images/curseforge_pointer.png"), auto;
-}
-
-.modrow .logo img {
-	width: 100px;
-
-	padding: 0 20px 0 10px;
-}
-
-.modrow .name {
-	padding-right: 10px;
-}
-
-.modrow .description {
+	color: #ECECEC;
 	font-size: 16px;
+	font-family: "Roboto", sans-serif;
 
-	padding-right: 10px;
+	background-color: #3a3e44;
+	border: 2px solid #5b6168;
+
+	outline: none;
+}
+.modcontrols #modsearch:focus {
+	border-color: #88C04F;
+}
+.modcontrols #modsearch::placeholder {
+	color: #9aa0a6;
 }
 
-.modrow .changelog {
-	text-align: center;
-}
-.modrow .changelog img {
-	width: 32px;
-}
-
-.modrow .versions {
-	text-align: center;
-}
-.modrow .versions img {
-	width: 50px;
+.versionfilter {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 6px;
 }
 
-.modrow .dependencies {
-	text-align: right;
-}
-.modrow .dependencies img {
-	width: 50px;
+.verchip {
+	display: inline-block;
+	min-width: 4ch;
+	padding: 8px 12px;
 
-	padding-right: 10px;
-}
-
-/* Version Selector Dropdown */
-.selectorwrapper {
-	width: 100%;
-	height: auto;
-
+	color: #9aa0a6;
+	font-family: "Monocraft", monospace;
+	font-size: 14px;
 	text-align: center;
 
-	margin-top: 50px;
-	margin-bottom: -20px;
-}
-.dropdown-check-list {
-	position: relative;
-	left: calc(50% - 88px);
-
-	width: 120px;
-}
-
-.dropdown-check-list .anchor {
-	position: relative;
-	z-index: 9;
+	background-color: #3a3e44;
+	border: 2px solid #5b6168;
 
 	cursor: pointer;
+}
+.verchip:hover {
+	color: #ECECEC;
+}
+.verchip.enabled {
+	color: #373737;
+
+	background-color: #88C04F;
+	border-color: #88C04F;
+}
+
+.modcount {
+	margin: 0 0 0 auto;
+	padding-right: 2px;
+
+	color: #9aa0a6;
+	font-size: 14px;
+}
+
+/* Grid */
+.modgrid {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(330px, 1fr));
+	gap: 14px;
+
+	margin-bottom: 20px;
+}
+
+.noresults {
+	margin: 40px 0;
+
+	text-align: center;
+	font-size: 18px;
+	color: #9aa0a6;
+}
+
+/* Card */
+.modcard {
+	display: flex;
+	flex-direction: column;
+
+	padding: 16px;
+
+	background-color: #3a3e44;
+	border: 2px solid #41464d;
+}
+
+/* Host-branded pointer when hovering the CurseForge/Modrinth links in a card */
+.defaultcurseforge .modcard .modlink:hover,
+.defaultcurseforge .modcard .loader:hover,
+.defaultcurseforge .modcard .version:hover,
+.defaultcurseforge .modcard .dependency:hover {
+	cursor: url("/assets/images/curseforge_pointer.png"), pointer;
+}
+.defaultmodrinth .modcard .modlink:hover,
+.defaultmodrinth .modcard .loader:hover,
+.defaultmodrinth .modcard .version:hover,
+.defaultmodrinth .modcard .dependency:hover {
+	cursor: url("/assets/images/modrinth_pointer.png"), pointer;
+}
+
+.modcard-top {
+	display: flex;
+	align-items: center;
+	gap: 12px;
+
+	margin-bottom: 10px;
+}
+
+.modlogo {
+	flex: 0 0 auto;
+
+	display: block;
+	line-height: 0;
+}
+
+.modcard-logo {
+	display: block;
+
+	width: 56px;
+	height: 56px;
+
+	object-fit: cover;
+
+	background-color: #2f3338;
+}
+
+.modcard-head {
+	flex: 1 1 auto;
+	min-width: 0;
+}
+
+.modcard .name {
 	display: inline-block;
-	padding: 5px 50px 5px 10px;
-	border: 1px solid #ccc;
 
-	width: 100%;
-}
-
-.dropdown-check-list .anchor:after {
-	position: absolute;
-	content: "";
-	border-left: 2px solid black;
-	border-top: 2px solid black;
-	padding: 5px;
-	right: 10px;
-	top: 20%;
-	-moz-transform: rotate(-135deg);
-	-ms-transform: rotate(-135deg);
-	-o-transform: rotate(-135deg);
-	-webkit-transform: rotate(-135deg);
-	transform: rotate(-135deg);
-}
-
-.dropdown-check-list .anchor:active:after {
-	right: 8px;
-	top: 21%;
-}
-
-.dropdown-check-list ul.items {
-	position: absolute;
-	z-index: 9;
-
-	padding: 2px;
-	display: none;
 	margin: 0;
-	border: 1px solid #ccc;
-	border-top: none;
 
-	width: 176px;
-	background-color: #484d54;
+	font-size: 18px;
+	font-weight: bolder;
+
+	color: #ECECEC;
+	text-decoration: none;
+}
+.modcard .name:hover {
+	color: #88C04F;
 }
 
-.dropdown-check-list ul.items li {
-	list-style: none;
-	width: 100%;
+.modcard-tags {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 5px;
 
-	text-align: left;
+	margin-top: 6px;
 }
 
-.dropdown-check-list ul.items li input {
-	margin: 5px 10px 5px 20px;
+.loader {
+	padding: 2px 8px;
+
+	color: #ECECEC;
+	font-size: 12px;
+	font-weight: bolder;
+	text-decoration: none;
+
+	background-color: #2f3338;
+	border-left: 2px solid #5b6168;
 }
-.dropdown-check-list ul.items li p {
-	display: inline;
+.loader:hover {
+	background-color: #41464d;
+}
+.loader.fabric {
+	border-left-color: #d7b48a;
+}
+.loader.forge {
+	border-left-color: #6c8fc7;
+}
+.loader.neoforge {
+	border-left-color: #e0913a;
 }
 
-.dropdown-check-list.visible .items {
+.bundlebadge {
+	padding: 2px 8px;
+
+	color: #373737;
+	font-size: 12px;
+	font-weight: bolder;
+
+	background-color: #88C04F;
+}
+
+.modcard .description {
+	margin: 0 0 12px 0;
+
+	font-size: 14px;
+	line-height: 1.5;
+	color: #c7ccd1;
+
+	display: -webkit-box;
+	-webkit-line-clamp: 3;
+	-webkit-box-orient: vertical;
+	overflow: hidden;
+}
+
+.modcard-versionbar {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+
+	margin-top: auto;
+	margin-bottom: 12px;
+}
+
+.modver {
+	min-width: 4ch;
+	padding: 3px 9px;
+
+	color: #ECECEC;
+	font-family: "Monocraft", monospace;
+	font-size: 13px;
+	text-align: center;
+	text-decoration: none;
+
+	background-color: #2f3338;
+	border: 1px solid #5b6168;
+}
+.modver:hover {
+	color: #88C04F;
+	border-color: #88C04F;
+}
+
+.versionstrigger {
+	position: relative;
+
+	margin-left: auto;
+
+	padding: 4px 9px;
+
+	color: #9aa0a6;
+	font-size: 12px;
+	font-weight: bolder;
+
+	background-color: #2f3338;
+	border: 1px solid #5b6168;
+
+	cursor: pointer;
+}
+.versionstrigger:hover {
+	color: #88C04F;
+	border-color: #88C04F;
+}
+
+.versionpopup {
+	display: none;
+	position: absolute;
+	z-index: 8;
+	right: 0;
+	top: 100%;
+
+	min-width: 200px;
+	max-width: 280px;
+	padding: 10px 12px;
+
+	cursor: default;
+
+	background-color: #2a2d33;
+	border: 2px solid #88C04F;
+}
+.versionstrigger:hover .versionpopup,
+.versionstrigger.open .versionpopup {
 	display: block;
 }
 
-/* Changelog */
+/* The version-filter "..." sits inline with the chips and opens downward */
+.filtertrigger {
+	margin-left: 0;
+
+	padding: 8px 12px;
+}
+.filtertrigger .versionpopup {
+	top: 100%;
+	bottom: auto;
+}
+
+.verloaderlabel {
+	display: block;
+
+	margin-bottom: 6px;
+
+	color: #9aa0a6;
+	font-size: 12px;
+	font-weight: bolder;
+}
+
+.verpills {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 4px;
+}
+
+.verpill {
+	min-width: 4ch;
+	padding: 2px 6px;
+
+	color: #ECECEC;
+	font-family: "Monocraft", monospace;
+	font-size: 11px;
+	text-align: center;
+	text-decoration: none;
+
+	background-color: #3a3e44;
+	border: 1px solid #5b6168;
+}
+.verpill:hover {
+	color: #88C04F;
+	border-color: #88C04F;
+}
+
+.modcard-foot {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 8px;
+
+	padding-top: 12px;
+
+	border-top: 1px solid #41464d;
+}
+/* Version-less cards (bundles) have no version bar, so float the footer here */
+.modcard:not(.hasforge):not(.hasfabric):not(.hasneoforge) .modcard-foot {
+	margin-top: auto;
+}
+
+.changelogbtn {
+	display: inline-flex;
+	align-items: center;
+	gap: 6px;
+
+	padding: 6px 10px;
+
+	color: #ECECEC;
+	font-size: 13px;
+	font-weight: bolder;
+
+	background-color: #2f3338;
+	border: 1px solid #5b6168;
+}
+.changelogbtn:hover {
+	color: #88C04F;
+	border-color: #88C04F;
+}
+.changelogbtn img {
+	width: 16px;
+}
+
+.modcard-deps {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 6px;
+}
+
+.dependency {
+	display: inline-flex;
+	align-items: center;
+	gap: 5px;
+
+	padding: 4px 8px;
+
+	color: #c7ccd1;
+	font-size: 12px;
+
+	background-color: #2f3338;
+	border: 1px solid #5b6168;
+}
+.dependency:hover {
+	color: #88C04F;
+	border-color: #88C04F;
+}
+.dependency img {
+	width: 16px;
+	height: 16px;
+}
+
+@media only screen and (max-width: 620.5px) {
+	.main {
+		padding-top: 82px;
+	}
+	.modcontrols {
+		top: 73px;
+	}
+}
+
+@media only screen and (max-width: 480px) {
+	.modgrid {
+		grid-template-columns: 1fr;
+	}
+	.modcount {
+		display: none;
+	}
+}
+
+/* Changelog modal */
 .changelogwrapper {
 	position: fixed;
 	z-index: 11;
@@ -282,31 +455,32 @@ table th {
 .changelogwrapper .insidechangelog {
 	position: fixed;
 	z-index: 12;
-	top: 20%;
-	left: 20%;
+	top: 12%;
+	left: 50%;
 
-	width: 60%;
-	height: 60%;
+	width: 90%;
+	max-width: 640px;
+	height: 70%;
 
-	border: 2px solid #FFF7C0;
-	border-radius: 5%;
+	transform: translateX(-50%);
 
-	background-color: #484d54;
+	border: 3px solid #88C04F;
+
+	background-color: #3a3e44;
 }
 
 .changelogwrapper .insidechangelog .closewrapper {
-	position: relative;
+	position: absolute;
 	z-index: 13;
-	float: right;
-
-	margin-right: 15px;
+	top: 6px;
+	right: 16px;
 }
 
 .changelogwrapper .insidechangelog .closewrapper p {
 	margin: 0;
 
 	font-size: 40px;
-	color: #EBC288;
+	color: #88C04F;
 }
 .changelogwrapper .insidechangelog .closewrapper p:hover {
 	cursor: pointer;
@@ -314,17 +488,86 @@ table th {
 }
 
 .changelogwrapper .insidechangelog .changelogcontent {
-	position: relative;
-	top: 5%;
-	left: 5%;
+	position: absolute;
+	top: 56px;
+	left: 0;
+	right: 16px;
+	bottom: 0;
 
-	width: 90%;
-	height: 90%;
+	overflow-y: auto;
 
-	overflow: scroll;
+	padding: 0 12px 24px 28px;
+
+	line-height: 1.5;
 }
 
 .changelogwrapper .insidechangelog .changelogcontent a {
 	text-decoration: underline;
-	color: #EBC288;
+	color: #88C04F;
+}
+
+/* Version choice modal (split -fabric pages) */
+.versionchoice {
+	display: none;
+	position: fixed;
+	z-index: 11;
+	top: 0;
+	left: 0;
+
+	width: 100%;
+	height: 100%;
+
+	background-color: rgba(0, 0, 0, 0.5);
+}
+
+.versionchoice .insidechoice {
+	position: fixed;
+	top: 50%;
+	left: 50%;
+
+	width: 90%;
+	max-width: 380px;
+	padding: 24px;
+
+	transform: translate(-50%, -50%);
+	text-align: center;
+
+	background-color: #3a3e44;
+	border: 3px solid #88C04F;
+}
+
+.versionchoice .choicetitle {
+	margin: 0 0 18px 0;
+
+	color: #ECECEC;
+	font-size: 16px;
+}
+.versionchoice .choiceversion {
+	color: #88C04F;
+	font-family: "Monocraft", monospace;
+}
+
+.versionchoice .choicebtns {
+	display: flex;
+	justify-content: center;
+	gap: 12px;
+}
+
+.versionchoice .choicebtn {
+	padding: 10px 24px;
+
+	color: #ECECEC;
+	font-size: 16px;
+	font-weight: bolder;
+	text-decoration: none;
+	cursor: pointer;
+
+	background-color: #2f3338;
+	border: 2px solid #5b6168;
+}
+.versionchoice .choicebtn:hover {
+	color: #373737;
+
+	background-color: #88C04F;
+	border-color: #88C04F;
 }

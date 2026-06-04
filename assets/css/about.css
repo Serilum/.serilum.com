@@ -1,36 +1,76 @@
 .about {
 	position: absolute;
-	top: 80px;
-	left: 10vw;
+	top: 70px;
+	left: 0;
+	right: 0;
+	bottom: 40px;
 
-	width: 80vw;
-	height: calc(100vh - 50px);
+	margin: 0 auto;
+
+	width: 90vw;
+	max-width: 760px;
+
+	overflow-y: auto;
+
+	scrollbar-width: none;
+	-ms-overflow-style: none;
+}
+.about::-webkit-scrollbar {
+	width: 0;
+	height: 0;
+}
+
+.about h1 {
+	width: 100%;
+
+	margin: 0 0 28px 0;
+
+	font-size: 46px;
+
+	text-align: center;
 }
 
 .about .insideabout {
 	margin-bottom: 20px;
 }
 
-.about h1 {
-	width: 100%;
+.about .insideabout p {
+	margin: 0 0 18px 0;
 
-	font-size: 50px;
-
-	text-align: center;
+	font-size: 18px;
+	line-height: 1.7;
 }
 
-.about p {
-	font-size: 20px;
+.about .insideabout p.signoff {
+	margin-top: 24px;
+
+	color: #9aa0a6;
+	font-style: italic;
 }
 
 .about .imagewrapper {
 	width: 100%;
-	height: auto;
+
+	margin-top: 18px;
 
 	text-align: center;
 }
 
-.about .imagewrapper img {
-	width: 100%;
-	max-width: 325px;
+.about .modsbutton {
+	display: inline-block;
+
+	padding: 12px 24px;
+
+	color: #ECECEC;
+	font-size: 18px;
+	font-weight: bolder;
+	text-decoration: none;
+
+	background-color: #3a3e44;
+	border: 3px solid #88C04F;
+}
+.about .modsbutton:hover {
+	color: #373737;
+
+	background-color: #88C04F;
 }

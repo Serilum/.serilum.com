@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1" /> 
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
 	<meta name="identifier-url" content="https://serilum.com/" />
 	<meta name="description" content="Serilum makes Minecraft mods on CurseForge and Modrinth. Here you'll find an overview, changelogs and more information on them." />
 	<meta name="keywords" content="serilum, minecraft, mods, overview, curseforge, modrinth" />
@@ -22,7 +22,6 @@
 				<ul>
 					<li><a href="/">Home</a></li>
 					<li><a href="/about">About</a></li>
-					<li><a href="/feed">Feed</a></li>
 					<li><a class="selected" href="/mods">Mods</a></li>
 					<li><a href="/donate">Donate</a></li>
 					<li><a class="external" href="https://github.com/Serilum" target=_blank>Github</a></li>
@@ -39,72 +38,18 @@
 				</ul>
 			</div>
 		</div>
-		<div class="backgroundwrapper"></div>
-		<div class="submenuwrapper">
-			<a href="/mods/changelog"><p>&lt;&nbsp; Global Changelog</p></a><p> | </p><a href="/mods/requests"><p>Feature Requests &nbsp;&gt;</p></a>
+		<div class="submenuwrapper noselect">
+			<a class="submenubtn" href="/mods/changelog">Global Changelog</a>
+			<a class="submenubtn" href="/mods/requests">Feature Requests</a>
 		</div>
-		<div class="modwrapper noselect" hidden>
-			<div class="selectorwrapper">
-				<div id="versionselector" class="dropdown-check-list" tabindex="100">
-					<span class="anchor">Visible Versions</span>
-					<ul class="items">
-						<li>
-							<input id="cb1_20" type="checkbox">
-							<p id="cb1_20label">1.20</p>
-						</li>
-						<li>
-							<input id="cb1_19" type="checkbox">
-							<p id="cb1_19label">1.19</p>
-						</li>
-						<li>
-							<input id="cb1_18" type="checkbox">
-							<p id="cb1_18label">1.18</p>
-						</li>
-						<li>
-							<input id="cb1_17" type="checkbox">
-							<p id="cb1_17label">1.17</p>
-						</li>
-						<li>
-							<input id="cb1_16" type="checkbox">
-							<p id="cb1_16label">1.16</p>
-						</li>
-						<li>
-							<input id="cb1_15" type="checkbox">
-							<p id="cb1_15label">1.15</p>
-						</li>
-						<li>
-							<input id="cb1_14" type="checkbox">
-							<p id="cb1_14label">1.14</p>
-						</li>
-						<li>
-							<input id="cb1_13" type="checkbox">
-							<p id="cb1_13label">1.13</p>
-						</li>
-						<li>
-							<input id="cb1_12" type="checkbox">
-							<p id="cb1_12label">1.12</p>
-						</li>
-						<li>
-							<input id="cb1_11" type="checkbox">
-							<p id="cb1_11label">1.11</p>
-						</li>
-						<li>
-							<input id="cb1_7" type="checkbox">
-							<p id="cb1_7label">1.7</p>
-						</li>
-					</ul>
-				</div>
+		<div class="modwrapper" hidden>
+			<div class="modcontrols">
+				<input id="modsearch" type="text" placeholder="Search mods" autocomplete="off">
+				<div class="versionfilter noselect"></div>
+				<p class="modcount"></p>
 			</div>
-			<table class="modlist">
-				<tr class="modheader">
-					<th class="logo"></th>
-					<th class="name">Name</th>
-					<th class="description">Description</th>
-					<th class="changelog">Changelog</th>
-					<th class="versions">Versions</th>
-					<th class="dependencies">Dependencies</th>
-				</tr>
-			</table>
+			<div class="modgrid noselect"></div>
+			<p class="noresults" hidden>No mods match your search.</p>
 		</div>
 		<div class="changelogwrapper" hidden>
 			<div class="insidechangelog">
@@ -112,6 +57,15 @@
 					<p>×</p>
 				</div>
 				<div class="changelogcontent"></div>
+			</div>
+		</div>
+		<div class="versionchoice" hidden>
+			<div class="insidechoice">
+				<p class="choicetitle">Version <span class="choiceversion"></span> has a separate Fabric page.</p>
+				<div class="choicebtns">
+					<a class="choicebtn" id="choiceforge" target=_blank>Forge</a>
+					<a class="choicebtn" id="choicefabric" target=_blank>Fabric</a>
+				</div>
 			</div>
 		</div>
 		<div class="toasterwrapper"></div>
@@ -123,9 +77,6 @@
 	</div>
 	<span class=".preloadimages">
 		<link rel="preload" as="image" href="/assets/images/changelog.png" />
-		<link rel="preload" as="image" href="/assets/images/versions/1_20.png" />
-		<link rel="preload" as="image" href="/assets/images/versions/1_19.png" />
-		<link rel="preload" as="image" href="/assets/images/versions/1_18.png" />
 		<link rel="preload" as="image" href="/assets/data/logo/collective.png" />
 	</span>
 </body>

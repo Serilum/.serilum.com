@@ -1,54 +1,30 @@
 $(document).ready(function(e) {
-	populateMemberTable();
-
-	var intervalId = window.setInterval(function(){
-		if ($(".avatarwrapper #rick").is(":visible")) {
-			$(".avatarwrapper #rick").fadeOut(2500).delay(1000).fadeIn(2500);
-		}
-	}, 10000);
+	populateMembers();
 });
 
-function populateMemberTable() {
+function populateMembers() {
 	$.ajax({
 		url: "https://workflow.serilum.com/membership/data/members.json",
 		type: "GET",
 		dataType: 'json',
 		success: function(data){
-			if ("combined" in data) {
-				var tablehtml = "<tr>";
-
-				var i = 2;
-				for (var member of data["combined"]) {
-					if (i < 0) {
-						i = 2;
-						tablehtml += "</tr><tr>";
-					}
-
-					tablehtml += "<td><p>" + member + "</p></td>";
-					i-=1;
-				}
-
-				while (i >= 0) {
-					tablehtml += "<td></td>";
-					i -= 1;
-				}
-
-				tablehtml += "</tr>";
-
-				$("#membertable").html(tablehtml).fadeIn(500);
+			if (!("combined" in data)) {
+				return;
 			}
+
+			let specific = data["combined_specific"] || {};
+
+			let memberhtml = "";
+			for (let member of data["combined"]) {
+				let platform = specific[member];
+				let title = platform ? ' title="' + platform + '"' : '';
+
+				memberhtml += '<span class="memberchip"' + title + '>' + member + '</span>';
+			}
+
+			$(".memberlist").html(memberhtml);
+			$(".members").show();
 		},
 		error: function(data) { }
 	});
 }
-
-$("#guide").on('click', function(e) {
-	$("body").addClass("noscroll");
-	$(".modal").show();
-});
-
-$(".modal").on('click', function(e) {
-	$("body").removeClass("noscroll");
-	$(".modal").hide();
-	$('.modal iframe').attr('src', function(i, val) { return val; });
-});
