@@ -14,7 +14,7 @@ $(document).ready(function(e) {
 
 function loadChangelogData() {
 	$.ajax({
-		url: "/assets/data/changelog_data.json",
+		url: "https://data.serilum.com/web/changelog_data.json",
 		type: "GET",
 		dataType: 'json',
 		success: function(changelogdata) {
@@ -214,19 +214,19 @@ function openModChangelog(mod) {
 			let content = formatChangelog(data);
 
 			if (logofiletypes[mod] === undefined) {
-				$.get("https://serilum.com/assets/data/logo/" + mod + ".png")
+				$.get("https://serilum.com/assets/images/logo/" + mod + ".png")
 					.done(function() {
-						content = '<img class="clmodallogo" alt="logo" src="/assets/data/logo/' + mod + '.png">' + content;
+						content = '<img class="clmodallogo" alt="logo" src="/assets/images/logo/' + mod + '.png">' + content;
 						setRestModChangelog(content);
 					}).fail(function() {
-						content = '<img class="clmodallogo" alt="logo" src="/assets/data/logo/' + mod + '.gif">' + content;
+						content = '<img class="clmodallogo" alt="logo" src="/assets/images/logo/' + mod + '.gif">' + content;
 						setRestModChangelog(content);
 				})
 
 				return;
 			}
 
-			content = '<img class="clmodallogo" alt="logo" src="/assets/data/logo/' + mod + logofiletypes[mod] + '">' + content;
+			content = '<img class="clmodallogo" alt="logo" src="/assets/images/logo/' + mod + logofiletypes[mod] + '">' + content;
 			setRestModChangelog(content);
 		},
 		error: function(data) {

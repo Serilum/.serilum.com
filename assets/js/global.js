@@ -15,6 +15,10 @@ function _qa(e, d) {
 	document.head.appendChild(s);
 })();
 
+$(document).ajaxError(function(event, jqXHR, settings, thrownError) {
+	console.log("Could not load " + settings.url + " (status " + jqXHR.status + (thrownError ? ", " + thrownError : "") + ")");
+});
+
 $(document).ready(function(e) {
 	console.log("Loading https://serilum.com/")
 

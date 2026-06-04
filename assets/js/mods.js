@@ -11,7 +11,7 @@ $(document).ready(function(e) {
 
 function loadModData() {
 	$.ajax({
-		url: "/assets/data/mod_data.json",
+		url: "https://data.serilum.com/web/mod_data.json",
 		type: "GET",
 		dataType: 'json',
 		success: function(data){
@@ -75,7 +75,7 @@ function loadModData() {
 				let card = '<div class="modcard' + extraclasses + '" data-name="' + modname.toLowerCase() + '" data-desc="' + moddata["description"].toLowerCase().replaceAll('"', '') + '" data-versions="' + allversions.join(" ") + '">';
 
 				card += '	<div class="modcard-top">';
-				card += '		<a class="modlink modlogo" href="' + modhref + '" value="' + modvalue + '" target=_blank><img class="modcard-logo" alt="logo" loading="lazy" decoding="async" width="56" height="56" src="/assets/data/logo/' + imagename + '"></a>';
+				card += '		<a class="modlink modlogo" href="' + modhref + '" value="' + modvalue + '" target=_blank><img class="modcard-logo" alt="logo" loading="lazy" decoding="async" width="56" height="56" src="/assets/images/logo/' + imagename + '"></a>';
 				card += '		<div class="modcard-head">';
 				card += '			<a class="modlink name" href="' + modhref + '" value="' + modvalue + '" target=_blank>' + modname + '</a>';
 				card += '			<div class="modcard-tags">';
@@ -121,7 +121,7 @@ function loadModData() {
 
 					let deplabel = dependency.charAt(0).toUpperCase() + dependency.slice(1);
 
-					card += '<a class="dependency" href="' + verurl + '" value="' + ourl + '" target=_blank title="Requires ' + deplabel + '"><img alt="' + dependency + '" loading="lazy" src="/assets/data/logo/' + dependency + '.png">' + deplabel + '</a>';
+					card += '<a class="dependency" href="' + verurl + '" value="' + ourl + '" target=_blank title="Requires ' + deplabel + '"><img alt="' + dependency + '" loading="lazy" src="/assets/images/logo/' + dependency + '.png">' + deplabel + '</a>';
 				}
 				card += '		</div>';
 				card += '	</div>';
@@ -314,23 +314,23 @@ function setChangelog(mod) {
 			let content = formatChangelog(data);
 
 			if (logofiletypes[mod] === undefined) {
-				$.get("https://serilum.com/assets/data/logo/" + mod + ".png")
+				$.get("https://serilum.com/assets/images/logo/" + mod + ".png")
 					.done(function() {
-						content = '<img class="clmodallogo" alt="logo" src="/assets/data/logo/' + mod + '.png">' + content;
+						content = '<img class="clmodallogo" alt="logo" src="/assets/images/logo/' + mod + '.png">' + content;
 						setRestChangelog(mod, content);
 					}).fail(function() {
 						console.log("Mod data not loaded yet and mod image is not a png.");
 						console.log("Expect a 404 Not Found error in the console.");
 						console.log("Don't worry. All is well!");
 
-						content = '<img class="clmodallogo" alt="logo" src="/assets/data/logo/' + mod + '.gif">' + content;
+						content = '<img class="clmodallogo" alt="logo" src="/assets/images/logo/' + mod + '.gif">' + content;
 						setRestChangelog(mod, content);
 				})
 
 				return;
 			}
 
-			content = '<img class="clmodallogo" alt="logo" src="/assets/data/logo/' + mod + logofiletypes[mod] + '">' + content;
+			content = '<img class="clmodallogo" alt="logo" src="/assets/images/logo/' + mod + logofiletypes[mod] + '">' + content;
 			setRestChangelog(mod, content);
 		},
 		error: function(data) {

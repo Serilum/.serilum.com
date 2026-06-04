@@ -20,14 +20,14 @@ $(document).ready(function(e) {
 		$("#forgesclink").attr('href', forgeurl);
 
 		$.ajax({
-			url: "/assets/data/mod_data.json",
+			url: "https://data.serilum.com/web/mod_data.json",
 			type: "GET",
 			dataType: 'json',
 			success: function(data){
 				if (modname in data) {
 					let md = data[modname];
 
-					$(".modlogo").html('<img alt="logo" src="/assets/data/logo/' + mod + md["logo_file_type"] + '">');
+					$(".modlogo").html('<img alt="logo" src="/assets/images/logo/' + mod + md["logo_file_type"] + '">');
 
 					let fabricvl = md["fabric_versions"].length
 					let forgevl = md["forge_versions"].length
