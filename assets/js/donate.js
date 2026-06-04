@@ -2,6 +2,10 @@ $(document).ready(function(e) {
 	populateMembers();
 });
 
+$(document).on('click', '.donateshields a', function(e) {
+	_qa("donate_click", { platform: $(this).attr('href').includes('patreon') ? "patreon" : "github_sponsors" });
+});
+
 function populateMembers() {
 	$.ajax({
 		url: "https://workflow.serilum.com/membership/data/members.json",

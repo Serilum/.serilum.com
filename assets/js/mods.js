@@ -423,7 +423,15 @@ $(document).on('mouseup', '.changelogbtn', function(e) {
 		return;
 	}
 
+	_qa("changelog_open", { mod: $(this).attr('value') });
 	setChangelog($(this).attr('value'));
+});
+
+$(document).on('click', '.modlink', function(e) {
+	_qa("mod_open", { mod: $(this).closest('.modcard').find('.modlink.name').text(), host: enabledCurseForge() ? "curseforge" : "modrinth" });
+});
+$(document).on('click', '.loader', function(e) {
+	_qa("loader_click", { mod: $(this).closest('.modcard').find('.modlink.name').text(), loader: $(this).text(), host: enabledCurseForge() ? "curseforge" : "modrinth" });
 });
 $(document).on('click', '.changelogbtn', function(e) {
 	e.preventDefault();
@@ -439,10 +447,22 @@ $(document).on('mouseup', '.versionstrigger', function(e) {
 	$(this).toggleClass("open");
 });
 
+$(document).on('mouseup', function(e) {
+	if (!(e.which === 1)) {
+		return;
+	}
+
+	if (!$(e.target).closest('.versionstrigger').length) {
+		$(".versionstrigger.open").removeClass("open");
+	}
+});
+
 $(document).on('click', '.version', function(e) {
 	e.preventDefault();
 
 	let el = $(this);
+
+	_qa("version_click", { mod: el.closest('.modcard').find('.modlink.name').text(), version: el.text(), host: enabledCurseForge() ? "curseforge" : "modrinth" });
 
 	if (!enabledCurseForge()) {
 		window.open(el.attr('data-mr'), '_blank').focus();

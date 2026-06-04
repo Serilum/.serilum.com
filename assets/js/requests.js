@@ -116,6 +116,7 @@ $(document).on('mouseup', 'table tr:not(.headerrow)', function(e) {
 	let issuenum = $(this).attr('id');
 	let url = "https://github.com/Serilum/.issue-tracker/issues/" + issuenum
 
+	_qa("request_open", { issue: issuenum });
 	window.open(url, '_blank').focus();
 });
 $(document).on('mouseup', 'table tr.headerrow p', function(e) {

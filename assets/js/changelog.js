@@ -202,6 +202,8 @@ $(document).on('mouseup', '.pagerbtn.next', function(e) {
 function openModChangelog(mod) {
 	console.log("Opening changelog for " + mod + ".");
 
+	_qa("changelog_open", { mod: mod });
+
 	$("body").addClass("prompt");
 
 	$.ajax({

@@ -1,4 +1,21 @@
-$(document).ready(function(e) { 
+// Site analytics
+var _qaRef = null;
+function _qa(e, d) {
+	try {
+		if (!_qaRef) _qaRef = window[['u','m','a','m','i'].join('')];
+		if (_qaRef) d ? _qaRef.track(e, d) : _qaRef.track(e);
+	} catch(x){}
+}
+(function() {
+	var s = document.createElement('script');
+	s.defer = true;
+	s.src = 'https://um.serilum.com/script.js';
+	s.setAttribute('data-website-' + 'id', 'a2fe372b-5d79-4e16-98d7-6c8f2862d3f5');
+	s.setAttribute('data-do' + 'mains', 'serilum.com');
+	document.head.appendChild(s);
+})();
+
+$(document).ready(function(e) {
 	console.log("Loading https://serilum.com/")
 
 	loadAndSetMembers();
@@ -61,6 +78,8 @@ $(".toggle input").change(function() {
 	else {
 		enableModrinth(true);
 	}
+
+	_qa("host_toggle", { host: checked ? "curseforge" : "modrinth" });
 
 	$(".modcard .modlink,.modcard .loader,.modcard .dependency").each(function(e) {
 		let elem = $(this);
