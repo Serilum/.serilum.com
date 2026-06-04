@@ -435,6 +435,7 @@ $(document).on('mouseup', '.versionstrigger', function(e) {
 	}
 
 	e.stopImmediatePropagation();
+	$(".versionstrigger.open").not(this).removeClass("open");
 	$(this).toggleClass("open");
 });
 
