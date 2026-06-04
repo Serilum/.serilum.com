@@ -179,7 +179,18 @@ function formatChangelog(data) {
 		html += '<p class="clmodaltitle">' + modtitle + '</p>';
 	}
 	if (modurl !== "") {
-		html += '<a class="clmodallink" href="' + modurl + '" target=_blank>' + clHostLabel(modurl) + '</a>';
+		let slug = modurl.includes("/mc-mods/") ? modurl.split("/mc-mods/")[1].split(/[/?#]/)[0] : "";
+		let mrslug = slug;
+		if (modtitle === "Villager Names") {
+			mrslug += "-serilum";
+		}
+
+		html += '<div class="clmodallinks">';
+		html += '<a class="submenubtn clmodallink" href="' + modurl + '" target=_blank>View on CurseForge</a>';
+		if (slug !== "") {
+			html += '<a class="submenubtn clmodallink" href="https://modrinth.com/mod/' + mrslug + '" target=_blank>View on Modrinth</a>';
+		}
+		html += '</div>';
 	}
 	html += '</div>';
 

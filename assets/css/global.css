@@ -368,13 +368,19 @@ div.toasterwrapper.offset {
 	font-size: 24px;
 	font-weight: bolder;
 }
-.clmodallink {
-	color: #88C04F;
-	font-size: 14px;
-	text-decoration: underline;
+.clmodallinks {
+	display: flex;
+	justify-content: center;
+	flex-wrap: wrap;
+	gap: 10px;
 }
-.clmodallink:hover {
-	color: #BFDAAF;
+
+.clmodallink {
+	padding: 4px 12px;
+
+	font-size: 14px;
+
+	background-color: #2f3338;
 }
 
 .clmodalentry {

@@ -274,7 +274,7 @@
 
 	line-height: 1.5;
 }
-.clmodal .clmodalcontent a {
+.clmodal .clmodalcontent a:not(.clmodallink) {
 	color: #88C04F;
 	text-decoration: underline;
 }
