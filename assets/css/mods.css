@@ -297,8 +297,8 @@
 	right: 0;
 	top: 100%;
 
-	min-width: 200px;
-	max-width: 280px;
+	width: max-content;
+	max-width: 90vw;
 	padding: 10px 12px;
 
 	cursor: default;
@@ -333,8 +333,8 @@
 }
 
 .verpills {
-	display: flex;
-	flex-wrap: wrap;
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
 	gap: 4px;
 }
 
