@@ -397,11 +397,13 @@ div.toasterwrapper.offset {
 	flex: 0 0 auto;
 	align-self: flex-start;
 
+	margin-top: 3px;
 	padding: 3px 10px;
 
 	color: #373737;
 	font-family: "Monocraft", monospace;
 	font-size: 13px;
+	line-height: 1;
 
 	background-color: #88C04F;
 }
