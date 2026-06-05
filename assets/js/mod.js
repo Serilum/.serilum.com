@@ -31,14 +31,14 @@ $(document).ready(function(e) {
 		$("#changelogurl").attr('href', changelogurl);
 
 		$.ajax({
-			url: "https://data.serilum.com/web/mod_data.json",
+			url: "https://workflow.serilum.com/web/data/mod_data.json",
 			type: "GET",
 			dataType: 'json',
 			success: function(data){
 				if (modname in data) {
 					let md = data[modname];
 
-					$(".modlogo").html('<img class="ml" alt="logo" src="/assets/images/logo/' + mod + md["logo_file_type"] + '">');
+					$(".modlogo").html('<img class="ml" alt="logo" src="' + logoSrc(mod, md["logo_file_type"], md["logo_sizes"]) + '" srcset="' + logoSrcset(mod, md["logo_file_type"], md["logo_sizes"]) + '" sizes="128px">');
 
 					let fabricvl = md["fabric_versions"].length
 					let forgevl = md["forge_versions"].length

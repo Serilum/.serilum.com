@@ -1,5 +1,7 @@
 const logofiletypes = {};
+const logosizes = {};
 const collectedversions = {};
+let searchTimer;
 
 $(document).ready(function(e) {
 	console.log("Loading https://serilum.com/mods");
@@ -11,7 +13,7 @@ $(document).ready(function(e) {
 
 function loadModData() {
 	$.ajax({
-		url: "https://data.serilum.com/web/mod_data.json",
+		url: "https://workflow.serilum.com/web/data/mod_data.json",
 		type: "GET",
 		dataType: 'json',
 		success: function(data){
@@ -22,9 +24,19 @@ function loadModData() {
 					continue;
 				}
 
-				let packageid = modname.replaceAll(" ", "-").replace("'", "").toLowerCase();
-				let imagename = packageid + moddata["logo_file_type"];
+				if (moddata["project_type"] && moddata["project_type"] !== "mod") {
+					continue;
+				}
+
+				if (modname.endsWith("(Forge)")) {
+					continue;
+				}
+
+				let packageid = modSlug(modname);
 				logofiletypes[packageid] = moddata["logo_file_type"];
+				logosizes[packageid] = moddata["logo_sizes"];
+
+				let description = cleanSummary(moddata["description"]);
 
 				let forge_versions = moddata["forge_versions"] || [];
 				let fabric_versions = moddata["fabric_versions"] || [];
@@ -46,7 +58,7 @@ function loadModData() {
 					collectedversions[v] = true;
 				}
 
-				let cfslug = modname.replaceAll(" ", "-").replaceAll("'", "").toLowerCase();
+				let cfslug = modSlug(modname);
 				let mrslug = cfslug;
 				if (modname === "Villager Names") {
 					mrslug += "-serilum";
@@ -72,13 +84,21 @@ function loadModData() {
 					extraclasses += " hasneoforge";
 				}
 
-				let card = '<div class="modcard' + extraclasses + '" data-name="' + modname.toLowerCase() + '" data-desc="' + moddata["description"].toLowerCase().replaceAll('"', '') + '" data-versions="' + allversions.join(" ") + '">';
+				let loaders = [];
+				if (hasfabric) { loaders.push("fabric"); }
+				if (hasforge) { loaders.push("forge"); }
+				if (hasneoforge) { loaders.push("neoforge"); }
+
+				let card = '<div class="modcard' + extraclasses + '" data-name="' + modname.toLowerCase() + '" data-desc="' + description.toLowerCase().replaceAll('"', '') + '" data-versions="' + allversions.join(" ") + '" data-env="' + (moddata["environment"] || "") + '" data-loaders="' + loaders.join(" ") + '">';
 
 				card += '	<div class="modcard-top">';
-				card += '		<a class="modlink modlogo" href="' + modhref + '" value="' + modvalue + '" target=_blank><img class="modcard-logo" alt="logo" loading="lazy" decoding="async" width="56" height="56" src="/assets/images/logo/' + imagename + '"></a>';
+				card += '		<a class="modlink modlogo" href="' + modhref + '" value="' + modvalue + '" target=_blank><img class="modcard-logo" alt="logo" decoding="async" width="56" height="56" src="' + logoSrc(packageid, moddata["logo_file_type"], moddata["logo_sizes"]) + '" srcset="' + logoSrcset(packageid, moddata["logo_file_type"], moddata["logo_sizes"]) + '" sizes="56px"></a>';
 				card += '		<div class="modcard-head">';
 				card += '			<a class="modlink name" href="' + modhref + '" value="' + modvalue + '" target=_blank>' + modname + '</a>';
 				card += '			<div class="modcard-tags">';
+				if (moddata["environment"]) {
+					card += environmentBadge(moddata["environment"]);
+				}
 				if (hasfabric) {
 					card += loaderBadge("fabric", "Fabric", 4, "fabric", cfmodurl, mrmodurl);
 				}
@@ -88,14 +108,11 @@ function loadModData() {
 				if (hasneoforge) {
 					card += loaderBadge("neoforge", "NeoForge", 6, "neoforge", cfmodurl, mrmodurl);
 				}
-				if (moddata["is_bundle"]) {
-					card += '<span class="bundlebadge">Bundle</span>';
-				}
 				card += '			</div>';
 				card += '		</div>';
 				card += '	</div>';
 
-				card += '	<p class="description">' + moddata["description"] + '</p>';
+				card += '	<p class="description">' + description + '</p>';
 
 				if (allversions.length > 0) {
 					card += buildVersionBar(modname, moddata, allversions);
@@ -121,7 +138,7 @@ function loadModData() {
 
 					let deplabel = dependency.charAt(0).toUpperCase() + dependency.slice(1);
 
-					card += '<a class="dependency" href="' + verurl + '" value="' + ourl + '" target=_blank title="Requires ' + deplabel + '"><img alt="' + dependency + '" loading="lazy" src="/assets/images/logo/' + dependency + '.png">' + deplabel + '</a>';
+					card += '<a class="dependency" href="' + verurl + '" value="' + ourl + '" target=_blank title="Requires ' + deplabel + '"><img alt="' + dependency + '" src="' + logobase + '64/' + dependency + '.png">' + deplabel + '</a>';
 				}
 				card += '		</div>';
 				card += '	</div>';
@@ -170,7 +187,7 @@ function buildVersionBar(modname, moddata, allversions) {
 }
 
 function versionChip(extraclass, modname, moddata, version) {
-	let cfslug = modname.replaceAll(" ", "-").replaceAll("'", "").toLowerCase();
+	let cfslug = modSlug(modname);
 	let mrslug = cfslug;
 	if (modname === "Villager Names") {
 		mrslug += "-serilum";
@@ -188,8 +205,8 @@ function versionChip(extraclass, modname, moddata, version) {
 	let mainfabric = moddata["fabric_versions"] || [];
 
 	let cffabric = "";
-	if (fabriclatest[version] !== undefined && mainfabric.indexOf(version) === -1 && moddata["fabric_url"]) {
-		cffabric = moddata["fabric_url"].replace("https://", "https://www.") + "/files/all?version=" + fabriclatest[version];
+	if (fabriclatest[version] !== undefined && mainfabric.indexOf(version) === -1 && moddata["fabric_slug"]) {
+		cffabric = "https://www.curseforge.com/minecraft/mc-mods/" + moddata["fabric_slug"] + "/files/all?version=" + fabriclatest[version];
 	}
 
 	let extra = cffabric === "" ? "" : " ambiguous";
@@ -209,6 +226,22 @@ function loaderBadge(loaderclass, label, gameversiontypeid, mrloader, cfmodurl, 
 	}
 
 	return '<a class="loader ' + loaderclass + '" href="' + href + '" value="' + value + '" target=_blank>' + label + '</a>';
+}
+
+function cleanSummary(summary) {
+	return summary.replace(/\[.*?\]/g, "").replace(/^[\p{Extended_Pictographic}\u200d\uFE0F\s]+/u, "").replace(/\s+([.,!?:;])/g, "$1").replace(/\s{2,}/g, " ").trim();
+}
+
+function environmentBadge(environment) {
+	let label = "Client &amp; Server";
+	if (environment === "client") {
+		label = "Client";
+	}
+	else if (environment === "server") {
+		label = "Server";
+	}
+
+	return '<span class="envbadge ' + environment + '">' + label + '</span>';
 }
 
 function buildVersionFilter() {
@@ -313,24 +346,8 @@ function setChangelog(mod) {
 		success: function(data){
 			let content = formatChangelog(data);
 
-			if (logofiletypes[mod] === undefined) {
-				$.get("https://serilum.com/assets/images/logo/" + mod + ".png")
-					.done(function() {
-						content = '<img class="clmodallogo" alt="logo" src="/assets/images/logo/' + mod + '.png">' + content;
-						setRestChangelog(mod, content);
-					}).fail(function() {
-						console.log("Mod data not loaded yet and mod image is not a png.");
-						console.log("Expect a 404 Not Found error in the console.");
-						console.log("Don't worry. All is well!");
-
-						content = '<img class="clmodallogo" alt="logo" src="/assets/images/logo/' + mod + '.gif">' + content;
-						setRestChangelog(mod, content);
-				})
-
-				return;
-			}
-
-			content = '<img class="clmodallogo" alt="logo" src="/assets/images/logo/' + mod + logofiletypes[mod] + '">' + content;
+			let filetype = logofiletypes[mod] || ".png";
+			content = '<img class="clmodallogo" alt="logo" src="' + logoSrc(mod, filetype, logosizes[mod]) + '" srcset="' + logoSrcset(mod, filetype, logosizes[mod]) + '" sizes="90px">' + content;
 			setRestChangelog(mod, content);
 		},
 		error: function(data) {
@@ -388,7 +405,7 @@ function getActiveModUrl(modname, fullurl=false) {
 	}
 
 	if (fullurl) {
-		return urlprefix + modname.replaceAll(" ", "-").replaceAll("'", "").toLowerCase() + urlsuffix;
+		return urlprefix + modSlug(modname) + urlsuffix;
 	}
 	return urlprefix;
 }
@@ -409,7 +426,7 @@ function getModUrl(modname, fullurl=false, iscurseforge=true) {
 	}
 
 	if (fullurl) {
-		return urlprefix + modname.replaceAll(" ", "-").replaceAll("'", "").toLowerCase() + urlsuffix;
+		return urlprefix + modSlug(modname) + urlsuffix;
 	}
 	return urlprefix;
 }
@@ -428,10 +445,14 @@ $(document).on('mouseup', '.changelogbtn', function(e) {
 });
 
 $(document).on('click', '.modlink', function(e) {
-	_qa("mod_open", { mod: $(this).closest('.modcard').find('.modlink.name').text(), host: enabledCurseForge() ? "curseforge" : "modrinth" });
+	let modcard = $(this).closest('.modcard');
+	_qa("mod_open", { mod: modcard.find('.modlink.name').text(), host: enabledCurseForge() ? "curseforge" : "modrinth", environment: modcard.attr('data-env'), loaders: modcard.attr('data-loaders') });
 });
 $(document).on('click', '.loader', function(e) {
 	_qa("loader_click", { mod: $(this).closest('.modcard').find('.modlink.name').text(), loader: $(this).text(), host: enabledCurseForge() ? "curseforge" : "modrinth" });
+});
+$(document).on('click', '.dependency', function(e) {
+	_qa("dependency_click", { mod: $(this).closest('.modcard').find('.modlink.name').text(), dependency: $(this).text(), host: enabledCurseForge() ? "curseforge" : "modrinth" });
 });
 $(document).on('click', '.changelogbtn', function(e) {
 	e.preventDefault();
@@ -497,6 +518,14 @@ $(document).on('mouseup', 'a', function(e) {
 
 $(document).on('input', '#modsearch', function(e) {
 	applyFilters();
+
+	clearTimeout(searchTimer);
+	let term = $(this).val().trim();
+	if (term !== "") {
+		searchTimer = setTimeout(function() {
+			_qa("mod_search", { term: term.toLowerCase() });
+		}, 800);
+	}
 });
 
 $(document).on('mouseup', '.verchip', function(e) {
@@ -519,6 +548,8 @@ $(document).on('mouseup', '.verchip', function(e) {
 	}
 
 	applyFilters();
+
+	_qa("version_filter", { version: $(this).attr('data-version'), enabled: $(this).hasClass("enabled") });
 });
 
 $(document).on('mouseup', '.changelogwrapper .insidechangelog .closewrapper p', function(e) {

@@ -224,14 +224,23 @@
 	border-left-color: #e0913a;
 }
 
-.bundlebadge {
+.envbadge {
 	padding: 2px 8px;
 
-	color: #373737;
+	color: #ECECEC;
 	font-size: 12px;
 	font-weight: bolder;
 
-	background-color: #88C04F;
+	background-color: #5b6168;
+}
+.envbadge.client {
+	background-color: #4d6378;
+}
+.envbadge.server {
+	background-color: #79664d;
+}
+.envbadge.both {
+	background-color: #5b6168;
 }
 
 .modcard .description {

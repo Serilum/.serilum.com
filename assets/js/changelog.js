@@ -1,5 +1,6 @@
 const grouppagesize = 40;
 const logofiletypes = {};
+const logosizes = {};
 
 let allentries = [];
 let rendergroups = [];
@@ -9,8 +10,25 @@ let searchterm = "";
 
 $(document).ready(function(e) {
 	console.log("Loading https://serilum.com/mods/changelog");
+	loadModLogos();
 	loadChangelogData();
 });
+
+function loadModLogos() {
+	$.ajax({
+		url: "https://workflow.serilum.com/web/data/mod_data.json",
+		type: "GET",
+		dataType: 'json',
+		success: function(data) {
+			for (let [modname, moddata] of Object.entries(data)) {
+				let packageid = modSlug(modname);
+				logofiletypes[packageid] = moddata["logo_file_type"];
+				logosizes[packageid] = moddata["logo_sizes"];
+			}
+		},
+		error: function(data) { }
+	});
+}
 
 function loadChangelogData() {
 	$.ajax({
@@ -213,20 +231,8 @@ function openModChangelog(mod) {
 		success: function(data) {
 			let content = formatChangelog(data);
 
-			if (logofiletypes[mod] === undefined) {
-				$.get("https://serilum.com/assets/images/logo/" + mod + ".png")
-					.done(function() {
-						content = '<img class="clmodallogo" alt="logo" src="/assets/images/logo/' + mod + '.png">' + content;
-						setRestModChangelog(content);
-					}).fail(function() {
-						content = '<img class="clmodallogo" alt="logo" src="/assets/images/logo/' + mod + '.gif">' + content;
-						setRestModChangelog(content);
-				})
-
-				return;
-			}
-
-			content = '<img class="clmodallogo" alt="logo" src="/assets/images/logo/' + mod + logofiletypes[mod] + '">' + content;
+			let filetype = logofiletypes[mod] || ".png";
+			content = '<img class="clmodallogo" alt="logo" src="' + logoSrc(mod, filetype, logosizes[mod]) + '" srcset="' + logoSrcset(mod, filetype, logosizes[mod]) + '" sizes="90px">' + content;
 			setRestModChangelog(content);
 		},
 		error: function(data) {

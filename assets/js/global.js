@@ -245,3 +245,34 @@ function setPageInUrl(pageindex) {
 
 	window.history.replaceState(null, "", url);
 }
+
+const logobase = "https://workflow.serilum.com/web/logo/";
+
+function logoSrc(slug, filetype, sizes) {
+	if (!sizes || sizes.length === 0) {
+		sizes = [128];
+	}
+
+	let pick = sizes.includes(256) ? 256 : sizes[sizes.length - 1];
+	return logobase + pick + "/" + slug + filetype;
+}
+
+function logoSrcset(slug, filetype, sizes) {
+	if (!sizes || sizes.length === 0) {
+		sizes = [128];
+	}
+
+	let srcset = "";
+	for (let s of sizes) {
+		if (srcset !== "") {
+			srcset += ", ";
+		}
+		srcset += logobase + s + "/" + slug + filetype + " " + s + "w";
+	}
+
+	return srcset;
+}
+
+function modSlug(modname) {
+	return modname.toLowerCase().replaceAll(" ", "-").replaceAll("(", "").replaceAll(")", "").replaceAll("'", "").replaceAll("?", "").replaceAll("[", "").replaceAll("]", "");
+}
