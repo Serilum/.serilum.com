@@ -42,10 +42,10 @@
 	flex: 1 1 240px;
 	min-width: 180px;
 
-	padding: 10px 14px;
+	padding: 7px 12px;
 
 	color: #ECECEC;
-	font-size: 16px;
+	font-size: 13px;
 	font-family: "Roboto", sans-serif;
 
 	background-color: #3a3e44;
@@ -69,11 +69,12 @@
 .verchip {
 	display: inline-block;
 	min-width: 4ch;
-	padding: 8px 12px;
+	padding: 7px 10px 5px;
 
 	color: #9aa0a6;
 	font-family: "Monocraft", monospace;
-	font-size: 14px;
+	font-size: 13px;
+	line-height: 1;
 	text-align: center;
 
 	background-color: #3a3e44;
@@ -83,15 +84,62 @@
 }
 .verchip:hover {
 	color: #ECECEC;
+	filter: brightness(1.2);
 }
 .verchip.enabled {
-	color: #373737;
+	color: #ECECEC;
 
-	background-color: #88C04F;
-	border-color: #88C04F;
+	background-color: #5C8D44;
+	border-color: #5C8D44;
 }
-.verchip.enabled:hover {
-	color: #5a6b3c;
+
+/* Visible filter chips sit 2px lower than the "..." panel chips to read centered in Monocraft. */
+.versionfilter > .verchip {
+	padding: 9px 10px 3px;
+}
+
+.filterslabel {
+	color: #9aa0a6;
+	font-size: 13px;
+	font-weight: bolder;
+}
+
+.envfilter {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 6px;
+}
+
+.envchip {
+	display: inline-block;
+	padding: 6px 10px;
+
+	color: #9aa0a6;
+	font-size: 13px;
+	font-weight: bolder;
+	text-align: center;
+
+	background-color: #3a3e44;
+	border: 2px solid #5b6168;
+
+	cursor: pointer;
+}
+.envchip:hover {
+	color: #ECECEC;
+	filter: brightness(1.2);
+}
+.envchip.enabled {
+	color: #ECECEC;
+	border-color: transparent;
+}
+.envchip.client.enabled {
+	background-color: #4d6378;
+}
+.envchip.server.enabled {
+	background-color: #79664d;
+}
+.envchip.both.enabled {
+	background-color: #5b6168;
 }
 
 .modcount {
@@ -102,6 +150,26 @@
 	color: #9aa0a6;
 	font-size: 14px;
 	text-align: right;
+}
+
+.resetfilters {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+
+	padding: 5px;
+
+	color: #9aa0a6;
+
+	cursor: pointer;
+}
+.resetfilters:hover {
+	color: #ECECEC;
+}
+.resetfilters .reseticon {
+	display: block;
+
+	transition: transform 0.5s ease;
 }
 
 /* Grid */
@@ -170,6 +238,12 @@
 	object-fit: cover;
 
 	background-color: #2f3338;
+
+	opacity: 0;
+	transition: opacity 0.4s ease;
+}
+.modcard-logo.loaded {
+	opacity: 1;
 }
 
 .modcard-head {
@@ -442,6 +516,13 @@
 	.modcontrols {
 		top: 73px;
 	}
+	.modcontrols #modsearch {
+		flex: 1 1 100%;
+	}
+	.filterslabel {
+		flex: 1 1 100%;
+		margin-bottom: -4px;
+	}
 }
 
 @media only screen and (max-width: 480px) {
@@ -450,6 +531,9 @@
 	}
 	.modcount {
 		display: none;
+	}
+	.resetfilters {
+		margin-left: auto;
 	}
 }
 

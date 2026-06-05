@@ -2,6 +2,7 @@ const logofiletypes = {};
 const logosizes = {};
 const collectedversions = {};
 let searchTimer;
+let resetRotation = 0;
 
 $(document).ready(function(e) {
 	console.log("Loading https://serilum.com/mods");
@@ -92,7 +93,7 @@ function loadModData() {
 				let card = '<div class="modcard' + extraclasses + '" data-name="' + modname.toLowerCase() + '" data-desc="' + description.toLowerCase().replaceAll('"', '') + '" data-versions="' + allversions.join(" ") + '" data-env="' + (moddata["environment"] || "") + '" data-loaders="' + loaders.join(" ") + '">';
 
 				card += '	<div class="modcard-top">';
-				card += '		<a class="modlink modlogo" href="' + modhref + '" value="' + modvalue + '" target=_blank><img class="modcard-logo" alt="logo" decoding="async" width="56" height="56" src="' + logoSrc(packageid, moddata["logo_file_type"], moddata["logo_sizes"]) + '" srcset="' + logoSrcset(packageid, moddata["logo_file_type"], moddata["logo_sizes"]) + '" sizes="56px"></a>';
+				card += '		<a class="modlink modlogo" href="' + modhref + '" value="' + modvalue + '" target=_blank><img class="modcard-logo" alt="' + modname + '" decoding="async" width="56" height="56" src="' + logoSrc(packageid, moddata["logo_file_type"], moddata["logo_sizes"]) + '" srcset="' + logoSrcset(packageid, moddata["logo_file_type"], moddata["logo_sizes"]) + '" sizes="56px"></a>';
 				card += '		<div class="modcard-head">';
 				card += '			<a class="modlink name" href="' + modhref + '" value="' + modvalue + '" target=_blank>' + modname + '</a>';
 				card += '			<div class="modcard-tags">';
@@ -151,11 +152,65 @@ function loadModData() {
 			$(".modgrid").html(gridcontent);
 
 			buildVersionFilter();
+			applyUrlFilters();
 			applyFilters();
 
-			$(".modwrapper").delay(300).fadeIn(500);
+			revealLogos();
 		},
 		error: function(data) { }
+	});
+}
+
+function revealLogos() {
+	let logos = $(".modgrid .modcard-logo").toArray();
+
+	if (logos.length === 0) {
+		$(".modwrapper").fadeIn(500);
+		return;
+	}
+
+	// Gate the grid reveal on the first three rows of logos (roughly above the fold);
+	// the rest fade in individually as they finish loading. Mirror the grid layout:
+	// minmax(330px, 1fr) tracks + 14px gap inside the 92%/1240px-capped wrapper.
+	let gridWidth = Math.min(window.innerWidth * 0.92, 1240);
+	let columns = Math.max(1, Math.floor((gridWidth + 14) / (330 + 14)));
+	let visibleCount = Math.min(logos.length, columns * 3);
+	let pending = visibleCount;
+	let revealed = false;
+
+	function reveal() {
+		if (revealed) {
+			return;
+		}
+		revealed = true;
+		$(".modwrapper").fadeIn(500);
+	}
+
+	let timer = setTimeout(reveal, 1500);
+
+	logos.forEach(function(img, i) {
+		let counts = i < visibleCount;
+
+		function done() {
+			img.classList.add("loaded");
+			if (counts && --pending === 0) {
+				clearTimeout(timer);
+				reveal();
+			}
+		}
+
+		if (img.complete) {
+			done();
+		}
+		else {
+			let onsettle = function() {
+				img.removeEventListener("load", onsettle);
+				img.removeEventListener("error", onsettle);
+				done();
+			};
+			img.addEventListener("load", onsettle);
+			img.addEventListener("error", onsettle);
+		}
 	});
 }
 
@@ -280,16 +335,23 @@ function applyFilters() {
 		enabled.push($(this).attr("data-version"));
 	});
 
+	let enabledenvs = [];
+	$(".envfilter .envchip.enabled").each(function(e) {
+		enabledenvs.push($(this).attr("data-env"));
+	});
+
 	let shown = 0;
 	$(".modgrid .modcard").each(function(e) {
 		let card = $(this);
 
 		let versions = card.attr("data-versions");
+		let env = card.attr("data-env");
 
 		let matchquery = query === "" || card.attr("data-name").includes(query) || card.attr("data-desc").includes(query);
 		let matchversion = versions === "" || versions.split(" ").some(v => enabled.includes(v));
+		let matchenv = env === "" || enabledenvs.includes(env);
 
-		if (matchquery && matchversion) {
+		if (matchquery && matchversion && matchenv) {
 			card.show();
 			shown += 1;
 		}
@@ -305,6 +367,72 @@ function applyFilters() {
 	}
 	else {
 		$(".noresults").hide();
+	}
+
+	updateFilterUrl();
+}
+
+function chipState(chips, attr) {
+	let enabled = chips.filter(".enabled");
+
+	if (enabled.length === chips.length) {
+		return "";
+	}
+	if (enabled.length === 0) {
+		return "none";
+	}
+
+	return enabled.map(function() {
+		return $(this).attr(attr);
+	}).get().join(",");
+}
+
+function updateFilterUrl() {
+	let params = new URLSearchParams(window.location.search);
+
+	let query = $("#modsearch").val().trim();
+	let env = chipState($(".envfilter .envchip"), "data-env");
+	let version = chipState($(".versionfilter .verchip"), "data-version");
+
+	for (let [key, value] of Object.entries({ q: query, env: env, version: version })) {
+		if (value === "") {
+			params.delete(key);
+		}
+		else {
+			params.set(key, value);
+		}
+	}
+
+	let qs = params.toString().replace(/%2C/g, ",");
+	let url = "/mods" + (qs ? "?" + qs : "");
+
+	if (window.history.replaceState) {
+		window.history.replaceState("mods", "Serilum.com | Mods", url);
+	}
+}
+
+function applyUrlFilters() {
+	let params = new URLSearchParams(window.location.search);
+
+	let query = params.get("q");
+	if (query !== null) {
+		$("#modsearch").val(query);
+	}
+
+	let env = params.get("env");
+	if (env !== null) {
+		let wanted = env === "none" ? [] : env.split(",");
+		$(".envfilter .envchip").each(function() {
+			$(this).toggleClass("enabled", wanted.includes($(this).attr("data-env")));
+		});
+	}
+
+	let version = params.get("version");
+	if (version !== null) {
+		let wanted = version === "none" ? [] : version.split(",");
+		$(".versionfilter .verchip").each(function() {
+			$(this).toggleClass("enabled", wanted.includes($(this).attr("data-version")));
+		});
 	}
 }
 
@@ -325,11 +453,9 @@ function compareVersionsDesc(a, b) {
 }
 
 function checkForChangelogParameter() {
-	let url = document.URL;
+	let mod = new URLSearchParams(window.location.search).get("changelog");
 
-	if (url.includes("?changelog=")) {
-		let mod = url.split("?changelog=")[1];
-
+	if (mod) {
 		setChangelog(mod);
 	}
 }
@@ -364,7 +490,10 @@ function setRestChangelog(mod, content) {
 	$(".changelogwrapper").fadeIn(100);
 
 	if (window.history.replaceState) {
-		window.history.replaceState("mods", "Serilum.com | Mods", "/mods?changelog=" + mod);
+		let params = new URLSearchParams(window.location.search);
+		params.set("changelog", mod);
+		let qs = params.toString().replace(/%2C/g, ",");
+		window.history.replaceState("mods", "Serilum.com | Mods", "/mods?" + qs);
 	}
 }
 
@@ -373,7 +502,10 @@ function closeChangelog() {
 	$("body").removeClass("prompt");
 
 	if (window.history.replaceState) {
-		window.history.replaceState("mods", "Serilum.com | Mods", "/mods");
+		let params = new URLSearchParams(window.location.search);
+		params.delete("changelog");
+		let qs = params.toString().replace(/%2C/g, ",");
+		window.history.replaceState("mods", "Serilum.com | Mods", "/mods" + (qs ? "?" + qs : ""));
 	}
 }
 
@@ -550,6 +682,49 @@ $(document).on('mouseup', '.verchip', function(e) {
 	applyFilters();
 
 	_qa("version_filter", { version: $(this).attr('data-version'), enabled: $(this).hasClass("enabled") });
+});
+
+$(document).on('mouseup', '.envchip', function(e) {
+	if (!(e.which === 1)) {
+		return;
+	}
+
+	e.stopImmediatePropagation();
+
+	let chips = $(".envfilter .envchip");
+	let allenabled = chips.length === chips.filter(".enabled").length;
+
+	if (allenabled) {
+		// First filter action while everything is on: isolate the clicked environment.
+		chips.removeClass("enabled");
+		$(this).addClass("enabled");
+	}
+	else {
+		$(this).toggleClass("enabled");
+	}
+
+	applyFilters();
+
+	_qa("env_filter", { environment: $(this).attr('data-env'), enabled: $(this).hasClass("enabled") });
+});
+
+$(document).on('mouseup', '.resetfilters', function(e) {
+	if (!(e.which === 1)) {
+		return;
+	}
+
+	e.stopImmediatePropagation();
+
+	resetRotation -= 360;
+	$(this).find('.reseticon').css('transform', 'rotate(' + resetRotation + 'deg)');
+
+	$("#modsearch").val("");
+	$(".envfilter .envchip").addClass("enabled");
+	$(".versionfilter .verchip").addClass("enabled");
+
+	applyFilters();
+
+	_qa("filters_reset", {});
 });
 
 $(document).on('mouseup', '.changelogwrapper .insidechangelog .closewrapper p', function(e) {
