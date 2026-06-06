@@ -51,7 +51,7 @@ function loadManifest(next) {
 
 function startEditor() {
 	wireControls();
-	setMobileTab("languages");
+	setMobileTab("intro");
 	buildLanguageList();
 	loadSource();
 }
@@ -318,6 +318,9 @@ function maybeAutoHideIntro(e) {
 		return;
 	}
 	if ($(e.target).closest("#introblock, #introtoggle").length) {
+		return;
+	}
+	if (!$(e.target).closest("textarea, input, button, select, a, label").length) {
 		return;
 	}
 	suppressAutoHide = true;
