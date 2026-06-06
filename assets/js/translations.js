@@ -84,6 +84,7 @@ function wireControls() {
 	$("#langlist").on("click", ".langitem", function() {
 		chooseLocale($(this).data("code"));
 	});
+	$("#langlist").on("click", ".langclear", clearLocale);
 	$(".tabbar .tab").on("click", function() {
 		setMobileTab($(this).data("tab"));
 	});
@@ -236,6 +237,7 @@ function chooseLocale(code) {
 	if ($(".tabbar").is(":visible")) {
 		setMobileTab("editor");
 	}
+	_qa("translation_select", { locale: code });
 }
 
 function selectLocale() {
@@ -245,7 +247,7 @@ function selectLocale() {
 	renderPinned();
 	serverValues = {};
 	if (currentLocale === "") {
-		$(".toolbar").attr("hidden", true);
+		$(".toolbar").addClass("empty");
 		$("#editor").attr("hidden", true);
 		clearInputs();
 		updateProgress();
@@ -253,7 +255,7 @@ function selectLocale() {
 	}
 	Cookies.set("translations_locale", currentLocale, { expires: 365 });
 	$(".toolbar .loc").text(currentLocale);
-	$(".toolbar").removeAttr("hidden");
+	$(".toolbar").removeClass("empty");
 	$("#editor").removeAttr("hidden");
 
 	if (Object.keys(knownLangs).length > 0 && !knownLangs[currentLocale]) {
@@ -286,10 +288,17 @@ function renderPinned() {
 	if (currentLocale === "") {
 		return;
 	}
-	let pinned = '<div class="langpinned"><div class="langsection-title">Selected</div>'
+	let pinned = '<div class="langpinned"><div class="langsection-title">Selected'
+		+ '<button type="button" class="langclear" title="Clear selection">&times;</button></div>'
 		+ langRowHtml(currentLocale, nameFor(currentLocale)) + "</div>";
 	$("#langlist").prepend(pinned);
 	$("#langlist .langpinned .langitem").addClass("selected");
+}
+
+function clearLocale() {
+	currentLocale = "";
+	Cookies.remove("translations_locale");
+	selectLocale();
 }
 
 function setIntroCollapsed(collapsed, persist) {
@@ -464,6 +473,7 @@ function buildLocaleFile() {
 function copyFile() {
 	if (!guardEmpty()) { return; }
 	navigator.clipboard.writeText(buildLocaleFile()).then(function() {
+		_qa("translation_copy", { locale: currentLocale });
 		if (!placeholderWarningToast()) {
 			showToast("Copied lang/" + currentLocale + ".json to your clipboard.", "#4f9a5b");
 		}
@@ -478,6 +488,7 @@ function openGithub() {
 	let url = localeExists
 		? "https://github.com/" + repoSlug + "/edit/" + repoBranch + "/" + path
 		: "https://github.com/" + repoSlug + "/new/" + repoBranch + "?filename=" + path;
+	_qa("translation_github", { locale: currentLocale, mode: localeExists ? "edit" : "new" });
 	window.open(url, "_blank");
 }
 
@@ -501,6 +512,7 @@ function downloadFile() {
 	a.download = currentLocale + ".json";
 	a.click();
 	URL.revokeObjectURL(a.href);
+	_qa("translation_download", { locale: currentLocale });
 	placeholderWarningToast();
 }
 
@@ -535,6 +547,7 @@ function confirmImport() {
 	closeImportModal();
 	if (data) {
 		applyImported(data);
+		_qa("translation_import", { locale: currentLocale });
 	}
 }
 

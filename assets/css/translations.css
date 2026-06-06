@@ -189,6 +189,27 @@
 	background-color: #3c4047;
 	border-bottom: 1px solid #2f3338;
 }
+.translations .langpinned .langsection-title {
+	display: flex;
+	align-items: center;
+}
+.translations .langclear {
+	margin-left: auto;
+	padding: 0 2px;
+
+	color: #9aa0a6;
+	font-family: "Roboto", serif;
+	font-size: 18px;
+	line-height: 1;
+
+	background: none;
+	border: none;
+
+	cursor: pointer;
+}
+.translations .langclear:hover {
+	color: #F16436;
+}
 .translations .langlist::-webkit-scrollbar {
 	width: 10px;
 }
@@ -612,6 +633,25 @@
 
 	text-align: center;
 }
+.translations .noselection {
+	flex-basis: 100%;
+
+	padding: 6px 4px;
+
+	color: #9aa0a6;
+	font-size: 15px;
+
+	text-align: center;
+}
+.translations .noselection .onmobile {
+	display: none;
+}
+.translations .toolbar.empty > :not(.noselection) {
+	display: none;
+}
+.translations .toolbar:not(.empty) > .noselection {
+	display: none;
+}
 .translations .langloading {
 	display: flex;
 	justify-content: center;
@@ -757,6 +797,12 @@
 	}
 	.translations .steps {
 		display: none;
+	}
+	.translations .noselection .ondesktop {
+		display: none;
+	}
+	.translations .noselection .onmobile {
+		display: inline;
 	}
 
 	.translations .sidebar-head,
