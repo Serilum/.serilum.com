@@ -1,0 +1,158 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<meta name="identifier-url" content="https://serilum.com/" />
+	<meta name="description" content="Help translate Serilum's Minecraft mods. Pick a language, fill in the translations and submit them with a single pull request." />
+	<meta name="keywords" content="serilum, minecraft, mods, translations, localization, language, curseforge, modrinth" />
+	<meta name="author" content="Rick South" />
+	<link rel="shortcut icon" href="/assets/images/favicon.ico" type="image/x-icon">
+	<title>Serilum.com | Translations</title>
+	<link rel="stylesheet" href="/assets/css/global.css">
+	<link rel="stylesheet" href="/assets/css/translations.css">
+</head>
+<body class="defaultcurseforge">
+	<div class="main">
+		<div class="navigation noselect">
+			<div class="inside">
+				<div class="serilum" hidden>
+					<a href="/"><img alt="serilum" src="/assets/images/serilum.png"></a>
+				</div>
+				<ul>
+					<li><a href="/">Home</a></li>
+					<li><a href="/about">About</a></li>
+					<li><a href="/mods">Mods</a></li>
+					<li><a class="selected" href="/translations">Translations</a></li>
+					<li><a class="external" href="https://github.com/Serilum" target=_blank>Github</a></li>
+					<li class="togglewrapper">
+						<img alt="modrinth" class="modrinth" src="/assets/images/modrinth_tiny.png">
+						<div class="toggle checkcross">
+							<input id="checkcross" type="checkbox" checked>
+							<label class="toggle-item" for="checkcross">
+								<div class="check"></div>
+							</label>
+						</div>
+						<img alt="curseforge" class="curseforge" src="/assets/images/curseforge_tiny.png">
+					</li>
+				</ul>
+			</div>
+		</div>
+		<div class="translations">
+			<div class="tabbar noselect">
+				<button class="tab" type="button" data-tab="languages">Languages</button>
+				<button class="tab" type="button" data-tab="intro">Intro</button>
+				<button class="tab" type="button" data-tab="editor">Editor</button>
+			</div>
+			<aside class="sidebar noselect">
+				<div class="sidebar-head">
+					<h1>Languages</h1>
+					<div class="selected">
+						<div class="selectedlang">No language selected</div>
+						<div class="progress"><div class="bar"><span></span></div><div class="pct">0 / 0 (0%)</div></div>
+					</div>
+					<input id="langsearch" type="text" placeholder="Search languages&hellip;" autocomplete="off">
+					<label class="showall"><input type="checkbox" id="showall"> Show all Minecraft languages</label>
+					<label class="showall"><input type="checkbox" id="hidecompleted"> Hide completed languages</label>
+				</div>
+				<div class="langlist" id="langlist" role="listbox"><div class="langloading"><span class="spinner"></span></div></div>
+			</aside>
+			<main class="editorpane">
+				<div class="editor-head">
+					<h1>Serilum Mod Translations</h1>
+					<div class="introblock" id="introblock">
+						<p>All translation files are parsed by the <b>Collective</b> library mod, so dependent mods don't have to manage them separately. Non-English languages are downloaded on runtime in-game once, then cached. I've done it this way so Collective's file size doesn't increase by ~3Mb with all the translation data. Changes made to the language files on GitHub will automatically be pulled into the game.</p>
+						<p>To submit translations/improvements please pick a language on the left, fill in what you can, then copy the file and open a pull request. You'll need a GitHub account for this.</p>
+						<p>Anything you leave blank simply falls back to English in-game, so partial translations are also very welcome.</p>
+						<p>Thank you for contributing and giving the mod collection a try!</p>
+					</div>
+					<button class="introtoggle" id="introtoggle" type="button" aria-expanded="true">&#9652; Hide intro</button>
+					<script>
+						if (document.cookie.indexOf("translations_introcollapsed=1") !== -1) {
+							document.getElementById("introblock").hidden = true;
+							var introToggle = document.getElementById("introtoggle");
+							introToggle.innerHTML = "&#9662; Show intro";
+							introToggle.setAttribute("aria-expanded", "false");
+						}
+					</script>
+					<div class="controls noselect">
+						<div class="control grow">
+							<label for="filter">Filter</label>
+							<input id="filter" type="text" placeholder="Search keys or text" autocomplete="off">
+						</div>
+					</div>
+					<div class="toolbar noselect" hidden>
+						<div class="filename">lang/<span class="loc">?</span>.json</div>
+						<button class="btn ghost resync" type="button">Re-sync</button>
+						<button class="btn ghost import" type="button">Import</button>
+						<button class="btn download" type="button">Download</button>
+						<input id="importfile" type="file" accept=".json,application/json" hidden>
+						<div class="toolbartitle">Submit your changes:</div>
+						<div class="actions">
+							<button class="btn copy" type="button">1. Copy file</button>
+							<span class="stepsep">&rarr;</span>
+							<button class="btn github" type="button">2. Open on GitHub</button>
+							<div class="steps">
+								<span class="stepsep">&rarr;</span>
+								<span class="step">3. Fork this repository</span>
+								<span class="stepsep">&rarr;</span>
+								<span class="step">4. Paste content</span>
+								<span class="stepsep">&rarr;</span>
+								<span class="step">5. Commit changes</span>
+								<span class="stepsep">&rarr;</span>
+								<span class="step">6. Propose changes</span>
+								<span class="stepsep">&rarr;</span>
+								<span class="step">7. Create pull request x2</span>
+								<span class="stepsep">&rarr;</span>
+								<span class="step">Done!</span>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div id="editor"><div class="loading"><span class="spinner"></span><span>Loading translations&hellip;</span></div></div>
+			</main>
+			<div class="trmodal" id="resyncmodal" hidden>
+				<div class="trmodal-box">
+					<h3>Re-sync from server?</h3>
+					<p>This discards your local changes for <span class="trmodal-loc">?</span> and reloads the version currently on the server.</p>
+					<div class="trmodal-actions">
+						<button class="btn ghost trmodal-cancel" type="button">Cancel</button>
+						<button class="btn trmodal-confirm" type="button">Re-sync</button>
+					</div>
+				</div>
+			</div>
+			<div class="trmodal" id="importmodal" hidden>
+				<div class="trmodal-box">
+					<h3>Import language file?</h3>
+					<p>This replaces your current entries with the translations in <span class="importmodal-file">?</span>. Fields not present in the file are left unchanged.</p>
+					<div class="trmodal-actions">
+						<button class="btn ghost importmodal-cancel" type="button">Cancel</button>
+						<button class="btn importmodal-confirm" type="button">Import</button>
+					</div>
+				</div>
+			</div>
+			<div class="trmodal" id="downloadmodal" hidden>
+				<div class="trmodal-box">
+					<h3>Download language file?</h3>
+					<p>This saves <span class="downloadmodal-file">?</span> with your current entries.</p>
+					<div class="trmodal-actions">
+						<button class="btn ghost downloadmodal-cancel" type="button">Cancel</button>
+						<button class="btn downloadmodal-confirm" type="button">Download</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="toasterwrapper"></div>
+	</div>
+	<div class="footer">
+		<div class="insidefooter" hidden>
+			<p><a href="/donate" target=_blank>💚 Thank you to <span class="randommember"></span> for sponsoring me on <span class="randomplatform"></span>! 💚</a></p>
+		</div>
+	</div>
+</body>
+	<script type="text/javascript" src="/assets/external/js/jquery-3.2.1.min.js"></script>
+	<script type="text/javascript" src="/assets/external/js/js-cookie.js"></script>
+	<script type="text/javascript" src="/assets/js/global.js"></script>
+	<script type="text/javascript" src="/assets/js/translations.js"></script>
+</html>
