@@ -6,7 +6,7 @@ let currentpage = 0;
 $(document).ready(function(e) {
 	console.log("Loading feature requests page.")
 
-	$(".reqtable").html('<p class="reqloading">Loading feature requests...</p>');
+	$(".reqtable").html('<p class="reqloading">Loading feature requests💚</p>');
 
 	setRequestsContent();
 });

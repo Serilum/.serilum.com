@@ -20,7 +20,7 @@
 	margin: 0 auto;
 }
 
-/* Controls: search + version filter, sticky below the nav */
+/* Controls */
 .modcontrols {
 	position: sticky;
 	z-index: 6;
@@ -93,7 +93,6 @@
 	border-color: #5C8D44;
 }
 
-/* Visible filter chips sit 2px lower than the "..." panel chips to read centered in Monocraft. */
 .versionfilter > .verchip {
 	padding: 9px 10px 3px;
 }
@@ -200,7 +199,6 @@
 	border: 2px solid #41464d;
 }
 
-/* Host-branded pointer when hovering the CurseForge/Modrinth links in a card */
 .defaultcurseforge .modcard .modlink:hover,
 .defaultcurseforge .modcard .loader:hover,
 .defaultcurseforge .modcard .version:hover,
@@ -399,7 +397,6 @@
 	display: block;
 }
 
-/* The version-filter "..." sits inline with the chips and opens downward */
 .filtertrigger {
 	margin-left: 0;
 
