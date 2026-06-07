@@ -1,0 +1,3 @@
+# Cloudflare Pages redirects
+# Logo path moved: /assets/data/logo/ -> /assets/images/logo/
+/assets/data/logo/* /assets/images/logo/:splat 301
