@@ -377,8 +377,8 @@ function parseSource(en) {
 	totalKeys = 0;
 	let current = null;
 	for (let key in en) {
-		if (key.indexOf("_comment_") === 0) {
-			current = { modid: key.substring(9), title: en[key], entries: [] };
+		if (key.indexOf("_comment_modname_") === 0) {
+			current = { modid: key.substring("_comment_modname_".length), title: en[key], entries: [] };
 			sections.push(current);
 			continue;
 		}
@@ -460,7 +460,7 @@ function buildLocaleFile() {
 	let out = "{\n";
 	groups.forEach(function(group, gi) {
 		let section = group[0], done = group[1];
-		out += "  " + JSON.stringify("_comment_" + section.modid) + ": " + JSON.stringify(section.title) + ",\n";
+		out += "  " + JSON.stringify("_comment_modname_" + section.modid) + ": " + JSON.stringify(section.title) + ",\n";
 		done.forEach(function(en, ki) {
 			let last = (gi === groups.length - 1) && (ki === done.length - 1);
 			out += "  " + JSON.stringify(en.key) + ": " + JSON.stringify(values[en.key]) + (last ? "" : ",") + "\n";
