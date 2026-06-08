@@ -1,6 +1,12 @@
 const logofiletypes = {};
 const logosizes = {};
 const collectedversions = {};
+
+const versionClickOverrides = {
+	"1.20": "1.20.1",
+	"1.21": "1.21.1",
+};
+
 let searchTimer;
 let resetRotation = 0;
 
@@ -249,6 +255,9 @@ function versionChip(extraclass, modname, moddata, version) {
 	}
 
 	let fullversion = (moddata["version_latest"] || {})[version] || version;
+	if (version in versionClickOverrides) {
+		fullversion = versionClickOverrides[version];
+	}
 
 	let cfurl = "https://www.curseforge.com/minecraft/mc-mods/" + cfslug + "/files/all?version=" + fullversion;
 	let mrurl = "https://modrinth.com/mod/" + mrslug + "/versions?g=" + fullversion;
@@ -260,7 +269,7 @@ function versionChip(extraclass, modname, moddata, version) {
 	let mainfabric = moddata["fabric_versions"] || [];
 
 	let cffabric = "";
-	if (fabriclatest[version] !== undefined && mainfabric.indexOf(version) === -1 && moddata["fabric_slug"]) {
+	if (version in fabriclatest && mainfabric.indexOf(version) === -1 && moddata["fabric_slug"]) {
 		cffabric = "https://www.curseforge.com/minecraft/mc-mods/" + moddata["fabric_slug"] + "/files/all?version=" + fabriclatest[version];
 	}
 
