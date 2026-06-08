@@ -20,7 +20,7 @@ $(document).ready(function(e) {
 		$("#forgesclink").attr('href', forgeurl);
 
 		$.ajax({
-			url: "https://workflow.serilum.com/web/data/mod_data.json",
+			url: "https://workflow.serilum.com/mods/data/mod_data.json",
 			type: "GET",
 			dataType: 'json',
 			success: function(data){
