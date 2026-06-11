@@ -1,0 +1,223 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1" /> 
+	<meta name="identifier-url" content="https://serilum.com/" />
+	<meta name="description" content="How to configure Serilum's Minecraft mods on Fabric, Forge and NeoForge, in-game or via the configuration file." />
+	<meta name="keywords" content="serilum, minecraft, mods, configuration, config, guide, fabric, forge, neoforge" />
+	<meta name="author" content="Rick South" />
+	<link rel="shortcut icon" href="/assets/images/favicon.ico" type="image/x-icon">
+	<title>Serilum.com | Configuration Guide</title>
+	<link rel="stylesheet" href="/assets/css/global.css">
+	<link rel="stylesheet" href="/assets/css/configuration-guide.css">
+</head>
+<body class="defaultcurseforge">
+	<div class="main">
+		<div class="navigation noselect">
+			<div class="inside">
+				<div class="serilum" hidden>
+					<a href="/"><img alt="serilum" src="/assets/images/serilum.png"></a>
+				</div>
+				<ul>
+					<li><a href="/">Home</a></li>
+					<li><a href="/about">About</a></li>
+					<li><a href="/mods">Mods</a></li>
+					<li><a href="/translations">Translations</a></li>
+					<li><a class="external" href="https://github.com/Serilum" target=_blank>Github</a></li>
+					<li class="togglewrapper">
+						<img alt="modrinth" class="modrinth" src="/assets/images/modrinth_tiny.png">
+						<div class="toggle checkcross">
+							<input id="checkcross" type="checkbox" checked>
+							<label class="toggle-item" for="checkcross">
+								<div class="check"></div>
+							</label>
+						</div>
+						<img alt="curseforge" class="curseforge" src="/assets/images/curseforge_tiny.png">
+					</li>
+				</ul>
+			</div>
+		</div>
+		<div class="configguide">
+			<div class="insideguide">
+				<h1>Configuration Guide</h1>
+				<p class="guideintro">Most of my mods have options you can tweak. Change them in-game through a settings screen, or edit the mod's <span class="path">.json5</span> config file directly. If you're unsure how, pick your mod loader below and follow the steps!</p>
+				<div class="guideheader noselect">
+					<div class="loadertabs">
+						<div class="loadertab" data-loader="fabric">Fabric</div>
+						<div class="loadertab" data-loader="forge">Forge</div>
+						<div class="loadertab" data-loader="neoforge">NeoForge</div>
+					</div>
+					<div class="submenuwrapper">
+						<div class="submenubtn sectionlink" data-section="in-game">In-game</div>
+						<div class="submenubtn sectionlink" data-section="manual">Manual</div>
+					</div>
+				</div>
+				<div class="loaderpane hidden" data-loader="fabric">
+					<div class="guidesection" data-section="in-game">
+						<h2>In-game</h2>
+						<p>Make sure you've installed <a class="modmenulink" href="https://curseforge.com/minecraft/mc-mods/modmenu" target=_blank>Mod Menu</a>. This adds the <span class="path">Mods</span> button.</p>
+						<div class="guidestep">
+							<h3>Step 1</h3>
+							<p>From Minecraft's main menu, click on <span class="path">Mods</span>.</p>
+							<img alt="fabric in-game step 1" loading="lazy" src="https://cdn.serilum.com/web/configuration-guide/fabric/in-game/fabric-in-game-step-1.png">
+						</div>
+						<div class="guidestep">
+							<h3>Step 2</h3>
+							<p>Scroll through the list and select the mod you'd like to configure. Then in the top right, click the <span class="path">Configure</span> button.</p>
+							<img alt="fabric in-game step 2" loading="lazy" src="https://cdn.serilum.com/web/configuration-guide/fabric/in-game/fabric-in-game-step-2.png">
+						</div>
+						<div class="guidestep">
+							<h3>Step 3</h3>
+							<p>On this screen you can edit the mod's config values.</p>
+							<img alt="fabric in-game step 3" loading="lazy" src="https://cdn.serilum.com/web/configuration-guide/fabric/in-game/fabric-in-game-step-3.png">
+						</div>
+						<div class="guidestep">
+							<h3>Step 4</h3>
+							<p>When you've finished, click <span class="path">Done</span> at the bottom to save your settings. Changes apply immediately, no restart needed.</p>
+							<img alt="fabric in-game step 4" loading="lazy" src="https://cdn.serilum.com/web/configuration-guide/fabric/in-game/fabric-in-game-step-4.png">
+						</div>
+					</div>
+					<div class="guidesection" data-section="manual">
+						<h2>Manual</h2>
+						<p>All configuration files are generated in the <span class="path">config</span> folder of your Minecraft instance, after the game has been started once with the mod installed.</p>
+						<p>Open the mod's file with any text editor, change the values you'd like and save it.</p>
+						<div class="guidestep">
+							<h3>Step 1</h3>
+							<p>Open your Minecraft folder. This is where you put your mods or resource packs, and where your save data is located. From there, open the <span class="path">config</span> folder.</p>
+							<img alt="fabric manual step 1" loading="lazy" src="https://cdn.serilum.com/web/configuration-guide/fabric/manual/fabric-manual-step-1.png">
+						</div>
+						<div class="guidestep">
+							<h3>Step 2</h3>
+							<p>Find the config file of the mod you'd like to edit. In this case I'm opening the Double Doors config file, named <span class="path">doubledoors.json5</span>. Open it with any text editor.</p>
+							<img alt="fabric manual step 2" loading="lazy" src="https://cdn.serilum.com/web/configuration-guide/fabric/manual/fabric-manual-step-2.png">
+						</div>
+						<div class="guidestep">
+							<h3>Step 3</h3>
+							<p>In here, find the config value you'd like to change.</p>
+							<img alt="fabric manual step 3" loading="lazy" src="https://cdn.serilum.com/web/configuration-guide/fabric/manual/fabric-manual-step-3.png">
+						</div>
+						<div class="guidestep">
+							<h3>Step 4</h3>
+							<p>As an example, I've changed <span class="path">enableRecursiveOpening</span> from <span class="path">true</span> to <span class="path">false</span>. Save the file afterwards. You'll need to restart your game before the changes take effect.</p>
+							<img alt="fabric manual step 4" loading="lazy" src="https://cdn.serilum.com/web/configuration-guide/fabric/manual/fabric-manual-step-4.png">
+						</div>
+					</div>
+				</div>
+				<div class="loaderpane hidden" data-loader="forge">
+					<div class="guidesection" data-section="in-game">
+						<h2>In-game</h2>
+						<p>Forge comes with the <span class="path">Mods</span> button built-in, no extra mod needed.</p>
+						<div class="guidestep">
+							<h3>Step 1</h3>
+							<p>From Minecraft's main menu, click on <span class="path">Mods</span>.</p>
+							<img alt="forge in-game step 1" loading="lazy" src="https://cdn.serilum.com/web/configuration-guide/forge/in-game/forge-in-game-step-1.png">
+						</div>
+						<div class="guidestep">
+							<h3>Step 2</h3>
+							<p>Select the mod you'd like to configure from the list on the left. Then click the <span class="path">Config</span> button in the bottom left.</p>
+							<img alt="forge in-game step 2" loading="lazy" src="https://cdn.serilum.com/web/configuration-guide/forge/in-game/forge-in-game-step-2.png">
+						</div>
+						<div class="guidestep">
+							<h3>Step 3</h3>
+							<p>On this screen you can edit the mod's config values.</p>
+							<img alt="forge in-game step 3" loading="lazy" src="https://cdn.serilum.com/web/configuration-guide/forge/in-game/forge-in-game-step-3.png">
+						</div>
+						<div class="guidestep">
+							<h3>Step 4</h3>
+							<p>When you've finished, click <span class="path">Done</span> at the bottom to save your settings. Changes apply immediately, no restart needed.</p>
+							<img alt="forge in-game step 4" loading="lazy" src="https://cdn.serilum.com/web/configuration-guide/forge/in-game/forge-in-game-step-4.png">
+						</div>
+					</div>
+					<div class="guidesection" data-section="manual">
+						<h2>Manual</h2>
+						<p>All configuration files are generated in the <span class="path">config</span> folder of your Minecraft instance, after the game has been started once with the mod installed.</p>
+						<p>Open the mod's file with any text editor, change the values you'd like and save it.</p>
+						<div class="guidestep">
+							<h3>Step 1</h3>
+							<p>Open your Minecraft folder. This is where you put your mods or resource packs, and where your save data is located. From there, open the <span class="path">config</span> folder.</p>
+							<img alt="forge manual step 1" loading="lazy" src="https://cdn.serilum.com/web/configuration-guide/forge/manual/forge-manual-step-1.png">
+						</div>
+						<div class="guidestep">
+							<h3>Step 2</h3>
+							<p>Find the config file of the mod you'd like to edit. In this case I'm opening the Double Doors config file, named <span class="path">doubledoors.json5</span>. Open it with any text editor.</p>
+							<img alt="forge manual step 2" loading="lazy" src="https://cdn.serilum.com/web/configuration-guide/forge/manual/forge-manual-step-2.png">
+						</div>
+						<div class="guidestep">
+							<h3>Step 3</h3>
+							<p>In here, find the config value you'd like to change.</p>
+							<img alt="forge manual step 3" loading="lazy" src="https://cdn.serilum.com/web/configuration-guide/forge/manual/forge-manual-step-3.png">
+						</div>
+						<div class="guidestep">
+							<h3>Step 4</h3>
+							<p>As an example, I've changed <span class="path">enableRecursiveOpening</span> from <span class="path">true</span> to <span class="path">false</span>. Save the file afterwards. You'll need to restart your game before the changes take effect.</p>
+							<img alt="forge manual step 4" loading="lazy" src="https://cdn.serilum.com/web/configuration-guide/forge/manual/forge-manual-step-4.png">
+						</div>
+					</div>
+				</div>
+				<div class="loaderpane hidden" data-loader="neoforge">
+					<div class="guidesection" data-section="in-game">
+						<h2>In-game</h2>
+						<p>NeoForge comes with the <span class="path">Mods</span> button built-in, no extra mod needed.</p>
+						<div class="guidestep">
+							<h3>Step 1</h3>
+							<p>From Minecraft's main menu, click on <span class="path">Mods</span>.</p>
+							<img alt="neoforge in-game step 1" loading="lazy" src="https://cdn.serilum.com/web/configuration-guide/neoforge/in-game/neo-in-game-step-1.png">
+						</div>
+						<div class="guidestep">
+							<h3>Step 2</h3>
+							<p>Select the mod you'd like to configure from the list on the left. Then click the <span class="path">Config</span> button in the bottom left.</p>
+							<img alt="neoforge in-game step 2" loading="lazy" src="https://cdn.serilum.com/web/configuration-guide/neoforge/in-game/neo-in-game-step-2.png">
+						</div>
+						<div class="guidestep">
+							<h3>Step 3</h3>
+							<p>On this screen you can edit the mod's config values.</p>
+							<img alt="neoforge in-game step 3" loading="lazy" src="https://cdn.serilum.com/web/configuration-guide/neoforge/in-game/neo-in-game-step-3.png">
+						</div>
+						<div class="guidestep">
+							<h3>Step 4</h3>
+							<p>When you've finished, click <span class="path">Done</span> at the bottom to save your settings. Changes apply immediately, no restart needed.</p>
+							<img alt="neoforge in-game step 4" loading="lazy" src="https://cdn.serilum.com/web/configuration-guide/neoforge/in-game/neo-in-game-step-4.png">
+						</div>
+					</div>
+					<div class="guidesection" data-section="manual">
+						<h2>Manual</h2>
+						<p>All configuration files are generated in the <span class="path">config</span> folder of your Minecraft instance, after the game has been started once with the mod installed.</p>
+						<p>Open the mod's file with any text editor, change the values you'd like and save it.</p>
+						<div class="guidestep">
+							<h3>Step 1</h3>
+							<p>Open your Minecraft folder. This is where you put your mods or resource packs, and where your save data is located. From there, open the <span class="path">config</span> folder.</p>
+							<img alt="neoforge manual step 1" loading="lazy" src="https://cdn.serilum.com/web/configuration-guide/neoforge/manual/neo-manual-step-1.png">
+						</div>
+						<div class="guidestep">
+							<h3>Step 2</h3>
+							<p>Find the config file of the mod you'd like to edit. In this case I'm opening the Double Doors config file, named <span class="path">doubledoors.json5</span>. Open it with any text editor.</p>
+							<img alt="neoforge manual step 2" loading="lazy" src="https://cdn.serilum.com/web/configuration-guide/neoforge/manual/neo-manual-step-2.png">
+						</div>
+						<div class="guidestep">
+							<h3>Step 3</h3>
+							<p>In here, find the config value you'd like to change.</p>
+							<img alt="neoforge manual step 3" loading="lazy" src="https://cdn.serilum.com/web/configuration-guide/neoforge/manual/neo-manual-step-3.png">
+						</div>
+						<div class="guidestep">
+							<h3>Step 4</h3>
+							<p>As an example, I've changed <span class="path">enableRecursiveOpening</span> from <span class="path">true</span> to <span class="path">false</span>. Save the file afterwards. You'll need to restart your game before the changes take effect.</p>
+							<img alt="neoforge manual step 4" loading="lazy" src="https://cdn.serilum.com/web/configuration-guide/neoforge/manual/neo-manual-step-4.png">
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="toasterwrapper"></div>
+	</div>
+	<div class="footer">
+		<div class="insidefooter" hidden>
+			<p><a href="/donate" target=_blank>💚 Thank you to <span class="randommember"></span> for sponsoring me on <span class="randomplatform"></span>! 💚</a></p>
+		</div>
+	</div>
+</body>
+	<script type="text/javascript" src="/assets/external/js/jquery-3.2.1.min.js"></script>
+	<script type="text/javascript" src="/assets/external/js/js-cookie.js"></script>
+	<script type="text/javascript" src="/assets/js/global.js"></script>
+	<script type="text/javascript" src="/assets/js/configuration-guide.js"></script>
+</html>

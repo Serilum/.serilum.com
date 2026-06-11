@@ -1,0 +1,165 @@
+@media only screen and (max-width: 620.5px) {
+	.configguide {
+		margin-top: 90px !important;
+	}
+	.configguide .guideheader {
+		top: 73px !important;
+	}
+}
+
+
+body {
+	height: auto;
+}
+
+.main {
+	position: static;
+	height: auto;
+	max-height: none;
+}
+
+.configguide {
+	display: none;
+
+	margin: 70px auto 100px auto;
+
+	width: 90vw;
+	max-width: 760px;
+}
+
+.configguide h1 {
+	width: 100%;
+
+	margin: 0 0 28px 0;
+
+	font-size: 46px;
+
+	text-align: center;
+}
+
+.configguide .guideintro {
+	margin: 0 0 20px 0;
+
+	color: #9aa0a6;
+	font-size: 18px;
+
+	text-align: center;
+}
+
+.configguide .guideheader {
+	position: sticky;
+	top: 43px;
+	z-index: 5;
+
+	margin-bottom: 26px;
+	padding: 14px 0;
+
+	background-color: #484d54;
+}
+
+.configguide .loadertabs {
+	display: flex;
+	justify-content: center;
+	gap: 10px;
+
+	margin-bottom: 12px;
+}
+
+.configguide .loadertab {
+	padding: 10px 26px;
+
+	font-size: 18px;
+
+	background-color: #3a3e44;
+	border: 1px solid #5b6168;
+	border-radius: 6px;
+}
+.configguide .loadertab:hover {
+	cursor: pointer;
+	filter: brightness(115%);
+}
+.configguide .loadertab.selected {
+	color: #373737;
+
+	background-color: #88C04F;
+	border-color: #88C04F;
+}
+
+.configguide .guideheader .submenuwrapper {
+	margin-top: 0;
+}
+.configguide .sectionlink:hover {
+	cursor: pointer;
+}
+
+.configguide .loaderpane.hidden {
+	display: none;
+}
+
+.configguide .guidesection {
+	margin-bottom: 34px;
+}
+
+.configguide .guidesection h2 {
+	margin: 0 0 14px 0;
+
+	color: #BFDAAF;
+	font-size: 28px;
+}
+
+.configguide .guidesection p {
+	margin: 0 0 18px 0;
+
+	font-size: 18px;
+	line-height: 1.7;
+}
+
+.configguide .guidesection a {
+	color: #88C04F;
+	font-weight: bolder;
+	text-decoration: none;
+}
+.configguide .guidesection a:hover {
+	color: #BFDAAF;
+	text-decoration: underline;
+}
+
+.configguide .path {
+	padding: 2px 7px;
+
+	font-family: monospace;
+	font-size: 16px;
+
+	background-color: #2f3338;
+	border-radius: 4px;
+}
+
+.configguide .guidestep {
+	margin-bottom: 26px;
+}
+
+.configguide .guidestep h3 {
+	margin: 0 0 10px 0;
+	padding-left: 9px;
+
+	font-size: 20px;
+	font-weight: normal;
+
+	border-left: 4px solid #88C04F;
+}
+
+.configguide .guidestep p {
+	margin: 0 0 4px 0;
+	padding-left: 12px;
+
+	font-size: 16px;
+	text-indent: -12px;
+}
+
+.configguide .guidestep img {
+	box-sizing: border-box;
+	width: 100%;
+
+	border: 1px solid #5b6168;
+	border-radius: 6px;
+}

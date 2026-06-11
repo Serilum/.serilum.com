@@ -1,3 +1,5 @@
 # Cloudflare Pages redirects
 # Logo path moved: /assets/data/logo/ -> /assets/images/logo/
 /assets/data/logo/* /assets/images/logo/:splat 301
+# Old configure page superseded by the configuration guide
+/how-to-configure-mods /configuration-guide 301
