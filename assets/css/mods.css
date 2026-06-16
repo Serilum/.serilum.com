@@ -191,6 +191,40 @@
 	color: #9aa0a6;
 }
 
+/* Loading spinner, shown until the mod data is parsed and the grid fades in */
+.modloader {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	gap: 14px;
+
+	padding: 80px 0;
+}
+
+.modspinner {
+	width: 38px;
+	height: 38px;
+
+	border: 4px solid #3a3e44;
+	border-top-color: #88C04F;
+	border-radius: 50%;
+
+	animation: modspin 0.8s linear infinite;
+}
+
+@keyframes modspin {
+	to { transform: rotate(360deg); }
+}
+
+.modloaderror {
+	margin: 0;
+
+	color: #9aa0a6;
+	font-size: 14px;
+	text-align: center;
+}
+
 /* Card */
 .modcard {
 	display: flex;

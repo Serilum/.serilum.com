@@ -163,7 +163,10 @@ function loadModData() {
 
 			revealLogos();
 		},
-		error: function(data) { }
+		error: function(data) {
+			$(".modspinner").hide();
+			$(".modloaderror").removeAttr("hidden");
+		}
 	});
 }
 
@@ -171,6 +174,7 @@ function revealLogos() {
 	let logos = $(".modgrid .modcard-logo").toArray();
 
 	if (logos.length === 0) {
+		$(".modloader").hide();
 		$(".modwrapper").fadeIn(500);
 		return;
 	}
@@ -189,6 +193,7 @@ function revealLogos() {
 			return;
 		}
 		revealed = true;
+		$(".modloader").hide();
 		$(".modwrapper").fadeIn(500);
 	}
 
