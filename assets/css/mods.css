@@ -69,16 +69,17 @@
 .verchip {
 	display: inline-block;
 	min-width: 4ch;
-	padding: 7px 10px 5px;
+	padding: 7px 10px 4px;
 
-	color: #9aa0a6;
+	color: #ECECEC;
 	font-family: "Monocraft", monospace;
 	font-size: 13px;
 	line-height: 1;
 	text-align: center;
 
-	background-color: #3a3e44;
-	border: 2px solid #5b6168;
+	background-color: #5b6168;
+	border: 0;
+	border-bottom: 3px solid #2f3338;
 
 	cursor: pointer;
 }
@@ -88,13 +89,14 @@
 }
 .verchip.enabled {
 	color: #ECECEC;
+	text-shadow: 1px 1px 0 rgb(0, 0, 0, 0.3);
 
 	background-color: #5C8D44;
-	border-color: #5C8D44;
+	border-bottom-color: #3b6d11;
 }
 
 .versionfilter > .verchip {
-	padding: 9px 10px 3px;
+	padding: 9px 10px 2px;
 }
 
 .filterslabel {
@@ -129,6 +131,7 @@
 }
 .envchip.enabled {
 	color: #ECECEC;
+	text-shadow: 1px 1px 0 rgb(0, 0, 0, 0.3);
 	border-color: transparent;
 }
 .envchip.client.enabled {
@@ -300,6 +303,7 @@
 	padding: 2px 8px;
 
 	color: #ECECEC;
+	text-shadow: 1px 1px 0 rgb(0, 0, 0, 0.3);
 	font-size: 12px;
 	font-weight: bolder;
 
@@ -339,7 +343,7 @@
 
 .modver {
 	min-width: 4ch;
-	padding: 3px 9px;
+	padding: 4px 9px 2px;
 
 	color: #ECECEC;
 	font-family: "Monocraft", monospace;

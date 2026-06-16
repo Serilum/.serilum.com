@@ -20,6 +20,24 @@
 }
 
 @font-face {
+	font-family: 'Roboto';
+	font-style: normal;
+	font-weight: 500;
+	font-display: swap;
+	src: url('/assets/fonts/roboto/Roboto-Medium.woff2') format('woff2'),
+		url('/assets/fonts/roboto/Roboto-Medium.woff') format('woff');
+}
+
+@font-face {
+	font-family: 'Roboto';
+	font-style: normal;
+	font-weight: 700;
+	font-display: swap;
+	src: url('/assets/fonts/roboto/Roboto-Bold.woff2') format('woff2'),
+		url('/assets/fonts/roboto/Roboto-Bold.woff') format('woff');
+}
+
+@font-face {
 	font-family: 'Monocraft';
 	font-style: normal;
 	font-weight: 400;
@@ -33,6 +51,7 @@ html, body {
 
 body {
 	font-family: "Roboto", serif;
+	font-synthesis-weight: none;
 
 	height: 100vh;
 

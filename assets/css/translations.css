@@ -110,7 +110,7 @@
 
 	color: #BFDAAF;
 	font-size: 14px;
-	font-weight: 600;
+	font-weight: 500;
 }
 .translations #langsearch {
 	margin-bottom: 12px;
@@ -226,7 +226,7 @@
 
 	color: #9aa0a6;
 	font-size: 11px;
-	font-weight: 600;
+	font-weight: 500;
 	letter-spacing: 0.06em;
 	text-transform: uppercase;
 }
@@ -372,7 +372,7 @@
 .translations .control label {
 	color: #9aa0a6;
 	font-size: 11px;
-	font-weight: 600;
+	font-weight: 500;
 	letter-spacing: 0.06em;
 	text-transform: uppercase;
 }
@@ -469,7 +469,7 @@
 
 	color: #9aa0a6;
 	font-size: 13px;
-	font-weight: 600;
+	font-weight: 500;
 
 	background-color: #2b2f34;
 	border: 1px solid #3a3e44;
@@ -532,7 +532,7 @@
 }
 .translations .section .sectitle {
 	font-size: 18px;
-	font-weight: 600;
+	font-weight: 500;
 }
 .translations .section .modid {
 	padding: 2px 8px;
