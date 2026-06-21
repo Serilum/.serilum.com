@@ -61,7 +61,7 @@ function loadSource() {
 		parseSource(en);
 		renderEditor();
 
-		let last = Cookies.get("translations_locale") || "";
+		let last = localeFromUrl() || Cookies.get("translations_locale") || "";
 		if (last && !inLocales(curatedLocales, last) && !inLocales(allLocales, last)) {
 			Cookies.remove("translations_locale");
 			last = "";
@@ -242,6 +242,7 @@ function chooseLocale(code) {
 
 function selectLocale() {
 	updateSelectedHeader();
+	updateUrlLocale();
 	filterLanguages();
 	highlightCurrent();
 	renderPinned();
@@ -299,6 +300,26 @@ function clearLocale() {
 	currentLocale = "";
 	Cookies.remove("translations_locale");
 	selectLocale();
+}
+
+function localeFromUrl() {
+	try {
+		return new URLSearchParams(window.location.search).get("lang") || "";
+	} catch (err) {
+		return "";
+	}
+}
+
+function updateUrlLocale() {
+	let params = new URLSearchParams(window.location.search);
+	if (currentLocale === "") {
+		params.delete("lang");
+	} else {
+		params.set("lang", currentLocale);
+	}
+	let qs = params.toString();
+	let url = window.location.pathname + (qs ? "?" + qs : "") + window.location.hash;
+	history.replaceState(null, "", url);
 }
 
 function setIntroCollapsed(collapsed, persist) {
