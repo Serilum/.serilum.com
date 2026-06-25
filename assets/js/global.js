@@ -12,6 +12,7 @@ function _qa(e, d) {
 	s.src = 'https://um.serilum.com/script.js';
 	s.setAttribute('data-website-' + 'id', 'a2fe372b-5d79-4e16-98d7-6c8f2862d3f5');
 	s.setAttribute('data-do' + 'mains', 'serilum.com');
+	s.setAttribute('data-exclude-search', 'true');
 	document.head.appendChild(s);
 })();
 
