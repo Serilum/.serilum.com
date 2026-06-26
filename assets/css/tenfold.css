@@ -1,0 +1,55 @@
+.tenfold {
+	position: absolute;
+	top: 70px;
+	left: 0;
+	right: 0;
+	bottom: 40px;
+
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+
+	margin: 0 auto;
+
+	width: 90vw;
+	max-width: 760px;
+
+	text-align: center;
+}
+
+.tenfold h1 {
+	margin: 0 0 18px 0;
+
+	font-size: 64px;
+	line-height: 1.1;
+	font-weight: bolder;
+
+	text-shadow: 2px 2px 0 rgb(0, 0, 0, 0.5);
+}
+
+.tenfold p {
+	margin: 0 0 28px 0;
+
+	font-size: 22px;
+	line-height: 1.7;
+}
+
+.tenfold .playlistbutton {
+	display: inline-block;
+
+	padding: 12px 24px;
+
+	color: #ECECEC;
+	font-size: 18px;
+	font-weight: bolder;
+	text-decoration: none;
+
+	background-color: #3a3e44;
+	border: 3px solid #88C04F;
+}
+.tenfold .playlistbutton:hover {
+	color: #373737;
+
+	background-color: #88C04F;
+}
