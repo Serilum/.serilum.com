@@ -1,1 +1,6 @@
 .git
+.github
+.gitignore
+.wrangler
+README.md
+wrangler.toml
