@@ -1,0 +1,73 @@
+.privacy {
+	position: absolute;
+	top: 70px;
+	left: 0;
+	right: 0;
+	bottom: 40px;
+
+	margin: 0 auto;
+
+	width: 90vw;
+	max-width: 760px;
+
+	overflow-y: auto;
+
+	scrollbar-width: none;
+	-ms-overflow-style: none;
+}
+.privacy::-webkit-scrollbar {
+	width: 0;
+	height: 0;
+}
+
+.privacy h1 {
+	width: 100%;
+
+	margin: 0 0 8px 0;
+
+	font-size: 46px;
+
+	text-align: center;
+}
+
+.privacy h2 {
+	margin: 36px 0 14px 0;
+
+	font-size: 28px;
+}
+
+.privacy .insideprivacy {
+	margin-bottom: 20px;
+}
+
+.privacy .insideprivacy p, .privacy .insideprivacy li {
+	margin: 0 0 18px 0;
+
+	font-size: 18px;
+	line-height: 1.7;
+}
+
+.privacy .insideprivacy ul {
+	margin: 0 0 18px 0;
+	padding-left: 24px;
+}
+
+.privacy .insideprivacy li {
+	margin-bottom: 10px;
+}
+
+.privacy .insideprivacy a {
+	color: #88C04F;
+	text-decoration: none;
+}
+.privacy .insideprivacy a:hover {
+	text-decoration: underline;
+}
+
+.privacy p.updated {
+	margin-bottom: 28px;
+
+	color: #9aa0a6;
+	font-style: italic;
+	text-align: center;
+}
