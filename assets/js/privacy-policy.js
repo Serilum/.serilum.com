@@ -1,5 +1,5 @@
 $(document).ready(function(e) {
-	console.log("Loading https://serilum.com/privacy");
+	console.log("Loading https://serilum.com/privacy-policy");
 	setContactAddress();
 });
 

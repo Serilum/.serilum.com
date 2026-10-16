@@ -74,3 +74,17 @@
 
 	background-color: #88C04F;
 }
+
+.about .insideabout p.privacylink {
+	margin-top: 40px;
+
+	font-size: 14px;
+	text-align: center;
+}
+.about .privacylink a {
+	color: #9aa0a6;
+	text-decoration: none;
+}
+.about .privacylink a:hover {
+	color: #BFDAAF;
+}
